@@ -1,6 +1,7 @@
 from __future__ import annotations
-import json,re,sys
+import html,json,re,sys
 from pathlib import Path
+from translate_content import TextCollector
 
 ROOT=Path(__file__).resolve().parents[1]; SITE=ROOT/'_site'
 catalog=json.loads((ROOT/'data/catalog.json').read_text(encoding='utf-8'))
@@ -24,6 +25,8 @@ if len(guides)<15:errors.append('Comprehensive learning guide set is incomplete'
 for guide in guides:
     body=''.join(guide.get('body',[])) if isinstance(guide.get('body'),list) else str(guide.get('body',''))
     if len(body)<500:errors.append('Guide is too short to be useful: '+str(guide.get('helpId')))
+placeholder='Open contextual Documentation from the feature whenever possible.'
+if placeholder in (ROOT/'tools/build_site.py').read_text(encoding='utf-8'):errors.append('Generic placeholder Help prose is still present in the site generator')
 tutorial_ids=['tutorials.'+x.get('id','') for x in tutorials]
 if len(set(tutorial_ids))!=len(tutorial_ids):errors.append('Duplicate tutorial id')
 for tutorial in tutorials:
@@ -32,7 +35,19 @@ for tutorial in tutorials:
 for locale in catalog['locales']:
     if not (SITE/locale/'index.html').exists():errors.append(f'Missing locale home: {locale}')
     for help_id in ids:
-        if not (SITE/locale/help_id.replace('.', '/')/'index.html').exists():errors.append(f'Missing route: {locale}/{help_id}')
+        page=SITE/locale/help_id.replace('.', '/')/'index.html'
+        if not page.exists():errors.append(f'Missing route: {locale}/{help_id}')
+        else:
+            rendered=page.read_text(encoding='utf-8')
+            if placeholder in rendered:errors.append(f'Placeholder Help body: {locale}/{help_id}')
+            if 'class="screenshot-gallery"' not in rendered:errors.append(f'Page has no current application visual: {locale}/{help_id}')
+            if locale!='en' and f'/assets/screenshots/android/{locale}/' not in rendered:errors.append(f'Page has no screenshot in selected language: {locale}/{help_id}')
+            if locale!='en' and 'class="fallback"' in rendered:errors.append(f'Untranslated fallback banner remains: {locale}/{help_id}')
+            if locale=='en':
+                article=re.search(r'<article>(.*?)</article>',rendered,re.S)
+                visible=' '.join(re.sub(r'<[^>]+>',' ',html.unescape(article.group(1) if article else '')).split())
+                if len(visible)<700:errors.append(f'Help page is too short to be detailed: {help_id} ({len(visible)} characters)')
+                if rendered.count('<h2>')<3:errors.append(f'Help page lacks a practical section structure: {help_id}')
     tutorial_index=(SITE/locale/'tutorials'/'index.html')
     if tutorial_index.exists():
         tutorial_html=tutorial_index.read_text(encoding='utf-8')
@@ -64,14 +79,29 @@ for target,source in internal_targets.items():
     if candidate.is_dir():candidate=candidate/'index.html'
     if not candidate.exists():errors.append(f'Broken internal link in {source}: {target}')
 required={'device-setup-wizard','board-selection','peripheral-selection','graphic-designer','vertical-logics-constructor','blueprint-logics-canvas','instrument-panel','compile-flash','usb','ota','serial-monitor'}
-present={x.get('feature') for x in screens}
-missing=sorted(required-present)
-if missing:errors.append('Missing current Android screenshots: '+', '.join(missing))
+for locale in catalog['locales']:
+    present={x.get('feature') for x in screens if x.get('locale','en')==locale}
+    missing=sorted(required-present)
+    if missing:errors.append(f'Missing current Android screenshots for {locale}: '+', '.join(missing))
 for item in screens:
     path=ROOT/item.get('path','')
     if not path.is_file():errors.append('Missing screenshot file: '+str(path))
     for field in ('platform','applicationVersion','feature','helpId','capturedAt'):
         if not item.get(field):errors.append(f'Screenshot missing {field}: {item}')
+    if not item.get('locale'):errors.append(f'Screenshot missing locale: {item}')
+collector=TextCollector()
+for path in (SITE/'en').rglob('*.html'):collector.feed(path.read_text(encoding='utf-8'))
+for locale in catalog['locales']:
+    if locale=='en':continue
+    translation_path=ROOT/'content/locales'/(locale+'.json')
+    if not translation_path.is_file():errors.append(f'Missing documentation translation: {locale}');continue
+    mapping=json.loads(translation_path.read_text(encoding='utf-8'))
+    missing=collector.values-set(mapping)
+    if missing:errors.append(f'{locale} translation is missing {len(missing)} source strings')
+    markers=[value for value in mapping.values() if re.search(r'\[\[ELMA\d+\]\]',str(value))]
+    if markers:errors.append(f'{locale} translation contains batch markers')
+    translated=sum(1 for source,value in mapping.items() if source.strip()!=str(value).strip())
+    if translated<max(1,int(len(mapping)*.75)):errors.append(f'{locale} translation appears mostly untranslated ({translated}/{len(mapping)})')
 for path in ROOT.rglob('*'):
     if not path.is_file() or '.git' in path.parts or path.suffix.lower() in {'.png','.jpg','.jpeg','.webp','.gif'}:continue
     if path.stat().st_size>3_000_000:errors.append(f'Unexpected large public file: {path.relative_to(ROOT)}')

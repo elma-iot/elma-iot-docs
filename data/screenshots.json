@@ -1,13 +1,1982 @@
 [
- {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"device-setup-wizard","helpId":"setup.overview","capturedAt":"2026-09-19","path":"assets/screenshots/android/device-setup-wizard.png"},
- {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"board-selection","helpId":"tutorials.select-esp-board","capturedAt":"2026-09-19","path":"assets/screenshots/android/board-selection.png"},
- {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"peripheral-selection","helpId":"tutorials.add-peripherals","capturedAt":"2026-09-19","path":"assets/screenshots/android/peripheral-selection.png"},
- {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"graphic-designer","helpId":"graphic-designer","capturedAt":"2026-09-19","path":"assets/screenshots/android/graphic-designer.png"},
- {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"vertical-logics-constructor","helpId":"tutorials.first-logic","capturedAt":"2026-09-19","path":"assets/screenshots/android/vertical-logics-constructor.png"},
- {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"blueprint-logics-canvas","helpId":"logics.overview","capturedAt":"2026-09-19","path":"assets/screenshots/android/blueprint-logics-canvas.png"},
- {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"instrument-panel","helpId":"getting-started","capturedAt":"2026-09-19","path":"assets/screenshots/android/instrument-panel.png"},
- {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"compile-flash","helpId":"compile","capturedAt":"2026-09-19","path":"assets/screenshots/android/compile-flash.png"},
- {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"usb","helpId":"flash.usb","capturedAt":"2026-09-19","path":"assets/screenshots/android/usb.png"},
- {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"ota","helpId":"flash.ota","capturedAt":"2026-09-19","path":"assets/screenshots/android/ota.png"},
- {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"serial-monitor","helpId":"serial-monitor","capturedAt":"2026-09-19","path":"assets/screenshots/android/serial-monitor.png"}
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ar",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ar/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ar",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ar/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ar",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ar/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ar",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ar/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ar",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ar/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ar",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ar/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ar",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ar/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ar",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ar/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ar",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ar/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ar",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ar/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ar",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ar/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "bn",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/bn/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "bn",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/bn/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "bn",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/bn/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "bn",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/bn/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "bn",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/bn/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "bn",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/bn/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "bn",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/bn/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "bn",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/bn/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "bn",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/bn/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "bn",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/bn/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "bn",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/bn/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "de",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/de/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "de",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/de/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "de",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/de/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "de",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/de/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "de",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/de/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "de",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/de/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "de",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/de/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "de",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/de/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "de",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/de/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "de",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/de/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "de",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/de/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "en",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/en/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "en",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/en/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "en",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/en/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "en",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/en/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "en",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/en/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "en",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/en/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "en",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/en/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "en",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/en/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "en",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/en/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "en",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/en/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "en",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/en/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "es",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/es/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "es",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/es/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "es",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/es/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "es",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/es/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "es",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/es/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "es",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/es/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "es",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/es/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "es",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/es/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "es",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/es/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "es",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/es/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "es",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/es/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fa",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fa/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fa",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fa/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fa",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fa/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fa",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fa/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fa",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fa/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fa",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fa/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fa",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fa/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fa",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fa/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fa",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fa/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fa",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fa/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fa",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fa/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fr",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fr/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fr",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fr/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fr",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fr/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fr",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fr/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fr",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fr/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fr",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fr/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fr",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fr/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fr",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fr/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fr",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fr/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fr",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fr/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "fr",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/fr/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "hi",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/hi/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "hi",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/hi/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "hi",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/hi/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "hi",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/hi/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "hi",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/hi/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "hi",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/hi/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "hi",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/hi/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "hi",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/hi/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "hi",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/hi/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "hi",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/hi/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "hi",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/hi/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "id",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/id/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "id",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/id/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "id",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/id/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "id",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/id/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "id",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/id/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "id",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/id/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "id",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/id/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "id",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/id/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "id",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/id/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "id",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/id/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "id",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/id/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "it",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/it/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "it",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/it/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "it",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/it/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "it",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/it/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "it",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/it/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "it",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/it/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "it",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/it/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "it",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/it/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "it",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/it/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "it",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/it/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "it",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/it/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ja",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ja/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ja",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ja/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ja",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ja/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ja",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ja/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ja",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ja/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ja",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ja/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ja",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ja/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ja",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ja/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ja",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ja/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ja",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ja/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ja",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ja/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ko",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ko/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ko",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ko/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ko",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ko/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ko",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ko/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ko",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ko/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ko",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ko/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ko",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ko/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ko",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ko/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ko",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ko/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ko",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ko/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ko",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ko/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pl",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pl/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pl",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pl/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pl",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pl/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pl",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pl/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pl",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pl/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pl",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pl/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pl",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pl/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pl",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pl/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pl",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pl/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pl",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pl/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pl",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pl/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pt",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pt/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pt",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pt/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pt",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pt/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pt",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pt/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pt",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pt/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pt",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pt/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pt",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pt/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pt",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pt/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pt",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pt/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pt",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pt/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "pt",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/pt/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ru",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ru/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ru",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ru/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ru",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ru/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ru",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ru/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ru",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ru/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ru",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ru/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ru",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ru/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ru",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ru/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ru",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ru/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ru",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ru/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "ru",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/ru/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "th",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/th/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "th",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/th/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "th",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/th/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "th",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/th/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "th",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/th/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "th",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/th/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "th",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/th/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "th",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/th/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "th",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/th/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "th",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/th/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "th",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/th/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "tr",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/tr/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "tr",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/tr/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "tr",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/tr/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "tr",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/tr/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "tr",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/tr/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "tr",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/tr/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "tr",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/tr/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "tr",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/tr/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "tr",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/tr/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "tr",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/tr/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "tr",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/tr/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "uk",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/uk/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "uk",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/uk/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "uk",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/uk/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "uk",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/uk/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "uk",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/uk/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "uk",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/uk/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "uk",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/uk/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "uk",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/uk/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "uk",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/uk/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "uk",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/uk/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "uk",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/uk/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "vi",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/vi/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "vi",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/vi/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "vi",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/vi/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "vi",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/vi/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "vi",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/vi/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "vi",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/vi/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "vi",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/vi/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "vi",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/vi/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "vi",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/vi/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "vi",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/vi/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "vi",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/vi/serial-monitor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "zh",
+    "feature": "device-setup-wizard",
+    "helpId": "setup.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/zh/device-setup-wizard.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "zh",
+    "feature": "board-selection",
+    "helpId": "tutorials.select-esp-board",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/zh/board-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "zh",
+    "feature": "peripheral-selection",
+    "helpId": "tutorials.add-peripherals",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/zh/peripheral-selection.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "zh",
+    "feature": "graphic-designer",
+    "helpId": "graphic-designer",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/zh/graphic-designer.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "zh",
+    "feature": "vertical-logics-constructor",
+    "helpId": "tutorials.first-logic",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/zh/vertical-logics-constructor.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "zh",
+    "feature": "blueprint-logics-canvas",
+    "helpId": "logics.overview",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/zh/blueprint-logics-canvas.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "zh",
+    "feature": "instrument-panel",
+    "helpId": "getting-started",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/zh/instrument-panel.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "zh",
+    "feature": "compile-flash",
+    "helpId": "compile",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/zh/compile-flash.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "zh",
+    "feature": "usb",
+    "helpId": "flash.usb",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/zh/usb.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "zh",
+    "feature": "ota",
+    "helpId": "flash.ota",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/zh/ota.png"
+  },
+  {
+    "platform": "Android",
+    "applicationVersion": "1.0.13 debug",
+    "locale": "zh",
+    "feature": "serial-monitor",
+    "helpId": "serial-monitor",
+    "capturedAt": "2026-09-19",
+    "path": "assets/screenshots/android/zh/serial-monitor.png"
+  }
 ]
