@@ -34,6 +34,8 @@ python tools/validate.py
 
 CI validates help IDs, routes, internal links, locale fallbacks, screenshot metadata, and coverage before publishing GitHub Pages.
 
+The planned Custom Hardware Constructor can use the documented [safe documentation-bundle contract](CUSTOM-HARDWARE-DOCUMENTATION.md).
+
 ## Versions
 
 Current documentation applies to ELMA-IoT Android 1.0.13+, Windows 0.1.57+, and firmware 0.1.54+, unless an article says otherwise.
