@@ -29,19 +29,27 @@ for locale in catalog['locales']:
     tutorial_index=(SITE/locale/'tutorials'/'index.html')
     if tutorial_index.exists():
         tutorial_html=tutorial_index.read_text(encoding='utf-8')
+        if 'class="doc-tree"' not in tutorial_html:errors.append(f'Missing documentation tree: {locale}/tutorials')
         for help_id in tutorial_ids:
             if f'/{locale}/{help_id.replace(".", "/")}/' not in tutorial_html:errors.append(f'Tutorial index does not link {locale}/{help_id}')
     for help_id in tutorial_ids:
         page=SITE/locale/help_id.replace('.', '/')/'index.html'
         if not page.exists():errors.append(f'Missing tutorial route: {locale}/{help_id}')
-        elif 'class="tutorial-steps"' not in page.read_text(encoding='utf-8'):errors.append(f'Tutorial has no rendered steps: {locale}/{help_id}')
+        else:
+            tutorial_page=page.read_text(encoding='utf-8')
+            if 'class="tutorial-steps"' not in tutorial_page:errors.append(f'Tutorial has no rendered steps: {locale}/{help_id}')
+            if 'class="doc-tree"' not in tutorial_page:errors.append(f'Tutorial has no navigation tree: {locale}/{help_id}')
+            if 'class="screenshot-gallery"' not in tutorial_page:errors.append(f'Tutorial has no screenshot gallery: {locale}/{help_id}')
+internal_targets={}
 for page in SITE.rglob('*.html'):
     text=page.read_text(encoding='utf-8')
     for target in re.findall(r'href="(/elma-iot-docs/[^"#?]+)"',text):
-        rel=target.removeprefix('/elma-iot-docs/').strip('/')
-        candidate=SITE/rel
-        if candidate.is_dir():candidate=candidate/'index.html'
-        if not candidate.exists():errors.append(f'Broken internal link in {page.relative_to(SITE)}: {target}')
+        internal_targets.setdefault(target,page.relative_to(SITE))
+for target,source in internal_targets.items():
+    rel=target.removeprefix('/elma-iot-docs/').strip('/')
+    candidate=SITE/rel
+    if candidate.is_dir():candidate=candidate/'index.html'
+    if not candidate.exists():errors.append(f'Broken internal link in {source}: {target}')
 required={'device-setup-wizard','board-selection','peripheral-selection','graphic-designer','vertical-logics-constructor','blueprint-logics-canvas','instrument-panel','compile-flash','usb','ota','serial-monitor'}
 present={x.get('feature') for x in screens}
 missing=sorted(required-present)

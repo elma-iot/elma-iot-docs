@@ -128,6 +128,22 @@ def tutorials_index(locale):
 <div class="tutorial-summary"><strong>{len(TUTORIALS)} tutorials</strong><span>Setup · GPIO · Logics · MQTT · displays · audio · compile · USB · OTA · diagnostics</span></div>
 <div class="tutorial-list">{''.join(cards)}</div>'''
 
+def nav_tree(locale,active,all_titles):
+    def link(help_id,label=None):
+        current=' aria-current="page"' if help_id==active else ''
+        return f'<a href="{href(locale,help_id)}"{current}>{esc(label or all_titles.get(help_id,help_id))}</a>'
+    def branch(label,links,opened=False,extra=''):
+        return f'<details {"open" if opened else ""}><summary>{esc(label)}</summary><div class="tree-children">{"".join(link(x,y) for x,y in links)}{extra}</div></details>'
+    getting=[("getting-started","Overview"),("tutorials.first-esp-project","First ESP project"),("tutorials.select-esp-board","Select a board"),("tutorials.add-peripherals","Add peripherals"),("tutorials.wiring-diagram","Read the wiring diagram")]
+    setup=[("setup.overview","Setup overview"),("setup.peripherals","Peripherals"),("setup.gpio","GPIO configuration"),("graphic-designer","Graphic Designer"),("wifi","Wi-Fi"),("mqtt.overview","MQTT"),("audio.overview","Audio")]
+    logics=[("logics.overview","Logics overview"),("logics.connectors","Connector types and colors"),("tutorials.first-logic","First automation")]
+    tutorials=[("tutorials","All tutorials")]+[("tutorials."+x["id"],x["title"]) for x in TUTORIALS]
+    troubleshooting=[("troubleshooting","All troubleshooting"),("troubleshooting.compile","Compilation"),("troubleshooting.usb","USB flashing"),("troubleshooting.ota","OTA updates"),("tutorials.compile-troubleshooting","Compilation tutorial"),("tutorials.usb-troubleshooting","USB tutorial"),("tutorials.ota-troubleshooting","OTA tutorial")]
+    categories={}
+    for node in CAT["nodes"]: categories.setdefault(node["category"],[]).append((node["helpId"],node["title"]))
+    block_tree='<details class="nested"><summary>All Logics blocks</summary><div class="tree-children">'+''.join(branch(category,items,active in {x for x,_ in items}) for category,items in sorted(categories.items()))+'</div></details>'
+    return '<nav class="doc-tree"><strong>Contents</strong>'+branch("Getting started",getting,active=="getting-started")+branch("Setup",setup,active.startswith("setup.") or active in {"graphic-designer","wifi","mqtt.overview","audio.overview"})+branch("Logics",logics,active.startswith("logics."),block_tree)+branch("Tutorials",tutorials,active=="tutorials" or active.startswith("tutorials."))+branch("Troubleshooting",troubleshooting,active.startswith("troubleshooting."))+"</nav>"
+
 def related_for(item,kind):
     if kind=="node":
         category=item["category"]
@@ -144,12 +160,13 @@ def page(locale,item,kind,all_titles):
     related=related_for(item,kind)
     selected=[s for s in SCREENSHOTS if s['helpId']==help_id]
     if kind=="tutorial": selected=[SCREENSHOT_BY_FEATURE[x] for x in TUTORIAL_SCREENSHOTS.get(item["id"],[]) if x in SCREENSHOT_BY_FEATURE]
-    figures=''.join(f'<figure><img src="{BASE}/{esc(s["path"])}" alt="Current {esc(s["platform"])} {esc(s["feature"].replace("-"," "))} screen" loading="lazy"><figcaption>{esc(s["platform"])} {esc(s["applicationVersion"])} · {esc(s["feature"].replace("-"," "))} · captured {esc(s["capturedAt"])}</figcaption></figure>' for s in selected)
+    figure_cards=''.join(f'<figure><a href="{BASE}/{esc(s["path"])}" target="_blank" rel="noopener"><img src="{BASE}/{esc(s["path"])}" alt="Current {esc(s["platform"])} {esc(s["feature"].replace("-"," "))} screen" loading="lazy"></a><figcaption>{esc(s["platform"])} {esc(s["applicationVersion"])} · {esc(s["feature"].replace("-"," "))} · captured {esc(s["capturedAt"])} · select to open full size</figcaption></figure>' for s in selected)
+    figures=f'<section class="screenshot-section"><h2>Current application screenshots</h2><div class="screenshot-gallery">{figure_cards}</div></section>' if figure_cards else ''
     rel=''.join(f'<li><a href="{href(locale,x)}">{esc(all_titles.get(x,x))}</a></li>' for x in related if x in all_titles)
     options=''.join(f'<option value="{esc(code)}" {"selected" if code==locale else ""}>{esc(LOCALE_NAMES[code])}</option>' for code in CAT["locales"])
     fallback='' if locale=="en" else f'<aside class="fallback">{esc(ui["fallback"])}</aside>'
     issue=f'https://github.com/elma-iot/elma-iot-docs/issues/new?title=Documentation%3A%20{help_id}'
-    return f'''<!doctype html><html lang="{locale}" dir="{'rtl' if locale in RTL else 'ltr'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} · ELMA-IoT Help</title><meta name="description" content="{esc(item.get('summary',item.get('purpose','ELMA-IoT documentation')))}"><link rel="stylesheet" href="{BASE}/assets/site.css"></head><body data-locale="{locale}" data-help-id="{esc(help_id)}"><header><a class="brand" href="{BASE}/{locale}/">ELMA-IoT Help</a><input id="search" type="search" placeholder="{esc(ui['search'])}" autocomplete="off"><select id="locale" aria-label="Language">{options}</select></header><div id="results" hidden></div><main><nav><strong>{esc(ui['contents'])}</strong><a href="{href(locale,'getting-started')}">Getting started</a><a href="{href(locale,'setup.overview')}">Setup</a><a href="{href(locale,'logics.overview')}">Logics</a><a href="{href(locale,'tutorials')}">Tutorials</a><a href="{href(locale,'troubleshooting')}">Troubleshooting</a></nav><article>{fallback}<p class="eyebrow">{esc(help_id)}</p><h1>{esc(title)}</h1><p class="version">{esc(ui['applies'])}: Android {CAT['appliesTo']['android']} · Windows {CAT['appliesTo']['windows']} · Firmware {CAT['appliesTo']['firmware']}</p>{body}{figures}<h2>{esc(ui['related'])}</h2><ul>{rel}</ul><footer><strong>{esc(ui['helpful'])}</strong> <a href="{issue}">{esc(ui['report'])}</a>. No usage telemetry is collected.</footer></article></main><script src="{BASE}/assets/site.js"></script></body></html>'''
+    return f'''<!doctype html><html lang="{locale}" dir="{'rtl' if locale in RTL else 'ltr'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} · ELMA-IoT Help</title><meta name="description" content="{esc(item.get('summary',item.get('purpose','ELMA-IoT documentation')))}"><link rel="stylesheet" href="{BASE}/assets/site.css"></head><body data-locale="{locale}" data-help-id="{esc(help_id)}"><header><a class="brand" href="{BASE}/{locale}/">ELMA-IoT Help</a><input id="search" type="search" placeholder="{esc(ui['search'])}" autocomplete="off"><select id="locale" aria-label="Language">{options}</select></header><div id="results" hidden></div><main>{nav_tree(locale,help_id,all_titles)}<article>{fallback}<p class="eyebrow">{esc(help_id)}</p><h1>{esc(title)}</h1><p class="version">{esc(ui['applies'])}: Android {CAT['appliesTo']['android']} · Windows {CAT['appliesTo']['windows']} · Firmware {CAT['appliesTo']['firmware']}</p>{body}{figures}<h2>{esc(ui['related'])}</h2><ul>{rel}</ul><footer><strong>{esc(ui['helpful'])}</strong> <a href="{issue}">{esc(ui['report'])}</a>. No usage telemetry is collected.</footer></article></main><script src="{BASE}/assets/site.js"></script></body></html>'''
 
 def home(locale,items):
     cards=''.join(f'<a class="card" href="{href(locale,x["helpId"])}"><strong>{esc(x["title"])}</strong><span>{esc(x.get("summary","Open documentation"))}</span></a>' for x in items if x["helpId"] in ("getting-started","setup.overview","graphic-designer","logics.overview","mqtt.overview","flash.usb","flash.ota","serial-monitor","web-interface","tutorials","troubleshooting"))
