@@ -6,9 +6,12 @@ ROOT=Path(__file__).resolve().parents[1]; SITE=ROOT/'_site'
 catalog=json.loads((ROOT/'data/catalog.json').read_text(encoding='utf-8'))
 topics=json.loads((ROOT/'content/topics.json').read_text(encoding='utf-8'))
 tutorials=json.loads((ROOT/'content/tutorials.json').read_text(encoding='utf-8'))
+guides=[]
+for guide_path in sorted((ROOT/'content/guides').glob('*.json')):
+    value=json.loads(guide_path.read_text(encoding='utf-8'));guides.extend(value if isinstance(value,list) else [value])
 screens=json.loads((ROOT/'data/screenshots.json').read_text(encoding='utf-8'))
 errors=[]
-all_items=[*catalog['nodes'],*catalog['peripherals'],*catalog['boards'],*topics]
+all_items=[*catalog['nodes'],*catalog['peripherals'],*catalog['boards'],*topics,*guides]
 ids=[x.get('helpId') for x in all_items]
 if any(not x for x in ids):errors.append('Every registered item must have helpId')
 duplicates=sorted({x for x in ids if ids.count(x)>1})
@@ -17,6 +20,10 @@ if len(catalog['nodes'])<100:errors.append('Logic catalog unexpectedly incomplet
 if len(catalog['peripherals'])<100:errors.append('Peripheral catalog unexpectedly incomplete')
 if len(catalog['boards'])<10:errors.append('Board catalog unexpectedly incomplete')
 if len(tutorials)!=18:errors.append('Expected 18 initial tutorials')
+if len(guides)<15:errors.append('Comprehensive learning guide set is incomplete')
+for guide in guides:
+    body=''.join(guide.get('body',[])) if isinstance(guide.get('body'),list) else str(guide.get('body',''))
+    if len(body)<500:errors.append('Guide is too short to be useful: '+str(guide.get('helpId')))
 tutorial_ids=['tutorials.'+x.get('id','') for x in tutorials]
 if len(set(tutorial_ids))!=len(tutorial_ids):errors.append('Duplicate tutorial id')
 for tutorial in tutorials:
@@ -40,6 +47,12 @@ for locale in catalog['locales']:
             if 'class="tutorial-steps"' not in tutorial_page:errors.append(f'Tutorial has no rendered steps: {locale}/{help_id}')
             if 'class="doc-tree"' not in tutorial_page:errors.append(f'Tutorial has no navigation tree: {locale}/{help_id}')
             if 'class="screenshot-gallery"' not in tutorial_page:errors.append(f'Tutorial has no screenshot gallery: {locale}/{help_id}')
+for peripheral in catalog['peripherals']:
+    page=SITE/'en'/peripheral['helpId'].replace('.', '/')/'index.html'
+    if page.exists():
+        peripheral_html=page.read_text(encoding='utf-8')
+        for required_text in ('Runtime support:', 'Minimal configuration', 'Configuration fields', 'Runtime behavior and Logics', 'Common mistakes'):
+            if required_text not in peripheral_html:errors.append(f'Peripheral reference missing {required_text}: {peripheral["helpId"]}')
 internal_targets={}
 for page in SITE.rglob('*.html'):
     text=page.read_text(encoding='utf-8')
@@ -67,4 +80,4 @@ for path in ROOT.rglob('*'):
     if any(re.search(pattern,text) for pattern in patterns):errors.append(f'Potential secret in {path.relative_to(ROOT)}')
 if errors:
     print('\n'.join('ERROR: '+x for x in errors[:100]));sys.exit(1)
-print(f'Validated {len(catalog["nodes"])} nodes, {len(catalog["peripherals"])} peripherals, {len(catalog["boards"])} boards, {len(tutorials)} tutorials, {len(screens)} screenshots, {len(catalog["locales"])} locale routes')
+print(f'Validated {len(catalog["nodes"])} nodes, {len(catalog["peripherals"])} peripherals, {len(catalog["boards"])} boards, {len(tutorials)} tutorials, {len(guides)} learning guides, {len(screens)} screenshots, {len(catalog["locales"])} locale routes')

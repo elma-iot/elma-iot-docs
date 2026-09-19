@@ -1,0 +1,66 @@
+[
+  {
+    "helpId": "reference.electronics-basics",
+    "title": "Practical electronics basics",
+    "summary": "GPIO, logic levels, pull resistors, ADC, PWM, buses, grounds, and drivers.",
+    "section": "Reference",
+    "related": ["safety", "setup.gpio"],
+    "body": [
+      "<h2>GPIO and logic levels</h2><p>A GPIO is a small logic signal. HIGH is near the board logic supply and LOW is near ground. ESP GPIO is normally 3.3 V logic; do not assume 5 V tolerance. An output cannot safely supply a motor, relay coil, pump, valve, heater, or speaker.</p>",
+      "<h2>Inputs</h2><p>An unconnected input floats and may change randomly. A pull-up holds it HIGH until a switch connects it to ground; a pull-down does the opposite. Active-low modules report the asserted state as LOW. Debounce filters contact transitions but does not repair bad wiring.</p>",
+      "<h2>ADC and PWM</h2><p>An ADC converts voltage into a number. Keep the GPIO inside its permitted range; a divider scales higher voltages. Calibration and averaging improve useful accuracy. PWM switches rapidly; duty cycle controls a suitable LED, fan input, or motor driver. It is not a true analog supply.</p>",
+      "<h2>Buses</h2><ul><li><strong>I2C:</strong> shared SDA/SCL, device addresses, usually pull-ups.</li><li><strong>SPI:</strong> shared clock/data plus chip-select per device.</li><li><strong>UART:</strong> cross TX to RX and share ground.</li><li><strong>I2S:</strong> digital audio clocks and data.</li></ul>",
+      "<h2>Drivers and ground</h2><p>A driver translates GPIO into load current/voltage. Low-voltage systems usually require a shared ground so signals have the same reference. Isolation modules can differ; follow their datasheet.</p>"
+    ]
+  },
+  {
+    "helpId": "safety",
+    "title": "Electrical and equipment safety",
+    "summary": "Safe boundaries for GPIO, relays, motors, pumps, heaters, and mains equipment.",
+    "section": "Reference",
+    "related": ["reference.electronics-basics", "cookbook.thermostat", "cookbook.water-system", "cookbook.drv8833"],
+    "body": [
+      "<aside class=\"safety\"><strong>ELMA-IoT wiring diagrams describe controller-side signals. They are not approval to work on hazardous voltage.</strong></aside>",
+      "<h2>Never drive loads directly</h2><p>Use a rated relay module, MOSFET driver, H-bridge, or contactor interface. Add flyback protection for inductive DC loads unless the driver includes it. Size wiring, connectors, fuses, and supplies for normal and fault current.</p>",
+      "<h2>Mains and high energy</h2><p>Mains heaters, pumps, compressors, and gate motors require suitable enclosures, isolation, earthing, over-current protection, emergency disconnection, and local-code compliance. Keep exposed low-voltage prototypes away from mains.</p>",
+      "<h2>Fail-safe design</h2><ul><li>Choose the safe output state for boot, disconnect, sensor failure, and restart.</li><li>Use independent hardware limits for motion and over-temperature.</li><li>Limit motor and pump runtime.</li><li>Test unplugged sensors and network loss deliberately.</li><li>Do not rely on MQTT or a phone notification as the only safety mechanism.</li></ul>"
+    ]
+  },
+  {
+    "helpId": "building-devices",
+    "title": "Building devices from multiple peripherals",
+    "summary": "Combine values, decisions, timing, actions, status, and MQTT into robust devices.",
+    "section": "Learning",
+    "related": ["logics.thinking", "cookbook.thermostat", "mqtt.guide", "home-assistant"],
+    "body": [
+      "<h2>Think in roles</h2><pre>Observe → decide → trigger → act → verify → report</pre><p>A sensor observes. Compare decides. Rising/Falling Edge turns a changing Boolean into one Flow pulse. A relay acts. A state block verifies. MQTT reports.</p>",
+      "<h2>Progressive example</h2><ol><li><strong>Temperature + relay:</strong> one threshold demonstrates value and action wiring.</li><li><strong>Two thresholds:</strong> ON above 30 °C and OFF below 27 °C prevents chatter.</li><li><strong>Timing:</strong> Delay, Cooldown, or explicit state paths protect against rapid commands.</li><li><strong>MQTT:</strong> Timer produces periodic Flow while the live value supplies payload.</li><li><strong>Availability:</strong> supported sensor Available/Error values guard actions and create alarms.</li></ol>",
+      "<h2>One board, many roles</h2><p>Name every slot by physical purpose, keep topics unique, and group independent automations. Shared buses may share lines only when address and chip-select rules are satisfied.</p>"
+    ]
+  },
+  {
+    "helpId": "logics.thinking",
+    "title": "How to think about Logics",
+    "summary": "Translate real requirements into values, Boolean decisions, Flow events, and actions.",
+    "section": "Logics",
+    "related": ["logics.overview", "logics.connectors", "logics.state-timing", "cookbook.thermostat"],
+    "body": [
+      "<h2>The sentence method</h2><p>Write: <strong>When X happens, check Y, then do Z.</strong> “When” becomes an event, edge, or timer; “check” becomes a Boolean condition; “do” becomes an action with a white Flow input.</p>",
+      "<h2>Data is not execution</h2><p>A temperature value connected to Compare updates Result. It does not fire a relay. Use Rising Edge, Falling Edge, IF, Branch, Timer, or another Flow-producing block.</p><pre>Temperature → Compare A (> 30) → Result → Rising Edge Value\nRising Edge Out → Relay ON In</pre>",
+      "<h2>Enable and hysteresis</h2><pre>(Temperature > 30) AND SystemEnabled → Rising Edge → Fan ON\nTemperature < 27 → Rising Edge → Fan OFF</pre><p>Between 27 and 30 °C the previous output state remains unchanged.</p>",
+      "<h2>Runtime limits</h2><p>Firmware graphs support at most 64 nodes, 128 connections, and a 32 KiB payload. Timing is greater than zero and at most 86,400 seconds. Repeat count is 1–128. Incompatible types, cycles, missing required ports, and unsupported adapters are rejected.</p>"
+    ]
+  },
+  {
+    "helpId": "logics.state-timing",
+    "title": "State, edges, timers, delays, and repeat",
+    "summary": "Use time and state without producing continuous or duplicated actions.",
+    "section": "Logics",
+    "related": ["logics.timer", "logics.repeat", "logics.delay", "logics.debounce", "logics.cooldown"],
+    "body": [
+      "<h2>Level versus transition</h2><p>A Boolean may remain True for minutes. Rising Edge fires once when False becomes True; Falling Edge fires once on the reverse transition; On Change fires on either.</p>",
+      "<h2>Timing blocks</h2><table><thead><tr><th>Block</th><th>Implemented behavior</th><th>Use</th></tr></thead><tbody><tr><td>Delay</td><td>One pulse after Seconds.</td><td>Turn off later.</td></tr><tr><td>Timer</td><td>Periodic pulses using Seconds; can be enabled.</td><td>Telemetry.</td></tr><tr><td>Repeat</td><td>Count pulses, first immediately; active retriggers ignored.</td><td>Three alerts.</td></tr><tr><td>Debounce</td><td>Wait for a quiet period.</td><td>Mechanical input.</td></tr><tr><td>Cooldown</td><td>Pass one, suppress others for Seconds.</td><td>Alarm rate limit.</td></tr></tbody></table>",
+      "<h2>Persistence</h2><p>Defaults, positions, connections, groups, and mode are stored and embedded. Runtime readings do not replace project defaults.</p>"
+    ]
+  }
+]

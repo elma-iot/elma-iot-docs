@@ -1,0 +1,41 @@
+[
+  {
+    "helpId": "troubleshooting.wifi",
+    "title": "Wi-Fi and device reachability troubleshooting",
+    "summary": "Diagnose boot, station connection, AP fallback, IP, isolation, and OTA reachability.",
+    "section": "Troubleshooting",
+    "related": ["wifi", "flash.ota", "serial-monitor", "troubleshooting.ota"],
+    "body": [
+      "<h2>Device does not appear</h2><ol><li>Capture Serial Monitor from reset.</li><li>Check SSID/password and network band.</li><li>Look for the configured fallback AP.</li><li>Confirm DHCP address; static IP must match subnet/gateway.</li><li>Disable phone mobile data or VPN temporarily if it diverts local traffic.</li></ol>",
+      "<h2>Web works but OTA is unreachable</h2><p>Open the exact IP from the same phone/PC. Check guest/client isolation, VLANs, VPN, firewall, authentication, and address changes. Discovery failure does not prove direct-IP failure.</p>",
+      "<h2>Unstable connection</h2><p>Check RSSI, antenna placement, power, transmit power, and memory. Motor/audio noise can reset or disconnect the ESP; test with the load supply disconnected.</p>"
+    ]
+  },
+  {
+    "helpId": "troubleshooting.mqtt",
+    "title": "MQTT troubleshooting",
+    "summary": "Diagnose cycling, authentication, duplicate clients, topics, commands, and discovery.",
+    "section": "Troubleshooting",
+    "related": ["mqtt.guide", "home-assistant", "serial-monitor"],
+    "body": [
+      "<h2>Connection fails or cycles</h2><ul><li>Verify broker host/port from the same network.</li><li>Check credentials and ACLs.</li><li>Use a unique client ID; firmware adds a MAC suffix, but broker policies can still conflict.</li><li>Inspect disconnect reasons and reset/memory logs.</li><li>Remove accidental spaces from base topic.</li></ul>",
+      "<h2>Publish works, command does not</h2><p>Use the exact compiled topic and payload. Subscriptions are absent when their feature is not compiled. A retained command can execute after reconnect; clear dangerous retained commands.</p>",
+      "<h2>Discovery missing</h2><p>Enable discovery, reconnect or republish, and confirm the feature has a runtime implementation. Configuration-only profiles do not create entities.</p>",
+      "<h2>State does not update</h2><p>MQTT Publish Out means queued, not acknowledged. Subscribe independently, inspect logs, and check the corresponding state topic.</p>"
+    ]
+  },
+  {
+    "helpId": "troubleshooting.hardware",
+    "title": "Sensors, relays, ADC, I2C, and motors troubleshooting",
+    "summary": "Diagnose common physical and configuration failures safely.",
+    "section": "Troubleshooting",
+    "related": ["reference.electronics-basics", "setup.gpio", "safety", "cookbook.drv8833"],
+    "body": [
+      "<h2>Sensor zero, unavailable, or jumping</h2><p>Confirm runtime support first. Check supply, ground, GPIO, pull resistor, ADC range, address, and cable length. Average noisy ADC values; never exceed input voltage.</p>",
+      "<h2>Relay backwards or chatters</h2><p>Determine active-high/low with the load disconnected. Chatter can come from one-threshold control, power noise, floating input, or repeated Flow. Use hysteresis and only the timing block whose documented behavior fits.</p>",
+      "<h2>I2C not detected</h2><p>Check SDA/SCL, address, pull-ups, voltage, and conflicts. Test one device before sharing the bus.</p>",
+      "<h2>Motor does not move or resets ESP</h2><p>Check motor supply, common ground, both direction pins, driver fault, and stall current. Separate motor paths and add recommended decoupling. Remove power if the driver gets hot.</p>",
+      "<h2>Configuration rejected</h2><p>Read the first validation message. Reserved pins, duplicates, unsuitable ADC, incomplete I2S, unsupported adapters, and graph limits are deliberate blockers.</p>"
+    ]
+  }
+]

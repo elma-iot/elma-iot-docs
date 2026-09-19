@@ -1,0 +1,46 @@
+[
+  {
+    "helpId": "mqtt.guide",
+    "title": "MQTT from first principles",
+    "summary": "Configure MQTT, understand topics and payloads, and build command and notification flows.",
+    "section": "MQTT",
+    "aliases": ["broker", "publish", "subscribe", "retained", "QoS", "notification"],
+    "related": ["mqtt.publish", "home-assistant", "tutorials.mqtt-live-value", "troubleshooting.mqtt"],
+    "body": [
+      "<h2>Terms</h2><p>A <strong>broker</strong> routes messages. A client publishes a payload to a topic or subscribes to receive it. Retained messages store the latest payload for new subscribers. QoS 1 requests at-least-once delivery and can duplicate a message.</p>",
+      "<h2>Configuration</h2><table><thead><tr><th>Field</th><th>Meaning</th></tr></thead><tbody><tr><td>Host / port</td><td>Broker address and TCP port; default 1883.</td></tr><tr><td>Username/password</td><td>Credentials when required.</td></tr><tr><td>Client ID</td><td>Configured base; firmware adds a MAC-derived suffix.</td></tr><tr><td>Base topic</td><td>Root such as <code>elma/greenhouse</code>.</td></tr><tr><td>Discovery</td><td>Publish supported Home Assistant entities.</td></tr></tbody></table>",
+      "<h2>Implemented topic families</h2><pre>&lt;base&gt;/availability\n&lt;base&gt;/state/cpu_temperature\n&lt;base&gt;/state/volume\n&lt;base&gt;/state/battery_voltage\n&lt;base&gt;/state/battery_percent\n&lt;base&gt;/state/battery_charging\n&lt;base&gt;/cmd/play, /cmd/tts, /cmd/stop, /cmd/volume\n&lt;base&gt;/cmd/reboot, /cmd/web_ui\n&lt;base&gt;/cmd/ota/check, /cmd/ota/install\n&lt;base&gt;/cmd/motor/channel_a/open (plus close/switch/duration)</pre><p>Feature-specific subscriptions exist only when that feature is compiled. Motor channel B mirrors A.</p>",
+      "<h2>Command payloads</h2><table><thead><tr><th>Command</th><th>Accepted payload</th></tr></thead><tbody><tr><td>volume</td><td>Integer percent, fractional level, or JSON containing volumePercent/volume/volume_level.</td></tr><tr><td>alarm</td><td>stop/off/0 stops; other payload starts.</td></tr><tr><td>web_ui</td><td>unlock/on/start/enable unlocks; other values lock.</td></tr><tr><td>ota/install</td><td>empty/install, latest, version text, or JSON version/tag and optional asset.</td></tr><tr><td>motor switch</td><td>ON/OPEN or OFF/CLOSE.</td></tr><tr><td>motor duration</td><td>Duration parsed and clamped by the motor runtime.</td></tr><tr><td>play/tts</td><td>URL/text or JSON media description; requires compiled audio.</td></tr></tbody></table>",
+      "<h2>Periodic telemetry</h2><pre>On Start → Timer (5 s) → MQTT Publish In\nTemperature → MQTT Publish Append value\nTopic: elma/greenhouse/temperature\nText: Greenhouse temperature: </pre><p>A Delay does not self-trigger; Timer supplies periodic Flow. Publish requires an exact topic without <code>+</code> or <code>#</code>, uses QoS 1, and Out means queued rather than broker-acknowledged.</p>",
+      "<h2>Notifications</h2><p>ELMA-IoT publishes events; it does not directly create a phone notification. Home Assistant or another subscriber must turn the event into one.</p>"
+    ]
+  },
+  {
+    "helpId": "home-assistant",
+    "title": "Home Assistant and MQTT Discovery",
+    "summary": "Expose supported features as one device with multiple Home Assistant entities.",
+    "section": "MQTT",
+    "related": ["mqtt.guide", "troubleshooting.mqtt", "web-interface"],
+    "body": [
+      "<h2>Discovery model</h2><p>When discovery is enabled and MQTT connects, firmware publishes retained discovery records for features included in the build. Entities share device identity, so Home Assistant groups them as one physical device.</p>",
+      "<h2>Current entity sources</h2><p>Depending on compiled features: availability, CPU temperature, battery voltage/percentage/charging, volume/audio commands, alarm/notification controls, storage actions, OTA actions, and configured DRV8833 channels. Configuration-only profiles do not automatically become entities.</p>",
+      "<h2>Example device</h2><p>A “Greenhouse Controller” may contain temperature, battery, relay/fan, display, and MQTT status. Only capabilities backed by compiled runtime code appear. Unsupported profiles need a future/custom driver.</p>",
+      "<h2>Missing entity</h2><ol><li>Confirm MQTT Connected.</li><li>Confirm discovery is enabled.</li><li>Confirm the feature is compiled and runtime-supported.</li><li>Republish discovery.</li><li>Inspect retained discovery topics and logs.</li></ol>"
+    ]
+  },
+  {
+    "helpId": "configuration.reference",
+    "title": "Configuration reference",
+    "summary": "Field-by-field reference for persisted firmware settings.",
+    "section": "Reference",
+    "related": ["setup.overview", "setup.gpio", "mqtt.guide", "flash.ota"],
+    "body": [
+      "<p class=\"lead\">These fields are persisted by the firmware settings manager. Applications may present friendlier labels and hide internal JSON fields.</p>",
+      "<h2>Wi-Fi</h2><table><thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td>ssid/password</td><td>text</td><td>empty</td><td>Station credentials.</td></tr><tr><td>apSsid/apPassword</td><td>text</td><td>ELMA-IoT… / 12345678</td><td>Fallback AP.</td></tr><tr><td>apFallbackEnabled</td><td>Boolean</td><td>true</td><td>Start AP if station is unavailable.</td></tr><tr><td>useStaticIp</td><td>Boolean</td><td>false</td><td>Use staticIp, gateway, subnet, dns1, dns2.</td></tr><tr><td>staTxPowerDbm / apTxPowerDbm</td><td>number</td><td>15</td><td>Requested radio power.</td></tr></tbody></table>",
+      "<h2>MQTT</h2><table><thead><tr><th>Field</th><th>Type</th><th>Default</th><th>Description</th></tr></thead><tbody><tr><td>host</td><td>text</td><td>empty</td><td>Empty disables connection.</td></tr><tr><td>port</td><td>integer</td><td>1883</td><td>Broker port.</td></tr><tr><td>username/password</td><td>text</td><td>empty</td><td>Optional credentials.</td></tr><tr><td>clientId</td><td>text</td><td>device name</td><td>Base client identity.</td></tr><tr><td>baseTopic</td><td>text</td><td>elma_iot</td><td>Command/state root.</td></tr><tr><td>discoveryEnabled</td><td>Boolean</td><td>true</td><td>Home Assistant discovery.</td></tr></tbody></table>",
+      "<h2>Battery</h2><table><thead><tr><th>Field</th><th>Type</th><th>Default/range</th><th>Description</th></tr></thead><tbody><tr><td>dividerR1Ohms / dividerR2Ohms</td><td>integer Ω</td><td>220000</td><td>Divider resistors.</td></tr><tr><td>dividerMaxVin</td><td>V</td><td>4.2</td><td>Expected source maximum.</td></tr><tr><td>calibrationMultiplier</td><td>number</td><td>build-dependent</td><td>Calibration.</td></tr><tr><td>adcPin / chargingSensePin</td><td>GPIO</td><td>board-dependent / 0</td><td>Measurement and charge sense.</td></tr><tr><td>updateIntervalMs</td><td>integer</td><td>10000; min 250</td><td>Update period.</td></tr><tr><td>movingAverageWindowSize</td><td>integer</td><td>10; 1–32</td><td>Smoothing.</td></tr></tbody></table>",
+      "<h2>Other groups</h2><ul><li><strong>audio:</strong> enable, remember, equalizer preset/three bands, DOUT/WS/BCLK, last playback and resume.</li><li><strong>oled:</strong> enable, type, driver (ssd1306/sh1106), address 1–127, width 64–128, height 32–64, rotation 0/90/180/270, pins, dim timeout 0–3600, trigger.</li><li><strong>sd:</strong> enable and CS/SCK/MOSI/MISO.</li><li><strong>device:</strong> names, status LED, volume/mute, buttons, sleep, factory-reset policy.</li><li><strong>effects:</strong> eight event files and volume percentages.</li><li><strong>webAuth:</strong> enable, username, password.</li><li><strong>ota:</strong> owner, repository, channel, asset template, manifest, TLS allowance, automatic check/update.</li></ul>",
+      "<h2>Application-managed fields</h2><p>Language, theme, GPIO safety, selected board, diagram layout, bindings, profiles, melodies, motor runtime, and Logics graph should be edited through ELMA-IoT. Malformed internal JSON is normalized or rejected.</p>"
+    ]
+  }
+]

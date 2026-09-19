@@ -1,0 +1,44 @@
+[
+  {
+    "helpId": "getting-started.architecture",
+    "title": "How ELMA-IoT works",
+    "summary": "Understand the builder, project, firmware runtime, and online Help.",
+    "section": "Getting started",
+    "related": ["getting-started.first-15-minutes", "setup.overview", "logics.overview"],
+    "body": [
+      "<p class=\"lead\">ELMA-IoT turns a board, selected hardware profiles, GPIO assignments, and a visual Logics graph into firmware for an ESP device.</p>",
+      "<h2>The four parts</h2><ol><li><strong>Android or Windows builder:</strong> creates the project, validates pins and Logics, compiles firmware, and flashes by USB or OTA.</li><li><strong>Project configuration:</strong> stores the board, peripheral slots, GPIO bindings, network settings, and editable graph.</li><li><strong>ESP firmware:</strong> runs supported drivers and the bounded Logics runtime, then exposes a local web interface, MQTT, status, logs, and OTA.</li><li><strong>Online documentation:</strong> owns long-form Help. Applications carry stable topic IDs and remain usable when Help is offline.</li></ol>",
+      "<h2>Profile versus driver</h2><p>A hardware profile can reserve pins and draw wiring without having a firmware runtime adapter. Every peripheral article reports both levels. Compilation rejects unsupported Logics capabilities rather than silently pretending they work.</p>",
+      "<h2>Normal workflow</h2><pre>Choose board → add peripherals → review GPIO → inspect wiring → create Logics → validate → compile → flash → verify live state</pre>",
+      "<p>Start with [[getting-started.first-15-minutes|Your first 15 minutes]], then learn [[building-devices|how peripherals form one device]].</p>"
+    ]
+  },
+  {
+    "helpId": "getting-started.installation",
+    "title": "Install and prepare ELMA-IoT",
+    "summary": "Prepare Android or Windows, the ESP board, USB, network, and optional MQTT broker.",
+    "section": "Getting started",
+    "related": ["getting-started.first-15-minutes", "flash.usb", "wifi", "troubleshooting.usb"],
+    "body": [
+      "<h2>Choose an application</h2><p>Use Android for a phone/tablet workflow with local compilation, USB/OTA flashing, and the portrait Logics constructor. Use Windows for a larger canvas and the standalone offline compiler. Keep application and generated firmware versions together when reporting a problem.</p>",
+      "<h2>Checklist</h2><ul><li>A supported ESP board whose exact module and flash/PSRAM variant you can identify.</li><li>A data-capable USB cable and stable power.</li><li>Only low-voltage test hardware for the first build.</li><li>Wi-Fi credentials and local reachability for OTA.</li><li>An MQTT broker only if the project uses MQTT.</li></ul>",
+      "<h2>First connection</h2><ol><li>Select the exact board.</li><li>Leave GPIO safety checks enabled.</li><li>Enter Wi-Fi Station credentials and keep AP fallback enabled until reachability is proven.</li><li>Save before compiling.</li><li>For the first installation, use USB and wait for image verification plus configuration acknowledgement.</li></ol>",
+      "<aside class=\"safety\"><strong>Do not connect mains, motors, pumps, valves, heaters, or bare relay contacts for the first test.</strong> Prove the controller with low-voltage hardware first.</aside>"
+    ]
+  },
+  {
+    "helpId": "getting-started.first-15-minutes",
+    "title": "Your first 15 minutes",
+    "summary": "Create, flash, and verify a small working ELMA-IoT device.",
+    "section": "Getting started",
+    "related": ["getting-started.installation", "setup.gpio", "graphic-designer", "flash.usb", "serial-monitor"],
+    "body": [
+      "<h2>Outcome</h2><p>You will create a saved project, flash it by USB, reach its web interface, and observe one safe input or status value.</p>",
+      "<h2>1. Create the project</h2><ol><li>Use a descriptive filename such as <code>desk-test.config.json</code>.</li><li>Select the exact ESP board; this controls reserved pins, ADC capability, flash target, and assignments.</li><li>Add one low-voltage peripheral only after reading its page.</li><li>Keep automatic GPIO selection unless the physical board forces a change.</li><li>Compare the Graphic Designer wiring with the printed module labels.</li></ol>",
+      "<h2>2. Identity and network</h2><ol><li>Set a unique name such as <code>desk-test</code>.</li><li>Enter Wi-Fi credentials and keep AP fallback enabled.</li><li>If using MQTT, enter broker, credentials, unique client ID, and base topic; otherwise leave host empty.</li></ol>",
+      "<h2>3. Compile and flash</h2><ol><li>Save and resolve every blocking validation message.</li><li>Compile for the selected board.</li><li>Connect a data USB cable and choose the correct serial device.</li><li>Wait for write verification, reset, Wi-Fi connection, and configuration acknowledgement.</li></ol>",
+      "<h2>4. Verify</h2><ol><li>Open the reported IP address.</li><li>Check board identity, firmware version, Wi-Fi signal, memory, and configured peripherals.</li><li>Open Serial Monitor and reset once if anything is missing.</li><li>Save a known-good project backup.</li></ol>",
+      "<h2>Success</h2><p>The device boots repeatedly, reconnects, reports the expected hardware, and shows no pin-conflict or initialization error.</p>"
+    ]
+  }
+]

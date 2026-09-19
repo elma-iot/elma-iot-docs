@@ -1,11 +1,14 @@
 from __future__ import annotations
-import html, json, shutil
+import html, json, re, shutil
 from pathlib import Path
 
 ROOT=Path(__file__).resolve().parents[1]; OUT=ROOT/"_site"; BASE="/elma-iot-docs"
 CAT=json.loads((ROOT/"data/catalog.json").read_text(encoding="utf-8"))
 TOPICS=json.loads((ROOT/"content/topics.json").read_text(encoding="utf-8"))
 TUTORIALS=json.loads((ROOT/"content/tutorials.json").read_text(encoding="utf-8"))
+GUIDES=[]
+for guide_path in sorted((ROOT/"content/guides").glob("*.json")):
+    value=json.loads(guide_path.read_text(encoding="utf-8")); GUIDES.extend(value if isinstance(value,list) else [value])
 SCREENSHOTS=json.loads((ROOT/"data/screenshots.json").read_text(encoding="utf-8"))
 SCREENSHOT_BY_FEATURE={x["feature"]:x for x in SCREENSHOTS}
 TUTORIAL_SCREENSHOTS={
@@ -20,6 +23,19 @@ TUTORIAL_SCREENSHOTS={
  "compile-firmware":["compile-flash"], "flash-usb":["usb"], "ota-update":["ota"],
  "serial-monitor":["serial-monitor"], "compile-troubleshooting":["compile-flash"],
  "usb-troubleshooting":["usb","serial-monitor"], "ota-troubleshooting":["ota"],
+}
+GUIDE_SCREENSHOTS={
+ "getting-started.architecture":["instrument-panel","blueprint-logics-canvas"],
+ "getting-started.installation":["device-setup-wizard","usb"],
+ "getting-started.first-15-minutes":["device-setup-wizard","board-selection","peripheral-selection","graphic-designer","compile-flash","usb"],
+ "building-devices":["graphic-designer","blueprint-logics-canvas"],
+ "logics.thinking":["vertical-logics-constructor","blueprint-logics-canvas"],
+ "logics.state-timing":["blueprint-logics-canvas"],
+ "configuration.reference":["device-setup-wizard","peripheral-selection"],
+ "cookbook.thermostat":["blueprint-logics-canvas"],
+ "cookbook.mini-piano":["vertical-logics-constructor","blueprint-logics-canvas"],
+ "troubleshooting.wifi":["ota","serial-monitor"],
+ "troubleshooting.hardware":["graphic-designer","serial-monitor"],
 }
 TYPE_COLORS={"execution":"#edf2fb","boolean":"#f33f4a","number":"#24bc73","integer":"#13bbdb","string":"#df59ba","analog":"#ef9900","peripheral":"#438deb","path":"#438deb","audio":"#20bac4","scalar":"#13bbdb"}
 RTL={"ar","fa"}
@@ -70,15 +86,40 @@ def node_body(n):
 <h2>Practical example</h2><pre>{esc(n["example"])}</pre>'''
 
 def peripheral_body(p):
-    req=[[esc(k),esc(v),esc(p["rails"].get(k,""))] for k,v in p["requirements"].items()]
+    req=[[esc(k),esc(v),esc(p["rails"].get(k,"Signal; board GPIO selected by the project"))] for k,v in p["requirements"].items()]
     pins=[[esc(x),esc(p["rails"].get(x,"Signal or profile-dependent"))] for x in p["pins"]]
-    return f'''<p class="lead">The {esc(p["title"])} profile configures a {esc(p["group"])} peripheral for ELMA-IoT.</p>
-<h2>Purpose and compatibility</h2><p>This built-in profile is available to supported boards when its required signals can be assigned without a GPIO conflict. Board-specific validity is checked by the project validator.</p>
-<h2>Power, pins, and interfaces</h2>{table(["Pin or signal","Known rail / role"],pins)}{table(["Signal","Direction","Rail"],req)}
-<h2>Configuration fields and defaults</h2><p>Add the profile in the {esc(p["group"])} section, then review every assigned signal. No undocumented electrical limits are assumed; verify the module manufacturer’s voltage and current requirements.</p>
-<h2>Logics values, events, and actions</h2><p>The Logics palette exposes only capabilities generated for the selected profile. Values use colored typed connectors; actions require a white Flow input. Availability varies by peripheral category.</p>
-<h2>Wiring and usage</h2><ol><li>Select the exact board and this profile.</li><li>Open the generated wiring diagram and connect every listed signal and rail.</li><li>Add the profile’s generated Logics block, if available, and connect compatible types.</li><li>Compile, flash, and verify the live value or action.</li></ol>
-<h2>Known limitations</h2><p>Manufacturer model, library version, power limits, and bus-address details not present in the maintained profile metadata require technical review before they can be stated here.</p>'''
+    group=p["group"]; pid=p["peripheralId"].split(":",1)[-1]
+    caps=[]
+    if group=="audio": caps=["Play","Stop"] if "buzzer" in pid else ["Play","Stop","Volume"]
+    elif group=="display" and pid=="i2c-oled": caps=["Set text","Clear text"]
+    elif group=="storage" and any(x in pid for x in ("microsd","sdmmc","spi-flash","littlefs")): caps=["Select audio file"]
+    elif group=="sensor" and "voltage-divider" in pid: caps=["Voltage","Percentage","Low","Critical"]
+    elif group=="control" and "relay" in pid: caps=["ON","OFF","Toggle","Set state","State"]
+    elif group=="control" and "buzzer" in pid: caps=["Play melody","Stop"]
+    elif group=="input" and "joystick" in pid: caps=["Analog value","X axis","Y axis","Button state"]
+    elif group=="input" and "potentiometer" in pid: caps=["Analog value"]
+    elif group=="input" and any(x in pid for x in ("button","switch","pir","reed")): caps=["State","Rising edge","Falling edge"]
+    dedicated=group=="control" and pid=="drv8833-dual-motor-driver"
+    if dedicated:
+        status='<aside class="support supported"><strong>Runtime support:</strong> the dedicated Motor runtime implements two timed direction channels, optional limit-stop inputs, learned open/closed roles, and MQTT commands. A generic DRV8833 Logics action adapter is not currently supported.</aside>'
+    elif caps:
+        status=f'<aside class="support supported"><strong>Runtime support:</strong> firmware Logics adapters are implemented for {esc(", ".join(caps))}. The profile also participates in GPIO validation and the wiring diagram.</aside>'
+    else:
+        status='<aside class="support wiring"><strong>Runtime support: not currently supported.</strong> This is a configuration and wiring profile only. GPIO assignment and diagrams are available, but selecting it does not by itself initialize or control the hardware.</aside>'
+    typical={"audio":"audio output module, amplifier, DAC, or buzzer named by this profile","audioIn":"microphone or audio input module named by this profile","display":"display module named by this profile","sensor":"sensor module named by this profile","input":"button, switch, or input module named by this profile","power":"power-conversion module named by this profile","control":"actuator driver named by this profile","expansion":"bus expander or converter named by this profile","storage":"storage module named by this profile","communication":"communications interface named by this profile"}.get(group,"module named by this profile")
+    signal_rows=[[esc(k),"GPIO selector","Required",esc(v),esc(p["rails"].get(k,"Board-dependent"))] for k,v in p["requirements"].items()]
+    advanced=('<li>Use the device Motor page or documented MQTT channel commands; configure a maximum duration and end switch before increasing movement time.</li>' if dedicated else f'<li>Add the generated capability blocks ({esc(", ".join(caps))}) to a grouped automation and verify live values or actions on the target.</li>' if caps else '<li>Do not build an automation around this profile until a firmware adapter exists; use it as a reviewed wiring plan or implement a custom hardware package.</li>')
+    return f'''<p class="lead">The <strong>{esc(p["title"])}</strong> entry is ELMA-IoT’s {esc(group)} profile for a {esc(typical)}.</p>{status}
+<h2>What this profile provides</h2><p>It declares the signals, directions, power labels, and GPIO requirements used by automatic assignment, conflict checking, and the Graphic Designer. Runtime support is stated separately above because a wiring profile is not proof that a firmware driver exists.</p>
+<h2>Typical hardware</h2><p>Use the exact module named by the profile, or a genuinely compatible module with the same interface and voltage requirements. Similar connector names do not guarantee electrical compatibility.</p>
+<h2>Wiring</h2>{table(["Pin or signal","Declared rail / role"],pins)}{table(["Signal","GPIO capability","Declared rail"],req)}
+<aside class="safety"><strong>Electrical safety:</strong> ESP GPIO is low-voltage logic and must not directly power motors, pumps, speakers, relay coils, solenoids, heaters, or mains loads. Use the correct driver and external supply, join grounds where the interface requires it, and verify the module datasheet. Never assume an ESP input is 5 V tolerant.</aside>
+<h2>Minimal configuration</h2><ol><li>Select the exact ESP board.</li><li>Add <strong>{esc(p["title"])}</strong> under {esc(group)}.</li><li>Accept safe automatic GPIO assignments or choose pins that satisfy every capability below.</li><li>Open the wiring diagram and compare every signal, supply rail, and ground with the physical module before applying power.</li></ol>
+<h2>Configuration fields</h2>{table(["Field","Type","Required","Meaning","Default"],signal_rows)}<p>GPIO defaults are board- and project-dependent because ELMA-IoT avoids reserved pins and collisions. The generated value shown in your project is authoritative for that build.</p>
+<h2>Runtime behavior and Logics</h2><p>{esc("The dedicated Motor service owns this profile; use its web/MQTT controls. Generic visual Logics actions for DRV8833 are not compiled." if dedicated else "The compiled runtime binds only the listed capabilities to this configured slot. A wired value overrides its inline default; Flow inputs trigger actions." if caps else "No generic Logics execution adapter is compiled for this profile. Its presence in the palette documents wiring and reserves pins only.")}</p>
+<h2>Examples</h2><h3>Minimal</h3><p>Add one profile, keep automatic GPIO assignment enabled, compile, and confirm there are no pin conflicts.</p><h3>Practical</h3><p>Give the slot a meaningful project role, such as “Tank high switch” or “Cooling relay,” then verify the generated wiring against the module labels before flashing.</p><h3>Advanced</h3><ol>{advanced}</ol>
+<h2>Common mistakes</h2><ul><li>Choosing a similarly named module with a different pinout or voltage.</li><li>Powering a load from GPIO or omitting the required driver and flyback protection.</li><li>Forgetting the common reference ground between logic and an external low-voltage driver.</li><li>Manually overriding a boot, flash, USB, input-only, or already-used GPIO.</li><li>Assuming a configuration-only profile already has a firmware driver.</li></ul>
+<h2>Known limits</h2><p>Exact current, voltage, bus address, timing, and library requirements are not present in the profile metadata unless shown above. Check the hardware manufacturer’s documentation. Configuration support and runtime support are deliberately reported separately.</p>'''
 
 def board_body(b):
     pins=[[esc(x.get("label","")),esc(x.get("pin") if x.get("pin") is not None else "Power / ground")] for x in b["pins"]]
@@ -90,14 +131,17 @@ def board_body(b):
 <h2>Power and compatibility</h2><p>Use the voltage printed on the board and module documentation. A GPIO is a logic signal, not a general power source. Peripheral compatibility also depends on required buses, free pins, and firmware support.</p>
 <aside class="review">Technical review: the source catalog does not yet state complete electrical limits and every silicon capability for this board. Consult the board manufacturer before wiring hardware outside the generated diagram.</aside>'''
 
-def generic_body(t):
+def generic_body(t,locale="en"):
     hid=t["helpId"]
     extras={
+      "getting-started":f'''<h2>Learning path</h2><ol><li><a href="{href(locale,'getting-started.architecture')}">Understand the architecture</a>.</li><li><a href="{href(locale,'getting-started.installation')}">Prepare the application and hardware</a>.</li><li><a href="{href(locale,'getting-started.first-15-minutes')}">Complete the first 15-minute device</a>.</li><li><a href="{href(locale,'tutorials.first-logic')}">Create the first automation</a>.</li><li><a href="{href(locale,'cookbook')}">Build a practical project</a>.</li></ol>''',
+      "setup.overview":f'''<h2>Setup sequence</h2><ol><li>Select the exact board.</li><li>Add peripheral profiles and read their runtime-support banners.</li><li>Keep automatic GPIO assignment enabled where possible.</li><li>Review the wiring diagram and electrical limits.</li><li>Configure Wi-Fi, optional MQTT, and device identity.</li><li>Save before compiling.</li></ol><p>Use the <a href="{href(locale,'configuration.reference')}">configuration reference</a> for persisted fields and <a href="{href(locale,'safety')}">Safety</a> before connecting loads.</p>''',
       "logics.connectors":connector_reference(),
-      "logics.overview":"<h2>How a workflow runs</h2><p>Data connectors carry current values. White Flow connectors trigger actions. Groups define independently controllable automations with Play, Pause, and Stop. Save and compile to embed the graph in firmware; the device web interface recreates the supported graph and overlays live values.</p><h2>Editing</h2><p>Drag blocks from the palette, connect compatible ports, set inline defaults, and group complete automations. Hover or long-press for local guidance, and use Documentation to open the exact online article.</p>",
+      "logics.overview":f'''<h2>How a workflow runs</h2><p>Data connectors carry current values. White Flow connectors trigger actions. Groups define independently controllable automations with Play, Pause, and Stop. Save and compile to embed the supported graph; the device web interface recreates it and overlays live values.</p><h2>Learn in order</h2><ol><li><a href="{href(locale,'logics.thinking')}">Translate a real requirement into Flow and data</a>.</li><li><a href="{href(locale,'logics.connectors')}">Learn connector colors and compatibility</a>.</li><li><a href="{href(locale,'logics.state-timing')}">Use edges, state, and timing</a>.</li><li><a href="{href(locale,'building-devices')}">Combine several peripherals</a>.</li></ol>''',
       "flash.ota":"<h2>Before updating</h2><p>The device must be reachable over HTTP, identify as compatible ELMA firmware or pass the explicit migration checks, match the compiled chip, and have an OTA-capable partition layout. Keep power stable until restart completes.</p>",
       "flash.usb":"<h2>Safe sequence</h2><p>Select the correct serial device, enter download mode if requested, write and verify all required regions, then allow the application to restart and acknowledge configuration. A verified image without configuration acknowledgement should be reconnected and checked rather than assumed complete.</p>",
-      "mqtt.overview":"<h2>Key terms</h2><p><strong>Topic</strong> is the exact destination name. <strong>Retained</strong> asks the broker to keep the last message for new subscribers. <strong>QoS 0</strong> sends at most once; <strong>QoS 1</strong> requests at least one delivery and can duplicate a message. A successful queue operation is not the same as broker acknowledgement.</p>",
+      "mqtt.overview":f'''<h2>Start here</h2><p><strong>Topic</strong> is the destination. <strong>Retained</strong> keeps the latest payload. <strong>QoS 1</strong> requests at-least-once delivery and can duplicate a message. A queued publish is not broker acknowledgement.</p><p>Read the complete <a href="{href(locale,'mqtt.guide')}">MQTT guide</a>, <a href="{href(locale,'home-assistant')}">Home Assistant discovery guide</a>, and <a href="{href(locale,'troubleshooting.mqtt')}">MQTT troubleshooting</a>.</p>''',
+      "troubleshooting":f'''<h2>Choose the symptom</h2><ul><li><a href="{href(locale,'troubleshooting.wifi')}">Wi-Fi, IP, and reachability</a></li><li><a href="{href(locale,'troubleshooting.mqtt')}">MQTT connection, commands, and discovery</a></li><li><a href="{href(locale,'troubleshooting.hardware')}">Sensors, ADC, relays, I2C, and motors</a></li><li><a href="{href(locale,'troubleshooting.compile')}">Compilation and validation</a></li><li><a href="{href(locale,'troubleshooting.usb')}">USB flashing</a></li><li><a href="{href(locale,'troubleshooting.ota')}">OTA updates</a></li></ul><p>Capture the first error and relevant Serial Monitor lines. Remove passwords, tokens, and private network details before sharing logs.</p>''',
     }.get(hid,"")
     return f'<p class="lead">{esc(t["summary"])}</p>{extras}<h2>Recommended workflow</h2><p>Open contextual Documentation from the feature whenever possible. It preserves the active language and routes directly to the relevant article. ELMA-IoT continues working if online Help is unavailable.</p>'
 
@@ -117,6 +161,11 @@ def tutorial_body(t):
 <h2>What to verify</h2><ul>{''.join(f'<li>{esc(x)}</li>' for x in checks)}</ul>
 <p>Save the project after verification. The feature articles under Related topics explain connector types, pin restrictions, and flashing requirements in more detail.</p>'''
 
+def guide_body(item,locale):
+    def replace(match): return f'<a href="{href(locale,match.group(1))}">{esc(match.group(2))}</a>'
+    raw=''.join(item["body"]) if isinstance(item["body"],list) else item["body"]
+    return re.sub(r'\[\[([a-z0-9.-]+)\|([^\]]+)\]\]',replace,raw)
+
 def tutorials_index(locale):
     cards=[]
     for i,t in enumerate(TUTORIALS,1):
@@ -134,32 +183,37 @@ def nav_tree(locale,active,all_titles):
         return f'<a href="{href(locale,help_id)}"{current}>{esc(label or all_titles.get(help_id,help_id))}</a>'
     def branch(label,links,opened=False,extra=''):
         return f'<details {"open" if opened else ""}><summary>{esc(label)}</summary><div class="tree-children">{"".join(link(x,y) for x,y in links)}{extra}</div></details>'
-    getting=[("getting-started","Overview"),("tutorials.first-esp-project","First ESP project"),("tutorials.select-esp-board","Select a board"),("tutorials.add-peripherals","Add peripherals"),("tutorials.wiring-diagram","Read the wiring diagram")]
-    setup=[("setup.overview","Setup overview"),("setup.peripherals","Peripherals"),("setup.gpio","GPIO configuration"),("graphic-designer","Graphic Designer"),("wifi","Wi-Fi"),("mqtt.overview","MQTT"),("audio.overview","Audio")]
-    logics=[("logics.overview","Logics overview"),("logics.connectors","Connector types and colors"),("tutorials.first-logic","First automation")]
+    getting=[("getting-started","Overview"),("getting-started.architecture","How ELMA-IoT works"),("getting-started.installation","Install and prepare"),("getting-started.first-15-minutes","First 15 minutes"),("tutorials.first-esp-project","First ESP project"),("tutorials.select-esp-board","Select a board"),("tutorials.add-peripherals","Add peripherals"),("tutorials.wiring-diagram","Read the wiring diagram")]
+    setup=[("setup.overview","Setup overview"),("setup.peripherals","Peripherals"),("setup.gpio","GPIO configuration"),("graphic-designer","Graphic Designer"),("configuration.reference","Configuration reference"),("reference.electronics-basics","Electronics basics"),("safety","Safety"),("wifi","Wi-Fi"),("mqtt.guide","MQTT guide"),("audio.overview","Audio")]
+    logics=[("logics.overview","Logics overview"),("logics.thinking","How to think about Logics"),("logics.connectors","Connector types and colors"),("logics.state-timing","State and timing"),("building-devices","Combining peripherals"),("tutorials.first-logic","First automation")]
     tutorials=[("tutorials","All tutorials")]+[("tutorials."+x["id"],x["title"]) for x in TUTORIALS]
-    troubleshooting=[("troubleshooting","All troubleshooting"),("troubleshooting.compile","Compilation"),("troubleshooting.usb","USB flashing"),("troubleshooting.ota","OTA updates"),("tutorials.compile-troubleshooting","Compilation tutorial"),("tutorials.usb-troubleshooting","USB tutorial"),("tutorials.ota-troubleshooting","OTA tutorial")]
+    cookbook=[("cookbook","All projects"),("cookbook.basic-patterns","Basic patterns"),("cookbook.control-systems","Lighting, gate, and alarms"),("cookbook.thermostat","Thermostat"),("cookbook.water-system","Water system"),("cookbook.drv8833","DRV8833 motor"),("cookbook.mini-piano","Mini piano"),("faq.practical-projects","Practical FAQ")]
+    troubleshooting=[("troubleshooting","All troubleshooting"),("troubleshooting.wifi","Wi-Fi and reachability"),("troubleshooting.mqtt","MQTT"),("troubleshooting.hardware","Sensors and actuators"),("troubleshooting.compile","Compilation"),("troubleshooting.usb","USB flashing"),("troubleshooting.ota","OTA updates"),("tutorials.compile-troubleshooting","Compilation tutorial"),("tutorials.usb-troubleshooting","USB tutorial"),("tutorials.ota-troubleshooting","OTA tutorial")]
     categories={}
     for node in CAT["nodes"]: categories.setdefault(node["category"],[]).append((node["helpId"],node["title"]))
     block_tree='<details class="nested"><summary>All Logics blocks</summary><div class="tree-children">'+''.join(branch(category,items,active in {x for x,_ in items}) for category,items in sorted(categories.items()))+'</div></details>'
-    return '<nav class="doc-tree"><strong>Contents</strong>'+branch("Getting started",getting,active=="getting-started")+branch("Setup",setup,active.startswith("setup.") or active in {"graphic-designer","wifi","mqtt.overview","audio.overview"})+branch("Logics",logics,active.startswith("logics."),block_tree)+branch("Tutorials",tutorials,active=="tutorials" or active.startswith("tutorials."))+branch("Troubleshooting",troubleshooting,active.startswith("troubleshooting."))+"</nav>"
+    return '<nav class="doc-tree"><strong>Contents</strong>'+branch("Getting started",getting,active.startswith("getting-started"))+branch("Setup and reference",setup,active.startswith("setup.") or active.startswith("configuration.") or active.startswith("reference.") or active in {"graphic-designer","wifi","mqtt.guide","audio.overview","safety"})+branch("Logics",logics,active.startswith("logics.") or active=="building-devices",block_tree)+branch("Tutorials",tutorials,active=="tutorials" or active.startswith("tutorials."))+branch("Project cookbook",cookbook,active=="cookbook" or active.startswith("cookbook."))+branch("Troubleshooting",troubleshooting,active.startswith("troubleshooting."))+"</nav>"
 
 def related_for(item,kind):
+    if item.get("related"): return item["related"]
     if kind=="node":
         category=item["category"]
         related=[n["helpId"] for n in CAT["nodes"] if n["category"]==category and n["helpId"]!=item["helpId"]][:4]
         if any(p["type"] in ("execution","boolean","scalar") for p in item["ports"]): related.insert(0,"logics.connectors")
         return related[:5]
-    if kind=="peripheral": return ["setup.peripherals","setup.gpio","graphic-designer","logics.overview"]
+    if kind=="peripheral":
+        peers=[p["helpId"] for p in CAT["peripherals"] if p["group"]==item["group"] and p["helpId"]!=item["helpId"]][:3]
+        return ["setup.peripherals","setup.gpio",*peers]
     if kind=="board": return ["setup.gpio","setup.peripherals","flash.usb","flash.ota"]
     return ["getting-started","tutorials","troubleshooting"]
 
 def page(locale,item,kind,all_titles):
     ui={**UI["en"],**UI.get(locale,{})}; help_id=item["helpId"]; title=item["title"]
-    body=node_body(item) if kind=="node" else peripheral_body(item) if kind=="peripheral" else board_body(item) if kind=="board" else tutorial_body(item) if kind=="tutorial" else tutorials_index(locale) if item["helpId"]=="tutorials" else generic_body(item)
+    body=node_body(item) if kind=="node" else peripheral_body(item) if kind=="peripheral" else board_body(item) if kind=="board" else tutorial_body(item) if kind=="tutorial" else guide_body(item,locale) if kind=="guide" else tutorials_index(locale) if item["helpId"]=="tutorials" else generic_body(item,locale)
     related=related_for(item,kind)
     selected=[s for s in SCREENSHOTS if s['helpId']==help_id]
     if kind=="tutorial": selected=[SCREENSHOT_BY_FEATURE[x] for x in TUTORIAL_SCREENSHOTS.get(item["id"],[]) if x in SCREENSHOT_BY_FEATURE]
+    if kind=="guide": selected=[SCREENSHOT_BY_FEATURE[x] for x in GUIDE_SCREENSHOTS.get(help_id,[]) if x in SCREENSHOT_BY_FEATURE]
     figure_cards=''.join(f'<figure><a href="{BASE}/{esc(s["path"])}" target="_blank" rel="noopener"><img src="{BASE}/{esc(s["path"])}" alt="Current {esc(s["platform"])} {esc(s["feature"].replace("-"," "))} screen" loading="lazy"></a><figcaption>{esc(s["platform"])} {esc(s["applicationVersion"])} · {esc(s["feature"].replace("-"," "))} · captured {esc(s["capturedAt"])} · select to open full size</figcaption></figure>' for s in selected)
     figures=f'<section class="screenshot-section" id="screenshots"><h2>Current application screenshots</h2><div class="screenshot-gallery">{figure_cards}</div></section>' if figure_cards else ''
     rel=''.join(f'<li><a href="{href(locale,x)}">{esc(all_titles.get(x,x))}</a></li>' for x in related if x in all_titles)
@@ -169,13 +223,15 @@ def page(locale,item,kind,all_titles):
     return f'''<!doctype html><html lang="{locale}" dir="{'rtl' if locale in RTL else 'ltr'}"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>{esc(title)} · ELMA-IoT Help</title><meta name="description" content="{esc(item.get('summary',item.get('purpose','ELMA-IoT documentation')))}"><link rel="stylesheet" href="{BASE}/assets/site.css"></head><body data-locale="{locale}" data-help-id="{esc(help_id)}"><header><a class="brand" href="{BASE}/{locale}/">ELMA-IoT Help</a><input id="search" type="search" placeholder="{esc(ui['search'])}" autocomplete="off"><select id="locale" aria-label="Language">{options}</select></header><div id="results" hidden></div><main>{nav_tree(locale,help_id,all_titles)}<article>{fallback}<p class="eyebrow">{esc(help_id)}</p><h1>{esc(title)}</h1><p class="version">{esc(ui['applies'])}: Android {CAT['appliesTo']['android']} · Windows {CAT['appliesTo']['windows']} · Firmware {CAT['appliesTo']['firmware']}</p>{body}{figures}<h2>{esc(ui['related'])}</h2><ul>{rel}</ul><footer><strong>{esc(ui['helpful'])}</strong> <a href="{issue}">{esc(ui['report'])}</a>. No usage telemetry is collected.</footer></article></main><script src="{BASE}/assets/site.js"></script></body></html>'''
 
 def home(locale,items):
-    cards=''.join(f'<a class="card" href="{href(locale,x["helpId"])}"><strong>{esc(x["title"])}</strong><span>{esc(x.get("summary","Open documentation"))}</span></a>' for x in items if x["helpId"] in ("getting-started","setup.overview","graphic-designer","logics.overview","mqtt.overview","flash.usb","flash.ota","serial-monitor","web-interface","tutorials","troubleshooting"))
+    source=[*items,*GUIDES]
+    cards=''.join(f'<a class="card" href="{href(locale,x["helpId"])}"><strong>{esc(x["title"])}</strong><span>{esc(x.get("summary","Open documentation"))}</span></a>' for x in source if x["helpId"] in ("getting-started.first-15-minutes","getting-started.architecture","setup.overview","graphic-designer","logics.thinking","mqtt.guide","cookbook","flash.usb","tutorials","troubleshooting"))
     return page(locale,{"helpId":"home","title":"ELMA-IoT online documentation","summary":"One public source for ELMA-IoT setup, Logics, hardware, flashing, tutorials, and troubleshooting."},"generic",{"getting-started":"Getting started","tutorials":"Tutorials","troubleshooting":"Troubleshooting"}).replace('<h2>Recommended workflow</h2>',f'<div class="cards">{cards}</div><h2>Recommended workflow</h2>')
 
 def main():
     if OUT.exists(): shutil.rmtree(OUT)
     items=[]
     items += [(x,"generic") for x in TOPICS]
+    items += [(x,"guide") for x in GUIDES]
     items += [({"helpId":"tutorials."+x["id"],"title":x["title"],"summary":x["why"],**x},"tutorial") for x in TUTORIALS]
     items += [(x,"node") for x in CAT["nodes"]]
     items += [(x,"peripheral") for x in CAT["peripherals"]]
@@ -186,7 +242,9 @@ def main():
         search=[]
         for item,kind in items:
             write(OUT/locale/route(item["helpId"])/"index.html",page(locale,item,kind,titles))
-            search.append({"title":item["title"],"helpId":item["helpId"],"url":href(locale,item["helpId"]),"text":" ".join(map(str,[item.get("summary",""),item.get("purpose",""),item.get("example","")," ".join(item.get("aliases",[]))]))})
+            raw_body=' '.join(item.get("body",[])) if isinstance(item.get("body"),list) else item.get("body","")
+            plain_body=re.sub(r'<[^>]+>',' ',raw_body)
+            search.append({"title":item["title"],"helpId":item["helpId"],"url":href(locale,item["helpId"]),"text":" ".join(map(str,[item.get("summary",""),item.get("purpose",""),item.get("example","")," ".join(item.get("aliases",[])),plain_body]))})
         write(OUT/"assets"/"search"/(locale+".json"),json.dumps(search,ensure_ascii=False))
     root='''<!doctype html><html><head><meta charset="utf-8"><meta name="viewport" content="width=device-width"><title>ELMA-IoT Help</title><script>const s=["en","es","zh","hi","ar","pt","bn","ru","ja","de","fr","ko","tr","it","id","pl","uk","vi","th","fa"];let l=(navigator.language||"en").toLowerCase().split("-")[0];location.replace("'''+BASE+'''/"+(s.includes(l)?l:"en")+"/")</script></head><body><a href="'''+BASE+'''/en/">ELMA-IoT Help</a></body></html>'''
     write(OUT/"index.html",root); write(OUT/"404.html",root)

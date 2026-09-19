@@ -1,0 +1,47 @@
+[
+  {
+    "helpId": "cookbook.basic-patterns",
+    "title": "Basic automation patterns",
+    "summary": "Copyable patterns for buttons, relays, timers, MQTT, displays, battery, and audio.",
+    "section": "Cookbook",
+    "related": ["logics.thinking", "logics.state-timing", "mqtt.guide"],
+    "body": [
+      "<h2>Button toggles relay</h2><pre>Physical Button Rising Edge → Relay Toggle In</pre><p>Both adapters are supported. Verify switch polarity and relay active level with the load disconnected.</p>",
+      "<h2>Delayed relay</h2><pre>Button Rising Edge → Relay ON\nButton Rising Edge → Delay 10 s → Relay OFF</pre><p>The two paths start together. A second trigger creates the behavior documented for the selected timing block; test retrigger expectations.</p>",
+      "<h2>Cyclic telemetry</h2><pre>On Start → Timer 30 s → MQTT Publish In\nBattery Voltage → Append value</pre><p>Use Timer, not Delay, for periodic execution.</p>",
+      "<h2>Low battery warning</h2><pre>Battery Low → Rising Edge → MQTT Publish\nBattery Low → Rising Edge → Audio Play</pre><p>Rising Edge sends once when the condition becomes true; Cooldown can rate-limit a different repeatedly-triggered alarm.</p>",
+      "<h2>Display a message</h2><pre>Button Rising Edge → I2C OLED Set text In\nText “System enabled” → Set text Text</pre><p>Only the primary I2C OLED profile currently has Set text/Clear runtime support.</p>",
+      "<h2>Not yet runtime-supported</h2><p>The LED PWM dimmer, generic fan/MOSFET/pump profiles, most environmental sensors, and arbitrary analog level sensors have configuration profiles but no generic firmware Logics adapter. Do not present them as executable recipes until adapters are added.</p>"
+    ]
+  },
+  {
+    "helpId": "cookbook.control-systems",
+    "title": "Lighting, gate, alarm, and multi-sensor designs",
+    "summary": "Build larger systems from the runtime capabilities that exist today.",
+    "section": "Cookbook",
+    "related": ["cookbook.basic-patterns", "cookbook.drv8833", "building-devices", "safety"],
+    "body": [
+      "<h2>Motion-triggered relay light</h2><pre>PIR Rising Edge → Relay ON\nPIR Falling Edge → Delay 60 s → Relay OFF</pre><p>PIR and relay runtime adapters are supported. A light sensor profile/driver is not currently available, so dusk qualification is a future enhancement unless a supported analog input is deliberately adapted and calibrated.</p>",
+      "<h2>Gate or valve actuator</h2><p>Use the dedicated DRV8833 Motor page and end switches. Assign Opening/Closing roles, a maximum duration, and a corresponding limit input. MQTT open/close/switch commands are implemented. PWM speed is not.</p>",
+      "<h2>Door alarm</h2><pre>Reed Switch Rising Edge → MQTT Publish “Door opened”\nReed Switch Falling Edge → MQTT Publish “Door closed”</pre><p>Match edge direction to wiring polarity. Use an independent subscriber for phone notifications.</p>",
+      "<h2>Multiple sensors and relays</h2><p>Each configured slot receives a stable identity. Use descriptive physical names and separate automation groups. Current firmware adapters cover a narrower set than the palette: verify each peripheral page before designing the graph.</p>",
+      "<h2>Greenhouse and irrigation reality check</h2><p>A full humidity, soil-moisture, fan, valve, and pump controller is a useful target, but several relevant profiles are currently wiring-only. A source-backed partial design can use supported relay outputs, reed/float switches, battery monitoring, MQTT, and DRV8833 motion. Environmental and soil sensors require implemented adapters before the complete project is supported.</p>"
+    ]
+  },
+  {
+    "helpId": "faq.practical-projects",
+    "title": "Practical project FAQ",
+    "summary": "Direct answers to common ELMA-IoT design questions.",
+    "section": "FAQ",
+    "related": ["cookbook", "troubleshooting", "setup.peripherals"],
+    "body": [
+      "<h2>How do I stop a relay chattering near a threshold?</h2><p>Use separate ON and OFF thresholds, such as ON above 30 °C and OFF below 27 °C. Debounce is for rapid triggers, not measurement hysteresis.</p>",
+      "<h2>How do I send every five seconds?</h2><p>Use Timer set to 5 seconds feeding the action Flow input. Connect the live value separately to its data input. Delay alone fires only after an incoming trigger.</p>",
+      "<h2>How do I get a phone notification?</h2><p>Publish an MQTT event. Home Assistant or another subscriber generates the phone notification; ELMA-IoT does not directly push one.</p>",
+      "<h2>Can I use DRV8833 speed control?</h2><p>Direction, duration, limits, and MQTT movement commands are implemented. PWM speed is not currently supported by the dedicated runtime.</p>",
+      "<h2>Can I use any profile shown in Configuration?</h2><p>No. Some profiles provide wiring and pin validation only. Read the Runtime support banner on the peripheral page.</p>",
+      "<h2>What happens if a sensor disappears?</h2><p>Where the adapter exposes Available/Error, build an explicit safe action and alarm path. ELMA-IoT cannot infer the safe physical state.</p>",
+      "<h2>Can I build a true key-to-frequency piano?</h2><p>Recorded Piano melody blocks and button-triggered melodies are supported. A general arbitrary frequency API is not currently supported.</p>"
+    ]
+  }
+]

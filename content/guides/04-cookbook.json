@@ -1,0 +1,75 @@
+[
+  {
+    "helpId": "cookbook",
+    "title": "Real-world project cookbook",
+    "summary": "Source-backed recipes from basic control to safer multi-peripheral devices.",
+    "section": "Cookbook",
+    "related": ["building-devices", "safety", "logics.thinking"],
+    "body": [
+      "<p class=\"lead\">Recipes progress from a small verified circuit to robust behavior. Confirm that every selected peripheral page reports the required runtime adapter as supported.</p>",
+      "<ul><li>[[cookbook.basic-patterns|Basic automation patterns]] — buttons, relays, timers, MQTT, display, battery, and audio.</li><li>[[cookbook.control-systems|Lighting, gate, alarm, and multi-sensor designs]].</li><li>[[cookbook.thermostat|Thermostat]] — hysteresis, timing, MQTT, and failure policy.</li><li>[[cookbook.water-system|Water system]] — level alarms, filling, timeout, and overflow.</li><li>[[cookbook.drv8833|DRV8833 motor]] — direction, limits, and MQTT.</li><li>[[cookbook.mini-piano|Mini piano]] — recorded melodies through DAC or buzzer.</li></ul>",
+      "<h2>Support rule</h2><p>Some recipes explain a useful design while flagging unavailable drivers. A profile in Configuration is not automatically executable in firmware.</p>"
+    ]
+  },
+  {
+    "helpId": "cookbook.thermostat",
+    "title": "Complete thermostat: basic to robust",
+    "summary": "Cooling control with hysteresis, timing protection, MQTT, and explicit failure behavior.",
+    "section": "Cookbook",
+    "related": ["building-devices", "logics.thinking", "mqtt.guide", "safety"],
+    "body": [
+      "<h2>Hardware and support</h2><p>Use a temperature source that exposes a firmware Logics value and a relay profile that exposes ON/OFF. The relay adapter is implemented. The current DS18B20 profile is available for wiring, but its automatic firmware Logics adapter is <strong>not currently supported</strong>; do not claim a working DS18B20 thermostat until that adapter exists.</p>",
+      "<aside class=\"safety\"><strong>Test with a low-voltage indicator.</strong> A heater, compressor, or mains fan needs rated control hardware and independent safety protection.</aside>",
+      "<h2>Version 1 — crossing the upper threshold</h2><pre>Temperature → Compare A (> 30 °C) → Result → Rising Edge\nRising Edge Out → Relay ON In</pre><p>This turns on once above 30 °C; it does not define OFF.</p>",
+      "<h2>Version 2 — hysteresis</h2><pre>Temperature > 30 °C → Rising Edge → Relay ON\nTemperature < 27 °C → Rising Edge → Relay OFF</pre><p>Between 27 and 30 °C, the previous state remains. This prevents chatter around one threshold.</p>",
+      "<h2>Version 3 — timing</h2><p>Cooldown suppresses repeat triggers and Delay postpones an action. There is no single dedicated compressor minimum-ON/minimum-OFF state-machine block. Model and test both directions explicitly, or use a rated external controller where mandatory protection is required.</p>",
+      "<h2>Version 4 — MQTT</h2><pre>On Start → Timer 10 s → MQTT Publish In\nTemperature → Append value\nTopic: elma/hvac/temperature\n\nRelay State → On Change → MQTT Publish\nTopic: elma/hvac/cooling_state</pre>",
+      "<h2>Version 5 — failure policy</h2><p>If the driver exposes Available/Error, route failure to the explicitly chosen safe relay action and an MQTT alarm. ELMA-IoT cannot infer whether ON or OFF is safe. Hardware cut-outs remain independent.</p>",
+      "<h2>Test matrix</h2><ol><li>Verify ON above 30 and OFF below 27.</li><li>Power-cycle in each state.</li><li>Disconnect sensor and broker separately.</li><li>Confirm a software halt cannot create an unsafe physical condition.</li></ol>"
+    ]
+  },
+  {
+    "helpId": "cookbook.water-system",
+    "title": "Water level, alarm, and filling controller",
+    "summary": "Binary and continuous level systems with timeout, overflow, and failure behavior.",
+    "section": "Cookbook",
+    "related": ["peripheral.reed-switch", "mqtt.guide", "safety", "logics.cooldown"],
+    "body": [
+      "<h2>Choose the measurement</h2><p>A float/reed switch is binary: high/not-high. An analog sensor is continuous but needs calibration and a supported ADC runtime value. Ultrasonic ranging is <strong>not currently represented by a built-in profile/driver</strong>.</p>",
+      "<h2>Support boundary</h2><p>Reed-switch State/Rising/Falling is supported. The water-leak/rain profile is configuration-only in the current runtime policy. A generic analog level driver is not currently supported unless represented by a supported analog input adapter.</p>",
+      "<h2>Simple alarm</h2><pre>Low-level switch State → edge matching wiring polarity\nEdge → MQTT Publish: elma/tank/low_alarm</pre>",
+      "<h2>Automatic filling</h2><pre>Low switch active → Rising Edge → Pump relay ON\nHigh switch active → Rising Edge → Pump relay OFF</pre><p>Use a driver rated for the pump control circuit; test polarity with the pump disconnected.</p>",
+      "<h2>Safer filling</h2><ul><li>Maximum runtime path commands OFF.</li><li>Separate overflow switch always commands OFF.</li><li>Cooldown rate-limits MQTT alarms.</li><li>Contradictory or missing switches have an explicit safe state.</li><li>Independent dry-run/current protection is required where damage is possible; there is no built-in current-based dry-run detector.</li></ul>",
+      "<h2>Test</h2><p>Test low only, high only, both, neither, stuck/unplugged switch, restart while filling, network loss, and maximum runtime.</p>"
+    ]
+  },
+  {
+    "helpId": "cookbook.drv8833",
+    "title": "DRV8833 DC motor control",
+    "summary": "Wire and operate the implemented two-channel DRV8833 runtime safely.",
+    "section": "Cookbook",
+    "related": ["peripheral.drv8833-dual-motor-driver", "safety", "mqtt.guide", "troubleshooting.hardware"],
+    "body": [
+      "<h2>What it is</h2><p>DRV8833 is a dual H-bridge. GPIO selects direction while a separate supply provides motor current. Never connect a motor directly to ESP GPIO.</p>",
+      "<h2>Wiring</h2><table><thead><tr><th>DRV8833</th><th>Role</th></tr></thead><tbody><tr><td>IN1/IN2</td><td>Channel A direction GPIO</td></tr><tr><td>IN3/IN4</td><td>Channel B direction GPIO</td></tr><tr><td>VM</td><td>External motor supply</td></tr><tr><td>GND</td><td>Motor and ESP reference ground</td></tr><tr><td>AOUT/BOUT</td><td>Motor terminals, never GPIO</td></tr></tbody></table>",
+      "<h2>Implemented behavior</h2><p>The Motor page runs either channel forward/backward for 100–600,000 ms; default 5,000 ms. It drives the inactive input LOW, then active HIGH. It stops on duration, manual request, or configured limit input. Directions may be labelled Opening/Closing; learned state supports Toggle. MQTT supports open, close, switch, and duration.</p>",
+      "<h2>PWM speed</h2><p><strong>Not currently supported by the DRV8833 motor runtime.</strong> Current code uses digital direction pins and timed movement. Do not treat PWM speed, braking modes, or current regulation as available controls.</p>",
+      "<h2>Progressive test</h2><ol><li>Verify safe pin assignments with motor disconnected.</li><li>Connect one suitable low-current motor.</li><li>Run forward 500 ms; after stopping, reverse 500 ms.</li><li>Add end switches and verify an active limit rejects movement.</li><li>Increase duration only after limits and emergency power removal work.</li></ol>",
+      "<h2>Heat and resets</h2><p>Heat suggests excess/stall current, a short, or inadequate cooling. ESP resets suggest supply droop/noise. Size for stall current and follow the module’s decoupling guidance.</p>"
+    ]
+  },
+  {
+    "helpId": "cookbook.mini-piano",
+    "title": "Build a mini piano",
+    "summary": "Record notes and play them through a supported DAC or buzzer.",
+    "section": "Cookbook",
+    "related": ["logics.audio-piano", "audio.overview", "safety"],
+    "body": [
+      "<h2>Implemented instrument</h2><p>Piano melody has one octave C through the next C, octave 1–7, instrument choice, and one recording per block. Recording again replaces that block; add blocks for more melodies.</p>",
+      "<h2>Controls</h2><p>White PC keys: A S D F G H J K. Black: W E T Y U. Number keys select octave; comma/period or arrows step octaves. Mouse/touch animates. Limit: 128 events and 60 seconds per block.</p>",
+      "<h2>Polyphony</h2><p>Holding keys records chords. DAC/I2S can render polyphony. A passive buzzer is physically monophonic; an active buzzer makes its own fixed tone and cannot reproduce arbitrary notes.</p>",
+      "<h2>Workflow</h2><ol><li>Configure a supported output and all pins.</li><li>Add Piano and the configured Play block.</li><li>Connect Melody to Source.</li><li>Connect a Flow event to Play In.</li><li>Record, preview, save, compile, and test.</li></ol><pre>Button Rising Edge → Audio Play In\nPiano Melody → Audio Play Source</pre>",
+      "<h2>Physical keys</h2><p>Supported button edges can trigger separate stored melodies. A direct arbitrary frequency API is <strong>not currently supported</strong>; use one short melody block per note/chord.</p>"
+    ]
+  }
+]
