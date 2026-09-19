@@ -17,7 +17,7 @@ Current applications:
 
 - Android 1.0.13: setup wizard, vertical constructor, full Blueprint canvas, local compilation, USB and OTA flashing.
 - Windows 0.1.57: standalone visual designer and full offline ESP compiler for Windows 10/11 x64.
-- Device firmware 0.1.54: live web configuration, Logics monitoring, MQTT, peripherals, and OTA updates.
+- Device firmware 0.1.55: live web configuration, Logics monitoring, MQTT, peripherals, and OTA updates.
 
 ## Screenshots
 
@@ -42,4 +42,4 @@ The planned Custom Hardware Constructor can use the documented [safe documentati
 
 ## Versions
 
-Current documentation applies to ELMA-IoT Android 1.0.13+, Windows 0.1.57+, and firmware 0.1.54+, unless an article says otherwise.
+Current documentation applies to ELMA-IoT Android 1.0.15+, Windows 0.1.59+, and firmware 0.1.55+, unless an article says otherwise.

@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "appliesTo": {
-    "android": "1.0.13+",
-    "windows": "0.1.57+",
-    "firmware": "0.1.54+"
+    "android": "1.0.15+",
+    "windows": "0.1.59+",
+    "firmware": "0.1.55+"
   },
   "locales": [
     "en",

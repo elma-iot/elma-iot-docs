@@ -1978,5 +1978,23 @@
     "helpId": "serial-monitor",
     "capturedAt": "2026-09-19",
     "path": "assets/screenshots/android/zh/serial-monitor.png"
+  },
+  {
+    "platform": "ESP Web",
+    "applicationVersion": "0.1.55",
+    "locale": "en",
+    "feature": "cpu-temperature-buzzer",
+    "helpId": "tutorials.cpu-temperature-buzzer",
+    "capturedAt": "2026-09-20",
+    "path": "assets/screenshots/web/en/cpu-temperature-buzzer.png"
+  },
+  {
+    "platform": "ESP Web",
+    "applicationVersion": "0.1.55",
+    "locale": "ru",
+    "feature": "cpu-temperature-buzzer",
+    "helpId": "tutorials.cpu-temperature-buzzer",
+    "capturedAt": "2026-09-20",
+    "path": "assets/screenshots/web/ru/cpu-temperature-buzzer.png"
   }
 ]

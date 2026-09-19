@@ -20,7 +20,7 @@ if duplicates:errors.append('Duplicate helpId: '+', '.join(duplicates))
 if len(catalog['nodes'])<100:errors.append('Logic catalog unexpectedly incomplete')
 if len(catalog['peripherals'])<100:errors.append('Peripheral catalog unexpectedly incomplete')
 if len(catalog['boards'])<10:errors.append('Board catalog unexpectedly incomplete')
-if len(tutorials)!=18:errors.append('Expected 18 initial tutorials')
+if len(tutorials)!=19:errors.append('Expected 19 tutorials')
 if len(guides)<15:errors.append('Comprehensive learning guide set is incomplete')
 for guide in guides:
     body=''.join(guide.get('body',[])) if isinstance(guide.get('body'),list) else str(guide.get('body',''))

@@ -110,6 +110,34 @@
     ]
   },
   {
+    "id": "cpu-temperature-buzzer",
+    "title": "Beep every 5 seconds above 50 °C",
+    "why": "Compare supplies a live Boolean level; Timer turns that level into a repeated Flow pulse while the temperature remains above the threshold.",
+    "goal": "Make the GPIO7 buzzer beep every five seconds while the ESP chip temperature is above 50 °C, then stop automatically when it falls to 50 °C or below.",
+    "prerequisites": [
+      "Configure a passive two-wire Buzzer with SIG on GPIO7 and GND on board ground.",
+      "Open Logics and confirm Buzzer Play appears under Active peripherals.",
+      "Remember that chip temperature is the ESP die temperature, not room temperature."
+    ],
+    "steps": [
+      "Add Hardware monitor · Chip temperature (°C) and connect its Value output to Compare A.",
+      "Set Compare B to 50 and Operator to >. Result is now True only while chip temperature is above 50 °C.",
+      "Add Timer, set Seconds to 5, and connect Compare Result to Timer Enabled. Do not use Rising Edge here: it emits only one Flow pulse when False becomes True.",
+      "Add the configured Buzzer Play action. Leave Source unconnected, choose the Beep preset and Passive mode, then connect Timer Out to Buzzer Play In.",
+      "Select all four blocks and group them. Select Start on that group. The Start control saves pending edits first and then changes the group state to Playing.",
+      "Use the Play button inside Buzzer Play to test the output directly. Use Stop to silence the test independently of the automation.",
+      "Confirm the wires animate while the group is running and Buzzer Play pulses every five seconds while Compare Result is True.",
+      "Select Stop on the group when testing is complete, then Save & apply and reboot once to verify the chosen state and graph persist."
+    ],
+    "explanation": "Rising Edge is correct for a single over-temperature alarm: it fires once at the moment the value crosses above 50 °C. A recurring alarm needs Timer. Connecting Compare Result to Timer Enabled keeps the timer active only while the condition is True, and Timer Out supplies a new execution pulse every five seconds. Buzzer Play runs once for each incoming pulse.",
+    "verify": [
+      "The Buzzer Play block’s direct Play button produces a beep on GPIO7.",
+      "When chip temperature is above 50 °C, Timer Out and the wire to Buzzer Play show recurring activity.",
+      "At 50 °C or below, the Timer is disabled and no recurring beep is produced.",
+      "After Save & apply and reboot, the graph, group, wiring, and selected runtime state are restored."
+    ]
+  },
+  {
     "id": "audio-tts",
     "title": "Audio and TTS notification",
     "why": "The source chain describes audio content while a separate Flow event starts playback.",
