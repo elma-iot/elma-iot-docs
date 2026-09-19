@@ -61,14 +61,16 @@
   {
     "helpId": "cookbook.mini-piano",
     "title": "Build a mini piano",
-    "summary": "Record notes and play them through a supported DAC or buzzer.",
+    "summary": "Play built-in buzzer signals or connect a Piano melody to a supported DAC or buzzer.",
     "section": "Cookbook",
     "related": ["logics.audio-piano", "audio.overview", "safety"],
     "body": [
       "<h2>Implemented instrument</h2><p>Piano melody has one octave C through the next C, octave 1–7, instrument choice, and one recording per block. Recording again replaces that block; add blocks for more melodies.</p>",
       "<h2>Controls</h2><p>White PC keys: A S D F G H J K. Black: W E T Y U. Number keys select octave; comma/period or arrows step octaves. Mouse/touch animates. Limit: 128 events and 60 seconds per block.</p>",
       "<h2>Polyphony</h2><p>Holding keys records chords. DAC/I2S can render polyphony. A passive buzzer is physically monophonic; an active buzzer makes its own fixed tone and cannot reproduce arbitrary notes.</p>",
-      "<h2>Workflow</h2><ol><li>Configure a supported output and all pins.</li><li>Add Piano and the configured Play block.</li><li>Connect Melody to Source.</li><li>Connect a Flow event to Play In.</li><li>Record, preview, save, compile, and test.</li></ol><pre>Button Rising Edge → Audio Play In\nPiano Melody → Audio Play Source</pre>",
+      "<h2>Buzzer Play block</h2><p>After selecting Buzzer as Audio Out, Active peripherals contains the configured Buzzer Play action. With Source unconnected, choose a built-in signal from its Preset list: Beep, Double beep, Alert, Doorbell, or Success. An active buzzer produces its fixed internal tone pattern; a passive buzzer follows the programmed note sequence.</p><p>When Piano Melody is connected to Source, the Preset control collapses because the connected melody replaces the built-in signal. Disconnect Source to show the Preset list again.</p>",
+      "<h2>Two-wire buzzer wiring</h2><p>The generic Buzzer profile represents a bare two-wire active or passive buzzer: connect SIG to the assigned output GPIO and GND to board ground. It does not expose VCC. A powered three-pin buzzer module has different electronics and must not be treated as this profile without checking its module documentation.</p>",
+      "<h2>Workflow</h2><ol><li>Select Buzzer or a supported DAC under Audio Out and assign every required pin.</li><li>Open Logics and expand Active peripherals. Add the Play block belonging to that configured output.</li><li>For a built-in buzzer sound, leave Source free and choose a Preset. For your own melody, add Piano and connect Melody to Play Source.</li><li>Connect a Flow event to Play In.</li><li>Record or select the sound, preview, save, compile, and test.</li></ol><pre>Button Rising Edge → Buzzer Play In\nPiano Melody → Buzzer Play Source (optional)</pre>",
       "<h2>Physical keys</h2><p>Supported button edges can trigger separate stored melodies. A direct arbitrary frequency API is <strong>not currently supported</strong>; use one short melody block per note/chord.</p>"
     ]
   }

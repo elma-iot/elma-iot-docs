@@ -3377,7 +3377,6 @@
       ],
       "pins": [
         "SIG",
-        "VCC",
         "GND"
       ],
       "requirements": {
@@ -3385,7 +3384,6 @@
       },
       "rails": {
         "SIG": null,
-        "VCC": "5V",
         "GND": "GND"
       }
     },
@@ -4391,7 +4389,6 @@
       ],
       "pins": [
         "SIG",
-        "VCC",
         "GND"
       ],
       "requirements": {
@@ -4399,7 +4396,6 @@
       },
       "rails": {
         "SIG": null,
-        "VCC": "5V",
         "GND": "GND"
       }
     },

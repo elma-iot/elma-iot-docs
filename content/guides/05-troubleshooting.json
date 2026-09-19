@@ -4,7 +4,12 @@
     "title": "Wi-Fi and device reachability troubleshooting",
     "summary": "Diagnose boot, station connection, AP fallback, IP, isolation, and OTA reachability.",
     "section": "Troubleshooting",
-    "related": ["wifi", "flash.ota", "serial-monitor", "troubleshooting.ota"],
+    "related": [
+      "wifi",
+      "flash.ota",
+      "serial-monitor",
+      "troubleshooting.ota"
+    ],
     "body": [
       "<h2>Device does not appear</h2><ol><li>Capture Serial Monitor from reset.</li><li>Check SSID/password and network band.</li><li>Look for the configured fallback AP.</li><li>Confirm DHCP address; static IP must match subnet/gateway.</li><li>Disable phone mobile data or VPN temporarily if it diverts local traffic.</li></ol>",
       "<h2>Web works but OTA is unreachable</h2><p>Open the exact IP from the same phone/PC. Check guest/client isolation, VLANs, VPN, firewall, authentication, and address changes. Discovery failure does not prove direct-IP failure.</p>",
@@ -16,7 +21,11 @@
     "title": "MQTT troubleshooting",
     "summary": "Diagnose cycling, authentication, duplicate clients, topics, commands, and discovery.",
     "section": "Troubleshooting",
-    "related": ["mqtt.guide", "home-assistant", "serial-monitor"],
+    "related": [
+      "mqtt.guide",
+      "home-assistant",
+      "serial-monitor"
+    ],
     "body": [
       "<h2>Connection fails or cycles</h2><ul><li>Verify broker host/port from the same network.</li><li>Check credentials and ACLs.</li><li>Use a unique client ID; firmware adds a MAC suffix, but broker policies can still conflict.</li><li>Inspect disconnect reasons and reset/memory logs.</li><li>Remove accidental spaces from base topic.</li></ul>",
       "<h2>Publish works, command does not</h2><p>Use the exact compiled topic and payload. Subscriptions are absent when their feature is not compiled. A retained command can execute after reconnect; clear dangerous retained commands.</p>",
@@ -29,13 +38,56 @@
     "title": "Sensors, relays, ADC, I2C, and motors troubleshooting",
     "summary": "Diagnose common physical and configuration failures safely.",
     "section": "Troubleshooting",
-    "related": ["reference.electronics-basics", "setup.gpio", "safety", "cookbook.drv8833"],
+    "related": [
+      "reference.electronics-basics",
+      "setup.gpio",
+      "safety",
+      "cookbook.drv8833"
+    ],
     "body": [
       "<h2>Sensor zero, unavailable, or jumping</h2><p>Confirm runtime support first. Check supply, ground, GPIO, pull resistor, ADC range, address, and cable length. Average noisy ADC values; never exceed input voltage.</p>",
       "<h2>Relay backwards or chatters</h2><p>Determine active-high/low with the load disconnected. Chatter can come from one-threshold control, power noise, floating input, or repeated Flow. Use hysteresis and only the timing block whose documented behavior fits.</p>",
       "<h2>I2C not detected</h2><p>Check SDA/SCL, address, pull-ups, voltage, and conflicts. Test one device before sharing the bus.</p>",
       "<h2>Motor does not move or resets ESP</h2><p>Check motor supply, common ground, both direction pins, driver fault, and stall current. Separate motor paths and add recommended decoupling. Remove power if the driver gets hot.</p>",
       "<h2>Configuration rejected</h2><p>Read the first validation message. Reserved pins, duplicates, unsuitable ADC, incomplete I2S, unsupported adapters, and graph limits are deliberate blockers.</p>"
+    ]
+  },
+  {
+    "helpId": "troubleshooting.recovery-safe-mode",
+    "title": "Recovery safe mode and reboot-loop protection",
+    "summary": "Recover a remote device when saved audio or a Logics automation causes repeated abnormal restarts.",
+    "section": "Troubleshooting",
+    "related": [
+      "logics.overview",
+      "audio.overview",
+      "serial-monitor",
+      "flash.ota"
+    ],
+    "body": [
+      "<h2>What the firmware protects</h2><p>Firmware 0.1.54+ records which Logics action is running and whether a saved audio source is still within its startup stability window. If a panic or watchdog reset occurs, the next boot keeps networking, the web interface, OTA, and device management available while quarantining the suspected workload.</p>",
+      "<h2>Logics recovery</h2><p>If the crash is attributed to a grouped automation, that group is changed to <strong>Stopped</strong>. If the failing node is not grouped, all Logics are stopped. The warning identifies the group or node where possible. The stopped state is saved across reboots.</p><p>Pressing Play on the quarantined automation first shows a warning. Confirm only after checking its wiring, values, timing, and actions. Confirmation clears the quarantine and deliberately retries it; another crash quarantines it again.</p>",
+      "<h2>Repeated abnormal restarts</h2><p>After three consecutive panic/watchdog resets, general recovery safe mode suppresses saved audio resume, startup/ambient playback, and Logics execution. A stable run clears the consecutive-crash counter. Wi-Fi, the local web interface, MQTT management, and OTA remain available so a remote unit can be corrected.</p>",
+      "<h2>Audio source recovery</h2><p>A remembered stream or file is guarded while it starts. If it causes an abnormal restart before becoming stable, automatic resume is disabled and the device boots without replaying that source. HTTP redirects are resolved before the decoder starts and decoder/network buffers are recreated between sources and retries.</p>",
+      "<h2>How to diagnose</h2><ol><li>Open the device web interface and read the red recovery message.</li><li>Open Serial Monitor and find <code>[logic-guard]</code>, <code>[audio-guard]</code>, or <code>[boot-guard]</code>.</li><li>Save a configuration backup before changing hardware or flashing.</li><li>Correct or stop the suspect automation/source.</li><li>Use the group Play button only when ready to perform one supervised retry.</li></ol>",
+      "<h2>Limits</h2><p>Recovery reduces reboot-loop risk; it cannot make unsafe electrical loads safe. Hardware watchdog resets, unstable power, invalid GPIO voltage, motor noise, and damaged peripherals still require physical diagnosis. Keep independent hardware interlocks for pumps, heaters, motors, and mains loads.</p>"
+    ]
+  },
+  {
+    "helpId": "troubleshooting.logics-persistence",
+    "title": "Logics cannot be saved on the device",
+    "summary": "Understand internal Logics storage, recover NVS space, and keep an editable graph across reloads and reboots.",
+    "section": "Troubleshooting",
+    "related": [
+      "logics.overview",
+      "web-interface",
+      "troubleshooting.recovery-safe-mode",
+      "setup.peripherals"
+    ],
+    "body": [
+      "<h2>Flash headroom is not Preferences space</h2><p>The Hardware Monitor Flash headroom value describes unused bytes in the OTA application slot. Logics edited in the device web interface are saved separately in NVS Preferences, or on a mounted flash filesystem/SD card. A low OTA headroom number does not by itself prevent a small graph from being saved.</p>",
+      "<h2>Firmware 0.1.54 storage behavior</h2><p>The device removes rebuildable connector contracts and peripheral bindings before saving. The remaining graph, node values, positions, groups, wires, and play/pause/stop state use compact MessagePack in Preferences. Existing JSON records remain readable and migrate on the next successful save.</p><p>If NVS is fragmented, firmware may reclaim the inactive copy of the bounded reboot log and retry. The current boot log, live serial output, settings, credentials, and previously saved Logics are not deliberately erased.</p>",
+      "<h2>Verify persistence</h2><ol><li>Press Save &amp; apply and wait for the success message.</li><li>Reload the page and confirm nodes, wiring, group bounds, and state return.</li><li>Reboot the device and confirm the same graph is active.</li><li>If saving still fails, export or screenshot the graph, inspect Serial Monitor for NVS errors, and remove obsolete large stored melodies or use a mounted SD card.</li></ol>",
+      "<h2>Compatibility</h2><p>Older firmware stored a larger JSON blob and could report that internal storage was unavailable even when the graph was modest. Update firmware before diagnosing the new compact format. Application-slot headroom still matters for OTA image size, while NVS capacity determines Preferences storage.</p>"
     ]
   }
 ]
