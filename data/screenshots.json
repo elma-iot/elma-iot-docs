@@ -1,0 +1,13 @@
+[
+ {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"device-setup-wizard","helpId":"setup.overview","capturedAt":"2026-09-19","path":"assets/screenshots/android/device-setup-wizard.png"},
+ {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"board-selection","helpId":"tutorials.select-esp-board","capturedAt":"2026-09-19","path":"assets/screenshots/android/board-selection.png"},
+ {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"peripheral-selection","helpId":"tutorials.add-peripherals","capturedAt":"2026-09-19","path":"assets/screenshots/android/peripheral-selection.png"},
+ {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"graphic-designer","helpId":"graphic-designer","capturedAt":"2026-09-19","path":"assets/screenshots/android/graphic-designer.png"},
+ {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"vertical-logics-constructor","helpId":"tutorials.first-logic","capturedAt":"2026-09-19","path":"assets/screenshots/android/vertical-logics-constructor.png"},
+ {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"blueprint-logics-canvas","helpId":"logics.overview","capturedAt":"2026-09-19","path":"assets/screenshots/android/blueprint-logics-canvas.png"},
+ {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"instrument-panel","helpId":"getting-started","capturedAt":"2026-09-19","path":"assets/screenshots/android/instrument-panel.png"},
+ {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"compile-flash","helpId":"compile","capturedAt":"2026-09-19","path":"assets/screenshots/android/compile-flash.png"},
+ {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"usb","helpId":"flash.usb","capturedAt":"2026-09-19","path":"assets/screenshots/android/usb.png"},
+ {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"ota","helpId":"flash.ota","capturedAt":"2026-09-19","path":"assets/screenshots/android/ota.png"},
+ {"platform":"Android","applicationVersion":"1.0.12 debug","feature":"serial-monitor","helpId":"serial-monitor","capturedAt":"2026-09-19","path":"assets/screenshots/android/serial-monitor.png"}
+]
