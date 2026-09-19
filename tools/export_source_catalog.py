@@ -45,7 +45,7 @@ def main():
         boards.append({"boardId":board_id,"helpId":"boards."+slug(board_id),
           "title":board_id.replace("-"," ").upper(),"chip":board.get("chip"),"pins":pins,
           "reserved":board.get("reserved",{}),"assetAlt":board.get("asset",{}).get("alt","")})
-    payload={"schemaVersion":1,"appliesTo":{"android":"1.0.12+","windows":"0.1.56+","firmware":"0.1.53+"},
+    payload={"schemaVersion":1,"appliesTo":{"android":"1.0.13+","windows":"0.1.57+","firmware":"0.1.54+"},
       "locales":["en","es","zh","hi","ar","pt","bn","ru","ja","de","fr","ko","tr","it","id","pl","uk","vi","th","fa"],
       "nodes":nodes,"peripherals":peripherals,"boards":boards}
     args.output.parent.mkdir(parents=True,exist_ok=True)

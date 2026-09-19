@@ -22,4 +22,4 @@ CI validates help IDs, routes, internal links, locale fallbacks, screenshot meta
 
 ## Versions
 
-Current documentation applies to ELMA-IoT Android 1.0.12+, Windows 0.1.56+, and firmware 0.1.53+, unless an article says otherwise.
+Current documentation applies to ELMA-IoT Android 1.0.13+, Windows 0.1.57+, and firmware 0.1.54+, unless an article says otherwise.
