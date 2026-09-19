@@ -7,6 +7,20 @@ CAT=json.loads((ROOT/"data/catalog.json").read_text(encoding="utf-8"))
 TOPICS=json.loads((ROOT/"content/topics.json").read_text(encoding="utf-8"))
 TUTORIALS=json.loads((ROOT/"content/tutorials.json").read_text(encoding="utf-8"))
 SCREENSHOTS=json.loads((ROOT/"data/screenshots.json").read_text(encoding="utf-8"))
+SCREENSHOT_BY_FEATURE={x["feature"]:x for x in SCREENSHOTS}
+TUTORIAL_SCREENSHOTS={
+ "first-esp-project":["device-setup-wizard","board-selection","peripheral-selection","compile-flash"],
+ "select-esp-board":["board-selection"], "add-peripherals":["peripheral-selection"],
+ "automatic-gpio":["peripheral-selection","graphic-designer"], "wiring-diagram":["graphic-designer"],
+ "first-logic":["vertical-logics-constructor","blueprint-logics-canvas"],
+ "sensor-compare-relay":["vertical-logics-constructor","blueprint-logics-canvas"],
+ "low-battery-warning":["blueprint-logics-canvas"], "mqtt-live-value":["blueprint-logics-canvas"],
+ "oled-output":["peripheral-selection","blueprint-logics-canvas"],
+ "audio-tts":["peripheral-selection","blueprint-logics-canvas"],
+ "compile-firmware":["compile-flash"], "flash-usb":["usb"], "ota-update":["ota"],
+ "serial-monitor":["serial-monitor"], "compile-troubleshooting":["compile-flash"],
+ "usb-troubleshooting":["usb","serial-monitor"], "ota-troubleshooting":["ota"],
+}
 TYPE_COLORS={"execution":"#edf2fb","boolean":"#f33f4a","number":"#24bc73","integer":"#13bbdb","string":"#df59ba","analog":"#ef9900","peripheral":"#438deb","path":"#438deb","audio":"#20bac4","scalar":"#13bbdb"}
 RTL={"ar","fa"}
 LOCALE_NAMES={"en":"English","es":"Español","zh":"中文","hi":"हिन्दी","ar":"العربية","pt":"Português","bn":"বাংলা","ru":"Русский","ja":"日本語","de":"Deutsch","fr":"Français","ko":"한국어","tr":"Türkçe","it":"Italiano","id":"Bahasa Indonesia","pl":"Polski","uk":"Українська","vi":"Tiếng Việt","th":"ไทย","fa":"فارسی"}
@@ -93,7 +107,26 @@ def connector_reference():
     return '<h2>Connector colors and meaning</h2>'+table(["Type","Color","Meaning"],rows)+'<h2>Direction and inline values</h2><p>Outputs face away from their block and connect to inputs. Required inputs must be wired. Optional inputs can use stored inline values; after wiring, the connected live value overrides the stored default. EN/Enabled is Boolean gating. Invalid type combinations are rejected.</p>'
 
 def tutorial_body(t):
-    return f'<p class="lead">{esc(t["why"])}</p><h2>Steps</h2><ol>'+''.join(f'<li>{esc(x)}</li>' for x in t["steps"])+f'</ol><h2>What to verify</h2><p>Save the project, check validation, and confirm the resulting behavior on the actual target. Use the linked feature articles for connector, pin, and flashing details.</p>'
+    prerequisites=t.get("prerequisites",["A saved ELMA-IoT project","The target board and hardware available for verification"])
+    checks=t.get("verify",["The project saves without a blocking validation error.","The device performs the intended action using the configured pins and values."])
+    return f'''<p class="lead">{esc(t["why"])}</p>
+<aside class="tutorial-goal"><strong>Goal:</strong> {esc(t.get("goal",t["why"]))}</aside>
+<h2>Before you start</h2><ul>{''.join(f'<li>{esc(x)}</li>' for x in prerequisites)}</ul>
+<h2>Step-by-step</h2><ol class="tutorial-steps">{''.join(f'<li><strong>Step {i}</strong><p>{esc(x)}</p></li>' for i,x in enumerate(t["steps"],1))}</ol>
+<h2>Why this workflow is arranged this way</h2><p>{esc(t.get("explanation",t["why"]))}</p>
+<h2>What to verify</h2><ul>{''.join(f'<li>{esc(x)}</li>' for x in checks)}</ul>
+<p>Save the project after verification. The feature articles under Related topics explain connector types, pin restrictions, and flashing requirements in more detail.</p>'''
+
+def tutorials_index(locale):
+    cards=[]
+    for i,t in enumerate(TUTORIALS,1):
+        features=TUTORIAL_SCREENSHOTS.get(t["id"],[])
+        shot=SCREENSHOT_BY_FEATURE.get(features[0]) if features else None
+        thumb=f'<img src="{BASE}/{esc(shot["path"])}" alt="{esc(t["title"])} tutorial screenshot" loading="lazy">' if shot else ''
+        cards.append(f'''<a class="tutorial-card" href="{href(locale,"tutorials."+t["id"])}">{thumb}<span class="tutorial-card-copy"><small>Tutorial {i}</small><strong>{esc(t["title"])}</strong><span>{esc(t["why"])}</span><b>{len(t["steps"])} guided steps →</b></span></a>''')
+    return f'''<p class="lead">Choose a tutorial below. Each guide explains what to do, why the step matters, what to verify, and shows current ELMA-IoT screens where they are relevant.</p>
+<div class="tutorial-summary"><strong>{len(TUTORIALS)} tutorials</strong><span>Setup · GPIO · Logics · MQTT · displays · audio · compile · USB · OTA · diagnostics</span></div>
+<div class="tutorial-list">{''.join(cards)}</div>'''
 
 def related_for(item,kind):
     if kind=="node":
@@ -107,9 +140,11 @@ def related_for(item,kind):
 
 def page(locale,item,kind,all_titles):
     ui={**UI["en"],**UI.get(locale,{})}; help_id=item["helpId"]; title=item["title"]
-    body=node_body(item) if kind=="node" else peripheral_body(item) if kind=="peripheral" else board_body(item) if kind=="board" else tutorial_body(item) if kind=="tutorial" else generic_body(item)
+    body=node_body(item) if kind=="node" else peripheral_body(item) if kind=="peripheral" else board_body(item) if kind=="board" else tutorial_body(item) if kind=="tutorial" else tutorials_index(locale) if item["helpId"]=="tutorials" else generic_body(item)
     related=related_for(item,kind)
-    figures=''.join(f'<figure><img src="{BASE}/{esc(s["path"])}" alt="Current {esc(s["platform"])} {esc(s["feature"].replace("-"," "))} screen" loading="lazy"><figcaption>{esc(s["platform"])} {esc(s["applicationVersion"])} · captured {esc(s["capturedAt"])}</figcaption></figure>' for s in SCREENSHOTS if s['helpId']==help_id)
+    selected=[s for s in SCREENSHOTS if s['helpId']==help_id]
+    if kind=="tutorial": selected=[SCREENSHOT_BY_FEATURE[x] for x in TUTORIAL_SCREENSHOTS.get(item["id"],[]) if x in SCREENSHOT_BY_FEATURE]
+    figures=''.join(f'<figure><img src="{BASE}/{esc(s["path"])}" alt="Current {esc(s["platform"])} {esc(s["feature"].replace("-"," "))} screen" loading="lazy"><figcaption>{esc(s["platform"])} {esc(s["applicationVersion"])} · {esc(s["feature"].replace("-"," "))} · captured {esc(s["capturedAt"])}</figcaption></figure>' for s in selected)
     rel=''.join(f'<li><a href="{href(locale,x)}">{esc(all_titles.get(x,x))}</a></li>' for x in related if x in all_titles)
     options=''.join(f'<option value="{esc(code)}" {"selected" if code==locale else ""}>{esc(LOCALE_NAMES[code])}</option>' for code in CAT["locales"])
     fallback='' if locale=="en" else f'<aside class="fallback">{esc(ui["fallback"])}</aside>'

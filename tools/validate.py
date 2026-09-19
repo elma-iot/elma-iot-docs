@@ -17,10 +17,24 @@ if len(catalog['nodes'])<100:errors.append('Logic catalog unexpectedly incomplet
 if len(catalog['peripherals'])<100:errors.append('Peripheral catalog unexpectedly incomplete')
 if len(catalog['boards'])<10:errors.append('Board catalog unexpectedly incomplete')
 if len(tutorials)!=18:errors.append('Expected 18 initial tutorials')
+tutorial_ids=['tutorials.'+x.get('id','') for x in tutorials]
+if len(set(tutorial_ids))!=len(tutorial_ids):errors.append('Duplicate tutorial id')
+for tutorial in tutorials:
+    if not tutorial.get('title') or not tutorial.get('why'):errors.append('Tutorial requires title and purpose: '+str(tutorial.get('id')))
+    if len(tutorial.get('steps',[]))<3:errors.append('Tutorial requires at least three actionable steps: '+str(tutorial.get('id')))
 for locale in catalog['locales']:
     if not (SITE/locale/'index.html').exists():errors.append(f'Missing locale home: {locale}')
     for help_id in ids:
         if not (SITE/locale/help_id.replace('.', '/')/'index.html').exists():errors.append(f'Missing route: {locale}/{help_id}')
+    tutorial_index=(SITE/locale/'tutorials'/'index.html')
+    if tutorial_index.exists():
+        tutorial_html=tutorial_index.read_text(encoding='utf-8')
+        for help_id in tutorial_ids:
+            if f'/{locale}/{help_id.replace(".", "/")}/' not in tutorial_html:errors.append(f'Tutorial index does not link {locale}/{help_id}')
+    for help_id in tutorial_ids:
+        page=SITE/locale/help_id.replace('.', '/')/'index.html'
+        if not page.exists():errors.append(f'Missing tutorial route: {locale}/{help_id}')
+        elif 'class="tutorial-steps"' not in page.read_text(encoding='utf-8'):errors.append(f'Tutorial has no rendered steps: {locale}/{help_id}')
 for page in SITE.rglob('*.html'):
     text=page.read_text(encoding='utf-8')
     for target in re.findall(r'href="(/elma-iot-docs/[^"#?]+)"',text):
