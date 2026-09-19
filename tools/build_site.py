@@ -161,7 +161,7 @@ def page(locale,item,kind,all_titles):
     selected=[s for s in SCREENSHOTS if s['helpId']==help_id]
     if kind=="tutorial": selected=[SCREENSHOT_BY_FEATURE[x] for x in TUTORIAL_SCREENSHOTS.get(item["id"],[]) if x in SCREENSHOT_BY_FEATURE]
     figure_cards=''.join(f'<figure><a href="{BASE}/{esc(s["path"])}" target="_blank" rel="noopener"><img src="{BASE}/{esc(s["path"])}" alt="Current {esc(s["platform"])} {esc(s["feature"].replace("-"," "))} screen" loading="lazy"></a><figcaption>{esc(s["platform"])} {esc(s["applicationVersion"])} · {esc(s["feature"].replace("-"," "))} · captured {esc(s["capturedAt"])} · select to open full size</figcaption></figure>' for s in selected)
-    figures=f'<section class="screenshot-section"><h2>Current application screenshots</h2><div class="screenshot-gallery">{figure_cards}</div></section>' if figure_cards else ''
+    figures=f'<section class="screenshot-section" id="screenshots"><h2>Current application screenshots</h2><div class="screenshot-gallery">{figure_cards}</div></section>' if figure_cards else ''
     rel=''.join(f'<li><a href="{href(locale,x)}">{esc(all_titles.get(x,x))}</a></li>' for x in related if x in all_titles)
     options=''.join(f'<option value="{esc(code)}" {"selected" if code==locale else ""}>{esc(LOCALE_NAMES[code])}</option>' for code in CAT["locales"])
     fallback='' if locale=="en" else f'<aside class="fallback">{esc(ui["fallback"])}</aside>'
