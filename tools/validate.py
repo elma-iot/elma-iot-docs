@@ -40,8 +40,12 @@ for locale in catalog['locales']:
         else:
             rendered=page.read_text(encoding='utf-8')
             if placeholder in rendered:errors.append(f'Placeholder Help body: {locale}/{help_id}')
-            if 'class="screenshot-gallery"' not in rendered:errors.append(f'Page has no current application visual: {locale}/{help_id}')
-            if locale!='en' and f'/assets/screenshots/android/{locale}/' not in rendered:errors.append(f'Page has no screenshot in selected language: {locale}/{help_id}')
+            illustrated=help_id in {'workspace','plotter','logics.telemetry'}
+            if illustrated:
+                if 'class="feature-figure"' not in rendered or f'/assets/illustrations/{help_id.split(".")[-1]}.svg' not in rendered:
+                    errors.append(f'Page has no feature illustration: {locale}/{help_id}')
+            elif 'class="screenshot-gallery"' not in rendered:errors.append(f'Page has no current application visual: {locale}/{help_id}')
+            if locale!='en' and not illustrated and f'/assets/screenshots/android/{locale}/' not in rendered:errors.append(f'Page has no screenshot in selected language: {locale}/{help_id}')
             if locale!='en' and 'class="fallback"' in rendered:errors.append(f'Untranslated fallback banner remains: {locale}/{help_id}')
             if locale=='en':
                 article=re.search(r'<article>(.*?)</article>',rendered,re.S)

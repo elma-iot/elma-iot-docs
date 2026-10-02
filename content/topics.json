@@ -57,6 +57,27 @@
     ]
   },
   {
+    "helpId": "logics.telemetry",
+    "title": "Sampling, plotting, and data logging",
+    "summary": "Collect several measurements on demand and save selected values to external storage.",
+    "section": "Logics",
+    "aliases": ["Sampling Interval", "Transfer to Plotter", "Save Data", "JSONL"]
+  },
+  {
+    "helpId": "workspace",
+    "title": "Windows workspace and detachable tabs",
+    "summary": "Reorder workspace tabs, place pages on another screen, and restore a saved layout.",
+    "section": "Tools",
+    "aliases": ["dock", "detach", "floating window", "View menu"]
+  },
+  {
+    "helpId": "plotter",
+    "title": "Plotter",
+    "summary": "Request live serial or Wi-Fi samples, compare colored curves, explore history, and record to the PC.",
+    "section": "Tools",
+    "aliases": ["serial chart", "record to PC", "CSV", "zoom"]
+  },
+  {
     "helpId": "mqtt.overview",
     "title": "MQTT",
     "summary": "Configure a broker, connect, publish values, and use Home Assistant discovery.",

@@ -5,6 +5,9 @@ This is the public, online-only user documentation for ELMA-IoT. Android, Window
 - [Getting Started](https://elma-iot.github.io/elma-iot-docs/en/getting-started/)
 - [First 15 minutes](https://elma-iot.github.io/elma-iot-docs/en/getting-started/first-15-minutes/)
 - [Visual Logics](https://elma-iot.github.io/elma-iot-docs/en/logics/overview/)
+- [Sampling, plotting, and data logging](https://elma-iot.github.io/elma-iot-docs/en/logics/telemetry/)
+- [Plotter](https://elma-iot.github.io/elma-iot-docs/en/plotter/)
+- [Windows workspace and detachable tabs](https://elma-iot.github.io/elma-iot-docs/en/workspace/)
 - [Tutorials](https://elma-iot.github.io/elma-iot-docs/en/tutorials/)
 - [Project cookbook](https://elma-iot.github.io/elma-iot-docs/en/cookbook/)
 - [MQTT guide](https://elma-iot.github.io/elma-iot-docs/en/mqtt/guide/)
@@ -16,8 +19,8 @@ ELMA-IoT supports ESP32, ESP32-S3, and ESP32-C3 families, visual peripheral conf
 Current applications:
 
 - Android 1.0.13: setup wizard, vertical constructor, full Blueprint canvas, local compilation, USB and OTA flashing.
-- Windows 0.1.57: standalone visual designer and full offline ESP compiler for Windows 10/11 x64.
-- Device firmware 0.1.55: live web configuration, Logics monitoring, MQTT, peripherals, and OTA updates.
+- Windows source 0.1.74: detachable native workspace, serial/Wi-Fi Plotter, Logics telemetry, and full offline ESP compiler for Windows 10/11 x64.
+- Device firmware source 0.1.56: live web configuration, on-demand telemetry, external-storage data logging, Logics monitoring, MQTT, peripherals, and OTA updates.
 
 ## Screenshots
 
@@ -42,4 +45,4 @@ The planned Custom Hardware Constructor can use the documented [safe documentati
 
 ## Versions
 
-Current documentation applies to ELMA-IoT Android 1.0.15+, Windows 0.1.59+, and firmware 0.1.55+, unless an article says otherwise.
+Current documentation applies to ELMA-IoT Android 1.0.15+, Windows source 0.1.74+, and firmware source 0.1.56+, unless an article says otherwise. Source versions do not imply a published app or firmware binary.

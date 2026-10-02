@@ -2,6 +2,7 @@ from __future__ import annotations
 import html, json, re, shutil
 from html.parser import HTMLParser
 from pathlib import Path
+from current_features import body as current_feature_body
 
 ROOT=Path(__file__).resolve().parents[1]; OUT=ROOT/"_site"; BASE="/elma-iot-docs"
 CAT=json.loads((ROOT/"data/catalog.json").read_text(encoding="utf-8"))
@@ -42,6 +43,7 @@ GUIDE_SCREENSHOTS={
  "troubleshooting.wifi":["ota","serial-monitor"],
  "troubleshooting.hardware":["graphic-designer","serial-monitor"],
 }
+ILLUSTRATED_TOPICS={"workspace","plotter","logics.telemetry"}
 TYPE_COLORS={"execution":"#edf2fb","boolean":"#f33f4a","number":"#24bc73","integer":"#13bbdb","string":"#df59ba","analog":"#ef9900","peripheral":"#438deb","path":"#438deb","audio":"#20bac4","scalar":"#13bbdb"}
 RTL={"ar","fa"}
 LOCALE_NAMES={"en":"English","es":"Español","zh":"中文","hi":"हिन्दी","ar":"العربية","pt":"Português","bn":"বাংলা","ru":"Русский","ja":"日本語","de":"Deutsch","fr":"Français","ko":"한국어","tr":"Türkçe","it":"Italiano","id":"Bahasa Indonesia","pl":"Polski","uk":"Українська","vi":"Tiếng Việt","th":"ไทย","fa":"فارسی"}
@@ -162,6 +164,7 @@ def peripheral_body(p):
 def board_body(b):
     pins=[[esc(x.get("label","")),esc(x.get("pin") if x.get("pin") is not None else "Power / ground")] for x in b["pins"]]
     reserved=[[esc(k),esc(v)] for k,v in b["reserved"].items()]
+    special='''<h2>VIEWE onboard hardware</h2><p>The VIEWE UEDX24320028E-WB-A V1.1 profile reserves its onboard display, touch, SDMMC card, buzzer, UART, flash, PSRAM, and boot connections before offering free GPIOs to added modules. Its compact LVGL dashboard runs from the same device services as the web interface. Select this exact profile and review the generated contact labels before connecting anything externally.</p>''' if b["boardId"]=="viewe-uedx24320028e-wb-a" else ''
     return f'''<p class="lead">ELMA-IoT target for the {esc(b["chip"].upper())} family. {esc(b["assetAlt"])}</p>
 <h2>GPIO map</h2>{table(["Board label","GPIO"],pins)}
 <h2>Reserved and boot pins</h2>{table(["GPIO","Reason"],reserved)}<p>Automatic GPIO assignment uses the board metadata. Enable reserved-pin overrides only after verifying boot, USB, flash, PSRAM, and on-board-device restrictions.</p>
@@ -169,10 +172,13 @@ def board_body(b):
 <h2>Power and compatibility</h2><p>Use the voltage printed on the board and module documentation. A GPIO is a logic signal, not a general power source. Peripheral compatibility also depends on required buses, free pins, and firmware support.</p>
 <h2>Minimal setup example</h2><ol><li>Select this exact board profile before adding peripherals.</li><li>Keep automatic GPIO assignment enabled.</li><li>Add one low-voltage peripheral, review every generated signal, VCC, and GND connection, then compile.</li><li>Use Serial Monitor to confirm the reported chip and board profile after flashing.</li></ol>
 <h2>Common mistakes</h2><ul><li>Selecting a board with the same chip but a different flash, PSRAM, USB, LED, or header layout.</li><li>Using the printed header position as though it were the GPIO number.</li><li>Overriding boot, flash, USB, or on-board-device pins without checking the schematic.</li><li>Applying 5 V to a non-tolerant GPIO or powering a load from a signal pin.</li></ul>
-<aside class="review">Technical review: the source catalog does not yet state complete electrical limits and every silicon capability for this board. Consult the board manufacturer before wiring hardware outside the generated diagram.</aside>'''
+{special}<aside class="review">Technical review: the source catalog does not yet state complete electrical limits and every silicon capability for this board. Consult the board manufacturer before wiring hardware outside the generated diagram.</aside>'''
 
 def generic_body(t,locale="en"):
     hid=t["helpId"]
+    current=current_feature_body(hid,locale)
+    if current is not None:
+        return f'<p class="lead">{esc(t["summary"])}</p>{current}'
     details={
       "getting-started":f'''<h2>Learning path</h2><ol><li><a href="{href(locale,'getting-started.architecture')}">Understand the architecture</a>.</li><li><a href="{href(locale,'getting-started.installation')}">Prepare the application and hardware</a>.</li><li><a href="{href(locale,'getting-started.first-15-minutes')}">Complete the first 15-minute device</a>.</li><li><a href="{href(locale,'tutorials.first-logic')}">Create the first automation</a>.</li><li><a href="{href(locale,'cookbook')}">Build a practical project</a>.</li></ol><h2>Your first successful result</h2><p>The project should save without blocking validation, the wiring view should match the physical low-voltage connections, compilation should name the chosen board, and USB or OTA completion should identify the running device. Open the device web interface and confirm Wi-Fi, firmware version, and configured peripheral state.</p><h2>First checks when it does not work</h2><p>Verify the exact board, power and common ground, data-capable USB cable, 2.4 GHz Wi-Fi credentials, and the first Serial Monitor error. Do not connect mains loads, motors, pumps, heaters, or relay coils directly to GPIO.</p>''',
       "setup.overview":f'''<h2>Setup sequence</h2><ol><li>Select the exact board.</li><li>Add peripheral profiles and read their runtime-support banners.</li><li>Keep automatic GPIO assignment enabled where possible.</li><li>Review the wiring diagram and electrical limits.</li><li>Configure Wi-Fi, optional MQTT, and device identity.</li><li>Save before compiling.</li></ol><p>Use the <a href="{href(locale,'configuration.reference')}">configuration reference</a> for persisted fields and <a href="{href(locale,'safety')}">Safety</a> before connecting loads.</p><h2>What is saved</h2><p>The project stores identity, board, peripheral slots, GPIO bindings, network settings, Logics graph, groups, positions, and supported feature options. Compilation embeds project defaults; device-side settings can persist separately across application-only OTA updates.</p><h2>Before compilation</h2><p>Resolve every pin conflict and unsupported runtime capability. Confirm that wiring-only profiles are not expected to produce live values or actions, and save the configuration so the firmware and recreated web Logics view use the same graph.</p>''',
@@ -199,6 +205,15 @@ def generic_body(t,locale="en"):
       "home":'''<h2>Choose a path</h2><p>New users should follow Getting Started and the First 15 Minutes tutorial. Use Setup and Reference for board, GPIO, peripheral, and configuration details; Logics for automation blocks and connectors; Tutorials and the Project Cookbook for complete builds; and Troubleshooting when a result differs from the expected behavior.</p><h2>How the help stays accurate</h2><p>Stable help IDs connect Android, Windows, and device firmware to this site. Generated node, peripheral, and board references come from a sanitized catalog, while tutorials explain verified workflows and clearly mark configuration-only profiles or unsupported runtime behavior.</p>''',
     }
     body=details.get(hid)
+    if hid=="logics.overview":
+        body=body.replace('After a panic or watchdog restart during startup, saved Logics are quarantined and the compiled graph loads stopped.',
+                          'After an abnormal restart during startup, saved Logics are retried up to three times before the graph stops with a notice. Review the graph and the device log before pressing Play again.')
+    if hid=="web-interface":
+        body += '<h2>Plots and access lock</h2><p>The Plots tab appears when the saved graph contains Transfer to Plotter. It displays live samples in RAM and can open history recorded by Save Data on external storage. The optional interface PIN is checked against the reachable device. A network failure or page refresh while the device is offline must be treated as unavailable status, not as proof that a PIN was set.</p>'
+    if hid=="serial-monitor":
+        body += f'<h2>Serial plotting</h2><p>Serial Monitor and Plotter share one port. Disconnect the monitor before connecting the Plotter over USB; the Plotter sends bounded requests and the device answers with buffered samples. Open the <a href="{href(locale,"plotter")}">Plotter guide</a> to learn the chart controls.</p>'
+    if hid=="flash.usb":
+        body += '<h2>Configuration transfer is a separate result</h2><p>Firmware write and hash verification can succeed while settings provisioning fails. Read the final status and first storage error, including NVS not enough space or LittleFS mount failure. Keep a configuration backup; do not assume a 94% progress bar means the new configuration was saved on the device.</p>'
     if not body:raise ValueError(f'Missing detailed topic body: {hid}')
     return f'<p class="lead">{esc(t["summary"])}</p>{body}'
 
@@ -241,15 +256,15 @@ def nav_tree(locale,active,all_titles):
     def branch(label,links,opened=False,extra=''):
         return f'<details {"open" if opened else ""}><summary>{esc(label)}</summary><div class="tree-children">{"".join(link(x,y) for x,y in links)}{extra}</div></details>'
     getting=[("getting-started","Overview"),("getting-started.architecture","How ELMA-IoT works"),("getting-started.installation","Install and prepare"),("getting-started.first-15-minutes","First 15 minutes"),("tutorials.first-esp-project","First ESP project"),("tutorials.select-esp-board","Select a board"),("tutorials.add-peripherals","Add peripherals"),("tutorials.wiring-diagram","Read the wiring diagram")]
-    setup=[("setup.overview","Setup overview"),("setup.peripherals","Peripherals"),("setup.gpio","GPIO configuration"),("graphic-designer","Graphic Designer"),("configuration.reference","Configuration reference"),("reference.electronics-basics","Electronics basics"),("safety","Safety"),("wifi","Wi-Fi"),("mqtt.guide","MQTT guide"),("audio.overview","Audio")]
-    logics=[("logics.overview","Logics overview"),("logics.thinking","How to think about Logics"),("logics.connectors","Connector types and colors"),("logics.state-timing","State and timing"),("building-devices","Combining peripherals"),("tutorials.first-logic","First automation")]
+    setup=[("setup.overview","Setup overview"),("setup.peripherals","Peripherals"),("setup.gpio","GPIO configuration"),("graphic-designer","Graphic Designer"),("configuration.reference","Configuration reference"),("reference.electronics-basics","Electronics basics"),("safety","Safety"),("wifi","Wi-Fi"),("mqtt.guide","MQTT guide"),("audio.overview","Audio"),("workspace","Windows workspace"),("plotter","Plotter")]
+    logics=[("logics.overview","Logics overview"),("logics.telemetry","Sampling and data logging"),("logics.thinking","How to think about Logics"),("logics.connectors","Connector types and colors"),("logics.state-timing","State and timing"),("building-devices","Combining peripherals"),("tutorials.first-logic","First automation")]
     tutorials=[("tutorials","All tutorials")]+[("tutorials."+x["id"],x["title"]) for x in TUTORIALS]
     cookbook=[("cookbook","All projects"),("cookbook.basic-patterns","Basic patterns"),("cookbook.control-systems","Lighting, gate, and alarms"),("cookbook.thermostat","Thermostat"),("cookbook.water-system","Water system"),("cookbook.drv8833","DRV8833 motor"),("cookbook.mini-piano","Mini piano"),("faq.practical-projects","Practical FAQ")]
     troubleshooting=[("troubleshooting","All troubleshooting"),("troubleshooting.wifi","Wi-Fi and reachability"),("troubleshooting.mqtt","MQTT"),("troubleshooting.hardware","Sensors and actuators"),("troubleshooting.compile","Compilation"),("troubleshooting.usb","USB flashing"),("troubleshooting.ota","OTA updates"),("tutorials.compile-troubleshooting","Compilation tutorial"),("tutorials.usb-troubleshooting","USB tutorial"),("tutorials.ota-troubleshooting","OTA tutorial")]
     categories={}
     for node in CAT["nodes"]: categories.setdefault(node["category"],[]).append((node["helpId"],node["title"]))
     block_tree='<details class="nested"><summary>All Logics blocks</summary><div class="tree-children">'+''.join(branch(category,items,active in {x for x,_ in items}) for category,items in sorted(categories.items()))+'</div></details>'
-    return '<nav class="doc-tree"><strong>Contents</strong>'+branch("Getting started",getting,active.startswith("getting-started"))+branch("Setup and reference",setup,active.startswith("setup.") or active.startswith("configuration.") or active.startswith("reference.") or active in {"graphic-designer","wifi","mqtt.guide","audio.overview","safety"})+branch("Logics",logics,active.startswith("logics.") or active=="building-devices",block_tree)+branch("Tutorials",tutorials,active=="tutorials" or active.startswith("tutorials."))+branch("Project cookbook",cookbook,active=="cookbook" or active.startswith("cookbook."))+branch("Troubleshooting",troubleshooting,active.startswith("troubleshooting."))+"</nav>"
+    return '<nav class="doc-tree"><strong>Contents</strong>'+branch("Getting started",getting,active.startswith("getting-started"))+branch("Setup and reference",setup,active.startswith("setup.") or active.startswith("configuration.") or active.startswith("reference.") or active in {"graphic-designer","wifi","mqtt.guide","audio.overview","safety","workspace","plotter"})+branch("Logics",logics,active.startswith("logics.") or active=="building-devices",block_tree)+branch("Tutorials",tutorials,active=="tutorials" or active.startswith("tutorials."))+branch("Project cookbook",cookbook,active=="cookbook" or active.startswith("cookbook."))+branch("Troubleshooting",troubleshooting,active.startswith("troubleshooting."))+"</nav>"
 
 def related_for(item,kind):
     if item.get("related"): return item["related"]
@@ -271,7 +286,7 @@ def page(locale,item,kind,all_titles):
     selected=[s for s in SCREENSHOTS if s['helpId']==help_id and s.get('locale','en')==locale]
     if kind=="tutorial": selected=[screenshot(locale,x) for x in TUTORIAL_SCREENSHOTS.get(item["id"],[]) if screenshot(locale,x)]
     if kind=="guide": selected=[screenshot(locale,x) for x in GUIDE_SCREENSHOTS.get(help_id,[]) if screenshot(locale,x)]
-    if not selected:
+    if not selected and help_id not in ILLUSTRATED_TOPICS:
         feature="blueprint-logics-canvas" if kind=="node" else "peripheral-selection" if kind=="peripheral" else "board-selection" if kind=="board" else "instrument-panel"
         selected=[screenshot(locale,feature)] if screenshot(locale,feature) else []
     figure_cards=''.join(f'<figure><a href="{BASE}/{esc(s["path"])}" target="_blank" rel="noopener"><img src="{BASE}/{esc(s["path"])}" alt="Current {esc(s["platform"])} {esc(s["feature"].replace("-"," "))} screen" loading="lazy"></a><figcaption>{esc(s["platform"])} {esc(s["applicationVersion"])} · {esc(s["feature"].replace("-"," "))} · captured {esc(s["capturedAt"])} · select to open full size</figcaption></figure>' for s in selected)

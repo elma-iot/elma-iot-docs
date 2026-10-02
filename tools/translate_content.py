@@ -7,6 +7,7 @@ ROOT=Path(__file__).resolve().parents[1]
 LOCALES=['es','zh','hi','ar','pt','bn','ru','ja','de','fr','ko','tr','it','id','pl','uk','vi','th','fa']
 SKIP_TAGS={'script','style','code','pre','kbd','samp'}
 KEEP={'ELMA-IoT','Android','Windows','Firmware','GPIO','MQTT','Wi-Fi','OTA','USB','ADC','DAC','PWM','I2C','SPI','UART','I2S','CAN','TWAI','PSRAM','QoS','JSON','HTML','ESP32','ESP32-S3','ESP32-C3','ESP8266','DRV8833','Home Assistant'}
+IMMUTABLE_LABELS={'GPIO','MQTT','Wi-Fi','OTA','USB','ADC','DAC','PWM','I2C','SPI','UART','I2S','CAN','TWAI','PSRAM','NVS','JSON','JSONL','ESP32','ESP32-S3','ESP32-C3','SD','SDMMC','RX','TX','GND','VCC','CPU','Logics','ELMA-IoT'}
 
 def polish(value,locale):
  if locale=='ru':
@@ -67,7 +68,7 @@ def main():
    if value is not None:batch.append(value);size+=len(value)+18
   if batch:
    for source,translated in zip(batch,translate_batch(batch,locale)):mapping[source]=translated
-  mapping={source:polish(value,locale) for source,value in mapping.items()}
+  mapping={source:(source if source in IMMUTABLE_LABELS else polish(value,locale)) for source,value in mapping.items()}
   path.write_text(json.dumps(mapping,ensure_ascii=False,indent=2)+'\n',encoding='utf-8')
  print(f'Translated {len(strings)} documentation strings into {len(LOCALES)} locales')
 
