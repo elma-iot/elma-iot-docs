@@ -31,6 +31,7 @@ TUTORIAL_SCREENSHOTS={
  "usb-troubleshooting":["usb","serial-monitor"], "ota-troubleshooting":["ota"],
 }
 GUIDE_SCREENSHOTS={
+ "logics.wire-routing":["routing-clean","routing-hover","routing-handles","routing-selection"],
  "getting-started.architecture":["instrument-panel","blueprint-logics-canvas"],
  "getting-started.installation":["device-setup-wizard","usb"],
  "getting-started.first-15-minutes":["device-setup-wizard","board-selection","peripheral-selection","graphic-designer","compile-flash","usb"],
@@ -282,6 +283,7 @@ def related_for(item,kind):
 def page(locale,item,kind,all_titles):
     ui={**UI["en"],**UI.get(locale,{})}; help_id=item["helpId"]; title=item["title"]
     body=node_body(item) if kind=="node" else peripheral_body(item) if kind=="peripheral" else board_body(item) if kind=="board" else tutorial_body(item) if kind=="tutorial" else guide_body(item,locale) if kind=="guide" else tutorials_index(locale) if item["helpId"]=="tutorials" else generic_body(item,locale)
+    if help_id=="logics.overview": body+=f'<h2>Wire routing and Bezier controls</h2><p><a href="{href(locale,"logics.wire-routing")}">Open the wire editing guide</a></p>'
     related=related_for(item,kind)
     selected=[s for s in SCREENSHOTS if s['helpId']==help_id and s.get('locale','en')==locale]
     if kind=="tutorial": selected=[screenshot(locale,x) for x in TUTORIAL_SCREENSHOTS.get(item["id"],[]) if screenshot(locale,x)]

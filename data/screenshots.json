@@ -1996,5 +1996,725 @@
     "helpId": "tutorials.cpu-temperature-buzzer",
     "capturedAt": "2026-09-20",
     "path": "assets/screenshots/web/ru/cpu-temperature-buzzer.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "en",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/en/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "en",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/en/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "en",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/en/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "en",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/en/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "es",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/es/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "es",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/es/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "es",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/es/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "es",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/es/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "zh",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/zh/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "zh",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/zh/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "zh",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/zh/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "zh",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/zh/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "hi",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/hi/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "hi",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/hi/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "hi",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/hi/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "hi",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/hi/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "ar",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/ar/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "ar",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/ar/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "ar",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/ar/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "ar",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/ar/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "pt",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/pt/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "pt",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/pt/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "pt",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/pt/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "pt",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/pt/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "bn",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/bn/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "bn",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/bn/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "bn",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/bn/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "bn",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/bn/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "ru",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/ru/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "ru",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/ru/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "ru",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/ru/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "ru",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/ru/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "ja",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/ja/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "ja",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/ja/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "ja",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/ja/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "ja",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/ja/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "de",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/de/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "de",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/de/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "de",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/de/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "de",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/de/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "fr",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/fr/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "fr",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/fr/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "fr",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/fr/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "fr",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/fr/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "ko",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/ko/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "ko",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/ko/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "ko",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/ko/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "ko",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/ko/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "tr",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/tr/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "tr",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/tr/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "tr",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/tr/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "tr",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/tr/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "it",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/it/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "it",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/it/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "it",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/it/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "it",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/it/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "id",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/id/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "id",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/id/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "id",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/id/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "id",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/id/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "pl",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/pl/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "pl",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/pl/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "pl",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/pl/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "pl",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/pl/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "uk",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/uk/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "uk",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/uk/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "uk",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/uk/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "uk",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/uk/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "vi",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/vi/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "vi",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/vi/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "vi",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/vi/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "vi",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/vi/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "th",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/th/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "th",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/th/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "th",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/th/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "th",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/th/routing-selection.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "fa",
+    "feature": "routing-clean",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/fa/routing-clean.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "fa",
+    "feature": "routing-hover",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/fa/routing-hover.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "fa",
+    "feature": "routing-handles",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/fa/routing-handles.png"
+  },
+  {
+    "platform": "Device web editor",
+    "applicationVersion": "0.1.56 source (browser fixture)",
+    "locale": "fa",
+    "feature": "routing-selection",
+    "helpId": "logics.wire-routing",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/fa/routing-selection.png"
   }
 ]

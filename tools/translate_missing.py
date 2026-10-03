@@ -13,7 +13,7 @@ from pathlib import Path
 from translate_content import LOCALES, ROOT, TextCollector, polish
 
 PROTECTED = sorted({
-    "ELMA-IoT", "Android", "Windows", "Firmware", "ESP", "ESP32", "GPIO7", "GPIO",
+    "Bezier", "Bézier", "Ctrl", "Shift", "Delay.In", "Delay.Out", "32 KiB", "64", "Android", "ELMA-IoT", "Windows", "Windows", "Firmware", "ESP", "ESP32", "GPIO7", "GPIO",
     "MQTT", "Wi-Fi", "OTA", "USB", "ADC", "DAC", "PWM", "I2C", "SPI", "UART",
     "I2S", "CAN", "TWAI", "PSRAM", "QoS", "JSON", "HTML", "Home Assistant",
 }, key=len, reverse=True)

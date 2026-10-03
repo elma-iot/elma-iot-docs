@@ -45,7 +45,7 @@ for locale in catalog['locales']:
                 if 'class="feature-figure"' not in rendered or f'/assets/illustrations/{help_id.split(".")[-1]}.svg' not in rendered:
                     errors.append(f'Page has no feature illustration: {locale}/{help_id}')
             elif 'class="screenshot-gallery"' not in rendered:errors.append(f'Page has no current application visual: {locale}/{help_id}')
-            if locale!='en' and not illustrated and f'/assets/screenshots/android/{locale}/' not in rendered:errors.append(f'Page has no screenshot in selected language: {locale}/{help_id}')
+            if locale!='en' and not illustrated and not any(f'/assets/screenshots/{platform}/{locale}/' in rendered for platform in ('android','web','windows')):errors.append(f'Page has no screenshot in selected language: {locale}/{help_id}')
             if locale!='en' and 'class="fallback"' in rendered:errors.append(f'Untranslated fallback banner remains: {locale}/{help_id}')
             if locale=='en':
                 article=re.search(r'<article>(.*?)</article>',rendered,re.S)
