@@ -2716,5 +2716,23 @@
     "helpId": "logics.wire-routing",
     "capturedAt": "2026-10-03",
     "path": "assets/screenshots/web/fa/routing-selection.png"
+  },
+  {
+    "platform": "Web",
+    "applicationVersion": "0.1.57-compact",
+    "locale": "en",
+    "feature": "compact-ring-configuration",
+    "helpId": "guides.compact-led-arrays",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/web/en/compact-ring-0.1.57.jpg"
+  },
+  {
+    "platform": "Windows native renderer (isolated fixture)",
+    "applicationVersion": "0.1.75",
+    "locale": "en",
+    "feature": "animated-ring-preview",
+    "helpId": "guides.compact-led-arrays",
+    "capturedAt": "2026-10-03",
+    "path": "assets/screenshots/windows/en/ring-preview-0.1.75.png"
   }
 ]

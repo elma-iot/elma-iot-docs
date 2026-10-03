@@ -1,9 +1,9 @@
 {
   "schemaVersion": 1,
   "appliesTo": {
-    "android": "1.0.15+",
-    "windows": "0.1.74+",
-    "firmware": "0.1.56+"
+    "android": "1.0.21 (parity pending)",
+    "windows": "0.1.75+",
+    "firmware": "0.1.57+"
   },
   "locales": [
     "en",
@@ -541,6 +541,226 @@
       "technicalReview": false
     },
     {
+      "nodeId": "bridge.boolean",
+      "helpId": "logics.bridge-boolean",
+      "title": "Event to Boolean",
+      "category": "Converters",
+      "description": "Value is always available from the configured field. In forwards one execution pulse to Out; it does not convert a pulse into a measurement. Connect Out to the destination action to apply Value.",
+      "purpose": "Uses the typed connectors listed below. Check this element’s registered documentation for its behavior.",
+      "example": "Connect an output to a compatible input; execution actions need an Execution connection.",
+      "ports": [
+        {
+          "id": "in",
+          "label": "In",
+          "type": "execution",
+          "direction": "input",
+          "required": true
+        },
+        {
+          "id": "out",
+          "label": "Out",
+          "type": "execution",
+          "direction": "output",
+          "required": false
+        },
+        {
+          "id": "value",
+          "label": "Value",
+          "type": "boolean",
+          "direction": "output",
+          "required": false
+        }
+      ],
+      "parameters": {
+        "value": false
+      },
+      "binding": null,
+      "technicalReview": true
+    },
+    {
+      "nodeId": "bridge.integer",
+      "helpId": "logics.bridge-integer",
+      "title": "Event to Integer",
+      "category": "Converters",
+      "description": "Value is always available from the configured field. In forwards one execution pulse to Out; it does not convert a pulse into a measurement. Connect Out to the destination action to apply Value.",
+      "purpose": "Uses the typed connectors listed below. Check this element’s registered documentation for its behavior.",
+      "example": "Connect an output to a compatible input; execution actions need an Execution connection.",
+      "ports": [
+        {
+          "id": "in",
+          "label": "In",
+          "type": "execution",
+          "direction": "input",
+          "required": true
+        },
+        {
+          "id": "out",
+          "label": "Out",
+          "type": "execution",
+          "direction": "output",
+          "required": false
+        },
+        {
+          "id": "value",
+          "label": "Value",
+          "type": "integer",
+          "direction": "output",
+          "required": false
+        }
+      ],
+      "parameters": {
+        "value": 0
+      },
+      "binding": null,
+      "technicalReview": true
+    },
+    {
+      "nodeId": "bridge.number",
+      "helpId": "logics.bridge-number",
+      "title": "Event to Number",
+      "category": "Converters",
+      "description": "Value is always available from the configured field. In forwards one execution pulse to Out; it does not convert a pulse into a measurement. Connect Out to the destination action to apply Value.",
+      "purpose": "Uses the typed connectors listed below. Check this element’s registered documentation for its behavior.",
+      "example": "Connect an output to a compatible input; execution actions need an Execution connection.",
+      "ports": [
+        {
+          "id": "in",
+          "label": "In",
+          "type": "execution",
+          "direction": "input",
+          "required": true
+        },
+        {
+          "id": "out",
+          "label": "Out",
+          "type": "execution",
+          "direction": "output",
+          "required": false
+        },
+        {
+          "id": "value",
+          "label": "Value",
+          "type": "number",
+          "direction": "output",
+          "required": false
+        }
+      ],
+      "parameters": {
+        "value": 0.0
+      },
+      "binding": null,
+      "technicalReview": true
+    },
+    {
+      "nodeId": "bridge.string",
+      "helpId": "logics.bridge-string",
+      "title": "Event to Text",
+      "category": "Converters",
+      "description": "Value is always available from the configured field. In forwards one execution pulse to Out; it does not convert a pulse into a measurement. Connect Out to the destination action to apply Value.",
+      "purpose": "Uses the typed connectors listed below. Check this element’s registered documentation for its behavior.",
+      "example": "Connect an output to a compatible input; execution actions need an Execution connection.",
+      "ports": [
+        {
+          "id": "in",
+          "label": "In",
+          "type": "execution",
+          "direction": "input",
+          "required": true
+        },
+        {
+          "id": "out",
+          "label": "Out",
+          "type": "execution",
+          "direction": "output",
+          "required": false
+        },
+        {
+          "id": "value",
+          "label": "Value",
+          "type": "string",
+          "direction": "output",
+          "required": false
+        }
+      ],
+      "parameters": {
+        "value": ""
+      },
+      "binding": null,
+      "technicalReview": true
+    },
+    {
+      "nodeId": "clock.alarm",
+      "helpId": "logics.clock-alarm",
+      "title": "Alarm Clock",
+      "category": "Timing",
+      "description": "Calendar alarm using UTC/NTP, a manually set clock, or one DS3231 RTC. Choose a specific date or checked weekdays, Monday first. All date/time fields use UTC. Alarm fires once per scheduled occurrence. Clock valid is false until the selected clock is trustworthy. Set clock applies the manual date/time to Manual or RTC only. Rearm clears occurrence history. Pausing/disabling does not replay missed alarms. Manual time is RAM-only; a battery-backed RTC retains time without power.",
+      "purpose": "Calendar alarm using UTC/NTP, a manually set clock, or one DS3231 RTC. Choose a specific date or checked weekdays, Monday first. All date/time fields use UTC. Alarm fires once per scheduled occurrence. Clock valid is false until the selected clock is trustworthy. Set clock applies the manual date/time to Manual or RTC only. Rearm clears occurrence history. Pausing/disabling does not replay missed alarms. Manual time is RAM-only; a battery-backed RTC retains time without power.",
+      "example": "Alarm → LED.Toggle or GPIO.Toggle. For offline time add Sensor → DS3231 RTC, wire SDA/SCL and power, choose DS3231 RTC and set its clock once from live device Logics. For Manual choose Manual, enter a date/time, then use Set clock or wire an event to Set clock. Date range: 2000–2099.",
+      "ports": [
+        {
+          "id": "setClock",
+          "label": "Set clock",
+          "type": "execution",
+          "direction": "input",
+          "required": false
+        },
+        {
+          "id": "rearm",
+          "label": "Rearm",
+          "type": "execution",
+          "direction": "input",
+          "required": false
+        },
+        {
+          "id": "out",
+          "label": "Alarm",
+          "type": "execution",
+          "direction": "output",
+          "required": false
+        },
+        {
+          "id": "valid",
+          "label": "Clock valid",
+          "type": "boolean",
+          "direction": "output",
+          "required": false
+        },
+        {
+          "id": "epoch",
+          "label": "UTC seconds",
+          "type": "number",
+          "direction": "output",
+          "required": false
+        },
+        {
+          "id": "clockTime",
+          "label": "Clock time",
+          "type": "string",
+          "direction": "output",
+          "required": false
+        },
+        {
+          "id": "enabled",
+          "label": "Enabled",
+          "type": "boolean",
+          "direction": "input",
+          "required": false
+        }
+      ],
+      "parameters": {
+        "enabled": true,
+        "clockSource": "utc",
+        "schedule": "weekdays",
+        "alarmDate": "",
+        "alarmTime": "07:00:00",
+        "weekdays": "1111100",
+        "manualDate": "",
+        "manualTime": "00:00:00"
+      },
+      "binding": null,
+      "technicalReview": false
+    },
+    {
       "nodeId": "condition.between",
       "helpId": "logics.condition-between",
       "title": "Between",
@@ -901,6 +1121,146 @@
       "technicalReview": false
     },
     {
+      "nodeId": "convert.boolean_integer",
+      "helpId": "logics.convert-boolean-integer",
+      "title": "Boolean to Integer",
+      "category": "Converters",
+      "description": "Converts False to integer 0 and True to integer 1.",
+      "purpose": "Uses the typed connectors listed below. Check this element’s registered documentation for its behavior.",
+      "example": "Connect an output to a compatible input; execution actions need an Execution connection.",
+      "ports": [
+        {
+          "id": "input",
+          "label": "Input",
+          "type": "boolean",
+          "direction": "input",
+          "required": true
+        },
+        {
+          "id": "value",
+          "label": "Value",
+          "type": "integer",
+          "direction": "output",
+          "required": false
+        }
+      ],
+      "parameters": {},
+      "binding": null,
+      "technicalReview": true
+    },
+    {
+      "nodeId": "convert.boolean_number",
+      "helpId": "logics.convert-boolean-number",
+      "title": "Boolean to Number",
+      "category": "Converters",
+      "description": "Converts False to 0 and True to 1. This is a data conversion, not an execution event.",
+      "purpose": "Uses the typed connectors listed below. Check this element’s registered documentation for its behavior.",
+      "example": "Connect an output to a compatible input; execution actions need an Execution connection.",
+      "ports": [
+        {
+          "id": "input",
+          "label": "Boolean",
+          "type": "boolean",
+          "direction": "input",
+          "required": true
+        },
+        {
+          "id": "value",
+          "label": "Value",
+          "type": "number",
+          "direction": "output",
+          "required": false
+        }
+      ],
+      "parameters": {},
+      "binding": null,
+      "technicalReview": true
+    },
+    {
+      "nodeId": "convert.measurement_number",
+      "helpId": "logics.convert-measurement-number",
+      "title": "Measurement to Number",
+      "category": "Converters",
+      "description": "Converts a numeric measurement unchanged, or False/True to 0/1.",
+      "purpose": "Uses the typed connectors listed below. Check this element’s registered documentation for its behavior.",
+      "example": "Connect an output to a compatible input; execution actions need an Execution connection.",
+      "ports": [
+        {
+          "id": "input",
+          "label": "Input",
+          "type": "measurement",
+          "direction": "input",
+          "required": true
+        },
+        {
+          "id": "value",
+          "label": "Value",
+          "type": "number",
+          "direction": "output",
+          "required": false
+        }
+      ],
+      "parameters": {},
+      "binding": null,
+      "technicalReview": true
+    },
+    {
+      "nodeId": "convert.number_integer",
+      "helpId": "logics.convert-number-integer",
+      "title": "Number to Integer",
+      "category": "Converters",
+      "description": "Truncates toward zero. Values outside the signed 32-bit integer range are unavailable.",
+      "purpose": "Uses the typed connectors listed below. Check this element’s registered documentation for its behavior.",
+      "example": "Connect an output to a compatible input; execution actions need an Execution connection.",
+      "ports": [
+        {
+          "id": "input",
+          "label": "Input",
+          "type": "number",
+          "direction": "input",
+          "required": true
+        },
+        {
+          "id": "value",
+          "label": "Value",
+          "type": "integer",
+          "direction": "output",
+          "required": false
+        }
+      ],
+      "parameters": {},
+      "binding": null,
+      "technicalReview": true
+    },
+    {
+      "nodeId": "convert.text_number",
+      "helpId": "logics.convert-text-number",
+      "title": "Text to Number",
+      "category": "Converters",
+      "description": "Parses a complete finite decimal number. Invalid or empty text is unavailable, not zero.",
+      "purpose": "Uses the typed connectors listed below. Check this element’s registered documentation for its behavior.",
+      "example": "Connect an output to a compatible input; execution actions need an Execution connection.",
+      "ports": [
+        {
+          "id": "input",
+          "label": "Input",
+          "type": "string",
+          "direction": "input",
+          "required": true
+        },
+        {
+          "id": "value",
+          "label": "Value",
+          "type": "number",
+          "direction": "output",
+          "required": false
+        }
+      ],
+      "parameters": {},
+      "binding": null,
+      "technicalReview": true
+    },
+    {
       "nodeId": "event.change",
       "helpId": "logics.event-change",
       "title": "On Change",
@@ -997,6 +1357,34 @@
           "id": "out",
           "label": "Out",
           "type": "execution",
+          "direction": "output",
+          "required": false
+        }
+      ],
+      "parameters": {},
+      "binding": null,
+      "technicalReview": false
+    },
+    {
+      "nodeId": "event.wake",
+      "helpId": "logics.event-wake",
+      "title": "On Wake",
+      "category": "Power",
+      "description": "Fires once after deep-sleep boot or successful light-sleep return, not cold boot. Wake cause uses the ESP-IDF enum: timer 4, GPIO 7, EXT0 2. Global/group modes still apply.",
+      "purpose": "Fires once after deep-sleep boot or successful light-sleep return, not cold boot. Wake cause uses the ESP-IDF enum: timer 4, GPIO 7, EXT0 2. Global/group modes still apply.",
+      "example": "On Wake.Out -> LED.Toggle or measurement action.",
+      "ports": [
+        {
+          "id": "out",
+          "label": "Out",
+          "type": "execution",
+          "direction": "output",
+          "required": false
+        },
+        {
+          "id": "cause",
+          "label": "Wake cause",
+          "type": "integer",
           "direction": "output",
           "required": false
         }
@@ -1205,8 +1593,8 @@
       "helpId": "logics.hardware-led",
       "title": "Built-in LED",
       "category": "Hardware",
-      "description": "Controls the configured status LED or the board’s built-in LED. Automatic status returns ownership to network indicators. RGB controls are available on NeoPixel/RGB hardware.",
-      "purpose": "Controls the configured status LED or the board built-in LED. ON, OFF, Toggle and Set color take execution pulses. RGB and brightness are available for NeoPixel/RGB LEDs. Automatic status restores the network indicator.",
+      "description": "Controls the configured status LED or the board’s built-in LED. Automatic status returns ownership to network indicators. Brightness controls regular LEDs through PWM; RGB color controls require NeoPixel/RGB hardware.",
+      "purpose": "Controls the configured status LED or the board built-in LED. ON, OFF, Toggle and Set color take execution pulses. Brightness uses PWM for a regular LED and intensity scaling for NeoPixel/RGB LEDs. RGB color controls require NeoPixel/RGB hardware. Automatic status restores the network indicator.",
       "example": "On Start.Out -> Built-in LED.ON; Timer.Out -> Toggle; a shutdown event -> Automatic status.",
       "ports": [
         {
@@ -1292,6 +1680,90 @@
         "green": 255,
         "blue": 0,
         "brightness": 20.0
+      },
+      "binding": null,
+      "technicalReview": false
+    },
+    {
+      "nodeId": "hardware.sleep",
+      "helpId": "logics.hardware-sleep",
+      "title": "Sleep",
+      "category": "Power",
+      "description": "Light sleep resumes RAM; Deep sleep restarts the device. Enable Wake timer (0.001-604800 seconds) and/or connect Wake GPIO. Awake fires only after light sleep. Rejected reports failure. CPU/web/software events cannot run during sleep. Audio/updates or busy storage reject sleep; recordings drain first. Motors stop before entry; external loads are not powered off.",
+      "purpose": "Light sleep resumes RAM; Deep sleep restarts the device. Enable Wake timer (0.001-604800 seconds) and/or connect Wake GPIO. Awake fires only after light sleep. Rejected reports failure. CPU/web/software events cannot run during sleep. Audio/updates or busy storage reject sleep; recordings drain first. Motors stop before entry; external loads are not powered off.",
+      "example": "Event -> Sleep.In; Wake GPIO.Source -> Sleep.Wake source; On Wake -> LED.Toggle. Release wake level before sleep. Deep sleep needs On Wake, not Awake. Avoid immediate boot-to-sleep loops.",
+      "ports": [
+        {
+          "id": "in",
+          "label": "Sleep",
+          "type": "execution",
+          "direction": "input",
+          "required": true
+        },
+        {
+          "id": "wake",
+          "label": "Wake source",
+          "type": "wake",
+          "direction": "input",
+          "required": false
+        },
+        {
+          "id": "out",
+          "label": "Awake",
+          "type": "execution",
+          "direction": "output",
+          "required": false
+        },
+        {
+          "id": "failed",
+          "label": "Rejected",
+          "type": "execution",
+          "direction": "output",
+          "required": false
+        },
+        {
+          "id": "cause",
+          "label": "Wake cause",
+          "type": "integer",
+          "direction": "output",
+          "required": false
+        },
+        {
+          "id": "seconds",
+          "label": "Seconds",
+          "type": "number",
+          "direction": "input",
+          "required": false
+        }
+      ],
+      "parameters": {
+        "mode": "light",
+        "timerEnabled": true,
+        "seconds": 5.0
+      },
+      "binding": null,
+      "technicalReview": false
+    },
+    {
+      "nodeId": "hardware.wake_gpio",
+      "helpId": "logics.hardware-wake-gpio",
+      "title": "Wake GPIO",
+      "category": "Power",
+      "description": "Hardware High/Low wake source. Deep sleep requires RTC-capable pins: ESP32 RTC pins, S3 GPIO0-21, C3 GPIO0-5, intersected with board availability and existing assignments. External pull resistor required. Software edges/conditions cannot wake a sleeping CPU.",
+      "purpose": "Hardware High/Low wake source. Deep sleep requires RTC-capable pins: ESP32 RTC pins, S3 GPIO0-21, C3 GPIO0-5, intersected with board availability and existing assignments. External pull resistor required. Software edges/conditions cannot wake a sleeping CPU.",
+      "example": "Button/sensor interrupt -> selected GPIO; Source -> Sleep.Wake source. RTC alarm outputs may be wired here, but the software Alarm Clock does not run during sleep.",
+      "ports": [
+        {
+          "id": "source",
+          "label": "Wake source",
+          "type": "wake",
+          "direction": "output",
+          "required": false
+        }
+      ],
+      "parameters": {
+        "pin": -1,
+        "level": "low"
       },
       "binding": null,
       "technicalReview": false
@@ -1499,6 +1971,184 @@
         "kind": "status",
         "endpoint": "/api/status",
         "path": "firmware.version"
+      },
+      "technicalReview": false
+    },
+    {
+      "nodeId": "mainboard.esp8266.bssid",
+      "helpId": "logics.mainboard-esp8266-bssid",
+      "title": "ESP8266 telemetry · Access point BSSID",
+      "category": "Mainboard",
+      "description": "Live ESP8266 telemetry. Text outputs can drive conditions or text nodes; numeric outputs can drive Plotter.",
+      "purpose": "Reads network.bssid from the board. Unavailable readings are not zero. Live ESP8266 telemetry. Text outputs can drive conditions or text nodes; numeric outputs can drive Plotter.",
+      "example": "This value → a compatible comparison/condition input. For a numeric reading: Compare > threshold → Rising Edge → action.In.",
+      "ports": [
+        {
+          "id": "value",
+          "label": "Access point BSSID",
+          "type": "string",
+          "direction": "output",
+          "required": false
+        }
+      ],
+      "parameters": {},
+      "binding": {
+        "kind": "status",
+        "endpoint": "/api/status",
+        "path": "network.bssid",
+        "availability": "network.wifiConnected"
+      },
+      "technicalReview": false
+    },
+    {
+      "nodeId": "mainboard.esp8266.mac",
+      "helpId": "logics.mainboard-esp8266-mac",
+      "title": "ESP8266 telemetry · STA MAC address",
+      "category": "Mainboard",
+      "description": "Live ESP8266 telemetry. Text outputs can drive conditions or text nodes; numeric outputs can drive Plotter.",
+      "purpose": "Reads network.mac from the board. Unavailable readings are not zero. Live ESP8266 telemetry. Text outputs can drive conditions or text nodes; numeric outputs can drive Plotter.",
+      "example": "This value → a compatible comparison/condition input. For a numeric reading: Compare > threshold → Rising Edge → action.In.",
+      "ports": [
+        {
+          "id": "value",
+          "label": "STA MAC address",
+          "type": "string",
+          "direction": "output",
+          "required": false
+        }
+      ],
+      "parameters": {},
+      "binding": {
+        "kind": "status",
+        "endpoint": "/api/status",
+        "path": "network.mac"
+      },
+      "technicalReview": false
+    },
+    {
+      "nodeId": "mainboard.esp8266.reset_reason",
+      "helpId": "logics.mainboard-esp8266-reset-reason",
+      "title": "ESP8266 telemetry · Reset reason",
+      "category": "Mainboard",
+      "description": "Live ESP8266 telemetry. Text outputs can drive conditions or text nodes; numeric outputs can drive Plotter.",
+      "purpose": "Reads system.resetReason from the board. Unavailable readings are not zero. Live ESP8266 telemetry. Text outputs can drive conditions or text nodes; numeric outputs can drive Plotter.",
+      "example": "This value → a compatible comparison/condition input. For a numeric reading: Compare > threshold → Rising Edge → action.In.",
+      "ports": [
+        {
+          "id": "value",
+          "label": "Reset reason",
+          "type": "string",
+          "direction": "output",
+          "required": false
+        }
+      ],
+      "parameters": {},
+      "binding": {
+        "kind": "status",
+        "endpoint": "/api/status",
+        "path": "system.resetReason"
+      },
+      "technicalReview": false
+    },
+    {
+      "nodeId": "mainboard.esp8266.sketch_free",
+      "helpId": "logics.mainboard-esp8266-sketch-free",
+      "title": "ESP8266 telemetry · Free sketch space (bytes)",
+      "category": "Mainboard",
+      "description": "Live ESP8266 telemetry. Text outputs can drive conditions or text nodes; numeric outputs can drive Plotter.",
+      "purpose": "Reads hardware.freeSketchSpaceBytes from the board. Unavailable readings are not zero. Live ESP8266 telemetry. Text outputs can drive conditions or text nodes; numeric outputs can drive Plotter.",
+      "example": "This value → a compatible comparison/condition input. For a numeric reading: Compare > threshold → Rising Edge → action.In.",
+      "ports": [
+        {
+          "id": "value",
+          "label": "Free sketch space (bytes)",
+          "type": "integer",
+          "direction": "output",
+          "required": false
+        }
+      ],
+      "parameters": {},
+      "binding": {
+        "kind": "status",
+        "endpoint": "/api/status",
+        "path": "hardware.freeSketchSpaceBytes"
+      },
+      "technicalReview": false
+    },
+    {
+      "nodeId": "mainboard.esp8266.uptime",
+      "helpId": "logics.mainboard-esp8266-uptime",
+      "title": "ESP8266 telemetry · Uptime (s)",
+      "category": "Mainboard",
+      "description": "Live ESP8266 telemetry. Text outputs can drive conditions or text nodes; numeric outputs can drive Plotter.",
+      "purpose": "Reads system.uptime from the board. Unavailable readings are not zero. Live ESP8266 telemetry. Text outputs can drive conditions or text nodes; numeric outputs can drive Plotter.",
+      "example": "This value → a compatible comparison/condition input. For a numeric reading: Compare > threshold → Rising Edge → action.In.",
+      "ports": [
+        {
+          "id": "value",
+          "label": "Uptime (s)",
+          "type": "number",
+          "direction": "output",
+          "required": false
+        }
+      ],
+      "parameters": {},
+      "binding": {
+        "kind": "status",
+        "endpoint": "/api/status",
+        "path": "system.uptime"
+      },
+      "technicalReview": false
+    },
+    {
+      "nodeId": "mainboard.esp8266.vcc",
+      "helpId": "logics.mainboard-esp8266-vcc",
+      "title": "ESP8266 telemetry · Supply voltage / VCC (V)",
+      "category": "Mainboard",
+      "description": "VCC mode requires recompilation and a disconnected A0/TOUT input. External A0 reads cannot be used in the same firmware.",
+      "purpose": "Reads system.vccVolts from the board. Unavailable readings are not zero. VCC mode requires recompilation and a disconnected A0/TOUT input. External A0 reads cannot be used in the same firmware.",
+      "example": "This value → a compatible comparison/condition input. For a numeric reading: Compare > threshold → Rising Edge → action.In.",
+      "ports": [
+        {
+          "id": "value",
+          "label": "Supply voltage / VCC (V)",
+          "type": "number",
+          "direction": "output",
+          "required": false
+        }
+      ],
+      "parameters": {},
+      "binding": {
+        "kind": "status",
+        "endpoint": "/api/status",
+        "path": "system.vccVolts",
+        "availability": "system.vccAvailable"
+      },
+      "technicalReview": false
+    },
+    {
+      "nodeId": "mainboard.esp8266.wifi_channel",
+      "helpId": "logics.mainboard-esp8266-wifi-channel",
+      "title": "ESP8266 telemetry · Wi-Fi channel",
+      "category": "Mainboard",
+      "description": "Live ESP8266 telemetry. Text outputs can drive conditions or text nodes; numeric outputs can drive Plotter.",
+      "purpose": "Reads network.channel from the board. Unavailable readings are not zero. Live ESP8266 telemetry. Text outputs can drive conditions or text nodes; numeric outputs can drive Plotter.",
+      "example": "This value → a compatible comparison/condition input. For a numeric reading: Compare > threshold → Rising Edge → action.In.",
+      "ports": [
+        {
+          "id": "value",
+          "label": "Wi-Fi channel",
+          "type": "integer",
+          "direction": "output",
+          "required": false
+        }
+      ],
+      "parameters": {},
+      "binding": {
+        "kind": "status",
+        "endpoint": "/api/status",
+        "path": "network.channel",
+        "availability": "network.wifiConnected"
       },
       "technicalReview": false
     },
@@ -3286,6 +3936,71 @@
           "id": "out",
           "label": "Out",
           "type": "execution",
+          "direction": "output",
+          "required": false
+        },
+        {
+          "id": "seconds",
+          "label": "Seconds",
+          "type": "number",
+          "direction": "input",
+          "required": false
+        }
+      ],
+      "parameters": {
+        "seconds": 5.0
+      },
+      "binding": null,
+      "technicalReview": false
+    },
+    {
+      "nodeId": "timing.countdown",
+      "helpId": "logics.timing-countdown",
+      "title": "Countdown Timer",
+      "category": "Timing",
+      "description": "One-shot countdown, default 5 seconds. Start restarts the full duration. Reset restarts an active countdown or restores an idle timer. Stop cancels without Finished. Remaining (s) shows live time and can feed Plot/Save Data; Running is Boolean. Group Pause preserves time. Duration is captured at Start/Reset.",
+      "purpose": "One-shot countdown, default 5 seconds. Start restarts the full duration. Reset restarts an active countdown or restores an idle timer. Stop cancels without Finished. Remaining (s) shows live time and can feed Plot/Save Data; Running is Boolean. Group Pause preserves time. Duration is captured at Start/Reset.",
+      "example": "On Start.Out → Countdown Timer.Start; Finished → Built-in LED.Toggle or GPIO.Toggle. Connect another event to Reset or Stop. Range: 0.001–86400 seconds.",
+      "ports": [
+        {
+          "id": "in",
+          "label": "Start",
+          "type": "execution",
+          "direction": "input",
+          "required": true
+        },
+        {
+          "id": "reset",
+          "label": "Reset",
+          "type": "execution",
+          "direction": "input",
+          "required": false
+        },
+        {
+          "id": "stop",
+          "label": "Stop",
+          "type": "execution",
+          "direction": "input",
+          "required": false
+        },
+        {
+          "id": "out",
+          "label": "Finished",
+          "type": "execution",
+          "direction": "output",
+          "required": false
+        },
+        {
+          "id": "remaining",
+          "label": "Remaining (s)",
+          "type": "number",
+          "direction": "output",
+          "required": false
+        },
+        {
+          "id": "running",
+          "label": "Running",
+          "type": "boolean",
           "direction": "output",
           "required": false
         },
@@ -6335,6 +7050,32 @@
       }
     },
     {
+      "peripheralId": "sensor:ds3231-rtc",
+      "helpId": "peripheral.ds3231-rtc",
+      "title": "DS3231 RTC",
+      "group": "sensor",
+      "signals": [
+        "SDA",
+        "SCL"
+      ],
+      "pins": [
+        "SDA",
+        "SCL",
+        "VCC",
+        "GND"
+      ],
+      "requirements": {
+        "SDA": "output",
+        "SCL": "output"
+      },
+      "rails": {
+        "SDA": null,
+        "SCL": null,
+        "VCC": "3V3",
+        "GND": "GND"
+      }
+    },
+    {
       "peripheralId": "sensor:mpu6050",
       "helpId": "peripheral.mpu6050",
       "title": "MPU6050",
@@ -6487,6 +7228,166 @@
   ],
   "boards": [
     {
+      "boardId": "esp32-c2-esp8684",
+      "helpId": "boards.esp32-c2-esp8684",
+      "title": "ESP32 C2 ESP8684",
+      "chip": "esp32c2",
+      "pins": [
+        {
+          "pin": null,
+          "label": "GND"
+        },
+        {
+          "pin": null,
+          "label": "3V3"
+        },
+        {
+          "pin": null,
+          "label": "3V3"
+        },
+        {
+          "pin": 2,
+          "label": "GPIO2"
+        },
+        {
+          "pin": 3,
+          "label": "GPIO3"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        },
+        {
+          "pin": null,
+          "label": "RST"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        },
+        {
+          "pin": 0,
+          "label": "GPIO0"
+        },
+        {
+          "pin": 1,
+          "label": "GPIO1"
+        },
+        {
+          "pin": 10,
+          "label": "GPIO10"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        },
+        {
+          "pin": null,
+          "label": "5V"
+        },
+        {
+          "pin": null,
+          "label": "5V"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        },
+        {
+          "pin": 9,
+          "label": "GPIO9"
+        },
+        {
+          "pin": 8,
+          "label": "GPIO8"
+        },
+        {
+          "pin": 7,
+          "label": "GPIO7"
+        },
+        {
+          "pin": 6,
+          "label": "GPIO6"
+        },
+        {
+          "pin": 5,
+          "label": "GPIO5"
+        },
+        {
+          "pin": 4,
+          "label": "GPIO4"
+        },
+        {
+          "pin": 20,
+          "label": "TX / GPIO20"
+        },
+        {
+          "pin": 19,
+          "label": "RX / GPIO19"
+        },
+        {
+          "pin": 18,
+          "label": "GPIO18"
+        },
+        {
+          "pin": 17,
+          "label": "GPIO17"
+        },
+        {
+          "pin": 16,
+          "label": "GPIO16"
+        },
+        {
+          "pin": 15,
+          "label": "GPIO15"
+        },
+        {
+          "pin": 14,
+          "label": "GPIO14"
+        },
+        {
+          "pin": 13,
+          "label": "GPIO13"
+        },
+        {
+          "pin": 12,
+          "label": "GPIO12"
+        },
+        {
+          "pin": 11,
+          "label": "GPIO11"
+        }
+      ],
+      "reserved": {
+        "0": {
+          "label": "RGB red",
+          "warning": "GPIO0 drives the onboard RGB LED red channel.",
+          "kind": "onboard"
+        },
+        "1": {
+          "label": "RGB green",
+          "warning": "GPIO1 drives the onboard RGB LED green channel.",
+          "kind": "onboard"
+        },
+        "8": {
+          "label": "RGB blue / ROM log",
+          "kind": "onboard",
+          "warning": "ESP8684-DevKitM-1 v1.1 blue LED; older v1.0 uses NeoPixel on GPIO8. Select LED type for your revision."
+        },
+        "19": {
+          "label": "U0RXD",
+          "warning": "GPIO19 is the primary UART download receive pin.",
+          "kind": "serial"
+        },
+        "20": {
+          "label": "U0TXD",
+          "warning": "GPIO20 is the primary UART download transmit pin.",
+          "kind": "serial"
+        }
+      },
+      "assetAlt": "ESP8684 DevKitM-1 board"
+    },
+    {
       "boardId": "esp32-c3",
       "helpId": "boards.esp32-c3",
       "title": "ESP32 C3",
@@ -6561,6 +7462,140 @@
       "assetAlt": "ESP32-C3 Super Mini board"
     },
     {
+      "boardId": "esp32-c6",
+      "helpId": "boards.esp32-c6",
+      "title": "ESP32 C6",
+      "chip": "esp32c6",
+      "pins": [
+        {
+          "pin": 8,
+          "label": "GPIO8"
+        },
+        {
+          "pin": 9,
+          "label": "GPIO9"
+        },
+        {
+          "pin": 14,
+          "label": "GPIO14"
+        },
+        {
+          "pin": 15,
+          "label": "GPIO15"
+        },
+        {
+          "pin": 18,
+          "label": "GPIO18"
+        },
+        {
+          "pin": 19,
+          "label": "GPIO19"
+        },
+        {
+          "pin": 20,
+          "label": "GPIO20"
+        },
+        {
+          "pin": null,
+          "label": "3.3V"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        },
+        {
+          "pin": null,
+          "label": "5V"
+        },
+        {
+          "pin": 7,
+          "label": "GPIO7"
+        },
+        {
+          "pin": 6,
+          "label": "GPIO6"
+        },
+        {
+          "pin": 5,
+          "label": "GPIO5"
+        },
+        {
+          "pin": 4,
+          "label": "GPIO4"
+        },
+        {
+          "pin": 3,
+          "label": "GPIO3"
+        },
+        {
+          "pin": 2,
+          "label": "GPIO2"
+        },
+        {
+          "pin": 1,
+          "label": "GPIO1"
+        },
+        {
+          "pin": 0,
+          "label": "GPIO0"
+        },
+        {
+          "pin": 17,
+          "label": "RX / GPIO17"
+        },
+        {
+          "pin": 16,
+          "label": "TX / GPIO16"
+        },
+        {
+          "pin": 15,
+          "label": "GPIO15"
+        },
+        {
+          "pin": 8,
+          "label": "GPIO8"
+        },
+        {
+          "pin": 23,
+          "label": "GPIO23"
+        },
+        {
+          "pin": 12,
+          "label": "GPIO12"
+        },
+        {
+          "pin": 13,
+          "label": "GPIO13"
+        },
+        {
+          "pin": 21,
+          "label": "GPIO21"
+        },
+        {
+          "pin": 22,
+          "label": "GPIO22"
+        }
+      ],
+      "reserved": {
+        "8": {
+          "label": "WS2812",
+          "warning": "Reserved onboard LED pin: GPIO8 drives the built-in WS2812 RGB LED (DIN).",
+          "kind": "onboard"
+        },
+        "9": {
+          "label": "BOOT",
+          "warning": "Reserved strap pin: GPIO9 is tied to the BOOT function on this ESP32-C6 board.",
+          "kind": "strap"
+        },
+        "15": {
+          "label": "LED",
+          "warning": "Board-tied LED pin: GPIO15 drives the onboard LED on this ESP32-C6 board.",
+          "kind": "onboard"
+        }
+      },
+      "assetAlt": "ESP32-C6 board"
+    },
+    {
       "boardId": "esp32-mini",
       "helpId": "boards.esp32-mini",
       "title": "ESP32 MINI",
@@ -6633,6 +7668,334 @@
       ],
       "reserved": {},
       "assetAlt": "ESP32 Mini board"
+    },
+    {
+      "boardId": "esp32-s2-psram",
+      "helpId": "boards.esp32-s2-psram",
+      "title": "ESP32 S2 PSRAM",
+      "chip": "esp32s2",
+      "pins": [
+        {
+          "pin": 1,
+          "label": "GPIO1"
+        },
+        {
+          "pin": null,
+          "label": "EN"
+        },
+        {
+          "pin": 2,
+          "label": "GPIO2"
+        },
+        {
+          "pin": 3,
+          "label": "GPIO3"
+        },
+        {
+          "pin": 4,
+          "label": "GPIO4"
+        },
+        {
+          "pin": 5,
+          "label": "GPIO5"
+        },
+        {
+          "pin": 6,
+          "label": "GPIO6"
+        },
+        {
+          "pin": 7,
+          "label": "GPIO7"
+        },
+        {
+          "pin": 8,
+          "label": "GPIO8"
+        },
+        {
+          "pin": 9,
+          "label": "GPIO9"
+        },
+        {
+          "pin": 10,
+          "label": "GPIO10"
+        },
+        {
+          "pin": 11,
+          "label": "GPIO11"
+        },
+        {
+          "pin": 13,
+          "label": "GPIO13"
+        },
+        {
+          "pin": 12,
+          "label": "GPIO12"
+        },
+        {
+          "pin": 14,
+          "label": "GPIO14"
+        },
+        {
+          "pin": null,
+          "label": "3.3V"
+        },
+        {
+          "pin": 39,
+          "label": "GPIO39"
+        },
+        {
+          "pin": 40,
+          "label": "GPIO40"
+        },
+        {
+          "pin": 37,
+          "label": "GPIO37"
+        },
+        {
+          "pin": 38,
+          "label": "GPIO38"
+        },
+        {
+          "pin": 35,
+          "label": "GPIO35"
+        },
+        {
+          "pin": 36,
+          "label": "GPIO36"
+        },
+        {
+          "pin": 33,
+          "label": "GPIO33"
+        },
+        {
+          "pin": 34,
+          "label": "GPIO34"
+        },
+        {
+          "pin": 18,
+          "label": "GPIO18"
+        },
+        {
+          "pin": 21,
+          "label": "GPIO21"
+        },
+        {
+          "pin": 16,
+          "label": "GPIO16"
+        },
+        {
+          "pin": 17,
+          "label": "GPIO17"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        },
+        {
+          "pin": null,
+          "label": "VBUS"
+        },
+        {
+          "pin": 15,
+          "label": "GPIO15"
+        }
+      ],
+      "reserved": {
+        "15": {
+          "label": "LED",
+          "warning": "Board-tied LED pin: GPIO15 drives the onboard LED on this ESP32-S2 PSRAM board.",
+          "kind": "onboard"
+        },
+        "34": {
+          "label": "SPI CS",
+          "warning": "Reserved SPI/PSRAM pin: GPIO34 is tied to the onboard CS signal on this board.",
+          "kind": "psram"
+        },
+        "35": {
+          "label": "SPI MOSI",
+          "warning": "Reserved SPI/PSRAM pin: GPIO35 is tied to the onboard MOSI signal on this board.",
+          "kind": "psram"
+        },
+        "36": {
+          "label": "SPI SCK",
+          "warning": "Reserved SPI/PSRAM pin: GPIO36 is tied to the onboard clock signal on this board.",
+          "kind": "psram"
+        },
+        "37": {
+          "label": "SPI MISO",
+          "warning": "Reserved SPI/PSRAM pin: GPIO37 is tied to the onboard MISO signal on this board.",
+          "kind": "psram"
+        },
+        "39": {
+          "label": "JTAG MTCK",
+          "warning": "Board-tied JTAG pin: GPIO39 is routed to MTCK on this ESP32-S2 board.",
+          "kind": "jtag"
+        },
+        "40": {
+          "label": "JTAG MTDO",
+          "warning": "Board-tied JTAG pin: GPIO40 is routed to MTDO on this ESP32-S2 board.",
+          "kind": "jtag"
+        }
+      },
+      "assetAlt": "ESP32-S2 with PSRAM board"
+    },
+    {
+      "boardId": "esp32-s2-wemos-mini",
+      "helpId": "boards.esp32-s2-wemos-mini",
+      "title": "ESP32 S2 WEMOS MINI",
+      "chip": "esp32s2",
+      "pins": [
+        {
+          "pin": 1,
+          "label": "GPIO1"
+        },
+        {
+          "pin": null,
+          "label": "EN"
+        },
+        {
+          "pin": 2,
+          "label": "GPIO2"
+        },
+        {
+          "pin": 3,
+          "label": "GPIO3"
+        },
+        {
+          "pin": 4,
+          "label": "GPIO4"
+        },
+        {
+          "pin": 5,
+          "label": "GPIO5"
+        },
+        {
+          "pin": 6,
+          "label": "GPIO6"
+        },
+        {
+          "pin": 7,
+          "label": "GPIO7"
+        },
+        {
+          "pin": 8,
+          "label": "GPIO8"
+        },
+        {
+          "pin": 9,
+          "label": "GPIO9"
+        },
+        {
+          "pin": 10,
+          "label": "GPIO10"
+        },
+        {
+          "pin": 11,
+          "label": "GPIO11"
+        },
+        {
+          "pin": 13,
+          "label": "GPIO13"
+        },
+        {
+          "pin": 12,
+          "label": "GPIO12"
+        },
+        {
+          "pin": 14,
+          "label": "GPIO14"
+        },
+        {
+          "pin": null,
+          "label": "3V3"
+        },
+        {
+          "pin": 39,
+          "label": "GPIO39"
+        },
+        {
+          "pin": 40,
+          "label": "GPIO40"
+        },
+        {
+          "pin": 37,
+          "label": "GPIO37"
+        },
+        {
+          "pin": 38,
+          "label": "GPIO38"
+        },
+        {
+          "pin": 35,
+          "label": "GPIO35"
+        },
+        {
+          "pin": 36,
+          "label": "GPIO36"
+        },
+        {
+          "pin": 33,
+          "label": "GPIO33"
+        },
+        {
+          "pin": 34,
+          "label": "GPIO34"
+        },
+        {
+          "pin": 18,
+          "label": "GPIO18"
+        },
+        {
+          "pin": 21,
+          "label": "GPIO21"
+        },
+        {
+          "pin": 16,
+          "label": "GPIO16"
+        },
+        {
+          "pin": 17,
+          "label": "GPIO17"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        },
+        {
+          "pin": null,
+          "label": "VBUS"
+        },
+        {
+          "pin": 15,
+          "label": "GPIO15"
+        }
+      ],
+      "reserved": {
+        "15": {
+          "label": "LED",
+          "warning": "GPIO15 drives the onboard LED on this Wemos S2 Mini.",
+          "kind": "onboard"
+        },
+        "19": {
+          "label": "USB D-",
+          "warning": "GPIO19 is used by native USB.",
+          "kind": "usb"
+        },
+        "20": {
+          "label": "USB D+",
+          "warning": "GPIO20 is used by native USB.",
+          "kind": "usb"
+        }
+      },
+      "assetAlt": "Wemos S2 Mini board"
     },
     {
       "boardId": "esp32-s3-cam-module",
@@ -8119,6 +9482,622 @@
       "assetAlt": "ESP32-WROVER board"
     },
     {
+      "boardId": "esp8266-esp01",
+      "helpId": "boards.esp8266-esp01",
+      "title": "ESP8266 ESP01",
+      "chip": "esp8266",
+      "pins": [
+        {
+          "pin": null,
+          "label": "3V3"
+        },
+        {
+          "pin": null,
+          "label": "RST"
+        },
+        {
+          "pin": null,
+          "label": "EN / CH_PD"
+        },
+        {
+          "pin": 3,
+          "label": "RX / GPIO3"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        },
+        {
+          "pin": 2,
+          "label": "GPIO2"
+        },
+        {
+          "pin": 0,
+          "label": "BOOT / GPIO0"
+        },
+        {
+          "pin": 1,
+          "label": "TX / GPIO1"
+        }
+      ],
+      "reserved": {
+        "0": {
+          "label": "BOOT",
+          "warning": "GPIO0 must be low during reset to enter the ROM bootloader.",
+          "kind": "strap"
+        },
+        "1": {
+          "label": "U0TXD",
+          "warning": "GPIO1 is used by the programming UART.",
+          "kind": "serial"
+        },
+        "2": {
+          "label": "BOOT strap",
+          "warning": "GPIO2 must remain high for normal boot.",
+          "kind": "strap"
+        },
+        "3": {
+          "label": "U0RXD",
+          "warning": "GPIO3 is used by the programming UART.",
+          "kind": "serial"
+        }
+      },
+      "assetAlt": "ESP8266 ESP-01 module"
+    },
+    {
+      "boardId": "esp8266-esp01s",
+      "helpId": "boards.esp8266-esp01s",
+      "title": "ESP8266 ESP01S",
+      "chip": "esp8266",
+      "pins": [
+        {
+          "pin": null,
+          "label": "3V3"
+        },
+        {
+          "pin": null,
+          "label": "RST"
+        },
+        {
+          "pin": null,
+          "label": "EN / CH_PD"
+        },
+        {
+          "pin": 3,
+          "label": "RX / GPIO3"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        },
+        {
+          "pin": 2,
+          "label": "GPIO2"
+        },
+        {
+          "pin": 0,
+          "label": "BOOT / GPIO0"
+        },
+        {
+          "pin": 1,
+          "label": "TX / GPIO1"
+        }
+      ],
+      "reserved": {
+        "0": {
+          "label": "BOOT",
+          "warning": "GPIO0 must be low during reset to enter the ROM bootloader.",
+          "kind": "strap"
+        },
+        "1": {
+          "label": "U0TXD",
+          "warning": "GPIO1 is used by the programming UART.",
+          "kind": "serial"
+        },
+        "2": {
+          "label": "BOOT strap",
+          "warning": "GPIO2 must remain high for normal boot.",
+          "kind": "strap"
+        },
+        "3": {
+          "label": "U0RXD",
+          "warning": "GPIO3 is used by the programming UART.",
+          "kind": "serial"
+        }
+      },
+      "assetAlt": "ESP8266 ESP-01S module"
+    },
+    {
+      "boardId": "esp8266-esp12e",
+      "helpId": "boards.esp8266-esp12e",
+      "title": "ESP8266 ESP12E",
+      "chip": "esp8266",
+      "pins": [
+        {
+          "pin": null,
+          "label": "RST"
+        },
+        {
+          "pin": null,
+          "label": "ADC"
+        },
+        {
+          "pin": null,
+          "label": "EN / CH_PD"
+        },
+        {
+          "pin": 16,
+          "label": "GPIO16"
+        },
+        {
+          "pin": 14,
+          "label": "GPIO14"
+        },
+        {
+          "pin": 12,
+          "label": "GPIO12"
+        },
+        {
+          "pin": 13,
+          "label": "GPIO13"
+        },
+        {
+          "pin": null,
+          "label": "3V3"
+        },
+        {
+          "pin": 1,
+          "label": "TX / GPIO1"
+        },
+        {
+          "pin": 3,
+          "label": "RX / GPIO3"
+        },
+        {
+          "pin": 5,
+          "label": "GPIO5"
+        },
+        {
+          "pin": 4,
+          "label": "GPIO4"
+        },
+        {
+          "pin": 0,
+          "label": "GPIO0"
+        },
+        {
+          "pin": 2,
+          "label": "GPIO2"
+        },
+        {
+          "pin": 15,
+          "label": "GPIO15"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        }
+      ],
+      "reserved": {
+        "0": {
+          "label": "BOOT",
+          "warning": "GPIO0 must be low during reset to enter the ROM bootloader.",
+          "kind": "strap"
+        },
+        "1": {
+          "label": "U0TXD",
+          "warning": "GPIO1 is used by the programming UART.",
+          "kind": "serial"
+        },
+        "2": {
+          "label": "BOOT strap",
+          "warning": "GPIO2 must remain high for normal boot.",
+          "kind": "strap"
+        },
+        "3": {
+          "label": "U0RXD",
+          "warning": "GPIO3 is used by the programming UART.",
+          "kind": "serial"
+        },
+        "15": {
+          "label": "BOOT strap",
+          "warning": "GPIO15 must remain low for normal flash boot.",
+          "kind": "strap"
+        }
+      },
+      "assetAlt": "ESP8266 ESP-12E module"
+    },
+    {
+      "boardId": "esp8266-esp12f",
+      "helpId": "boards.esp8266-esp12f",
+      "title": "ESP8266 ESP12F",
+      "chip": "esp8266",
+      "pins": [
+        {
+          "pin": null,
+          "label": "RST"
+        },
+        {
+          "pin": null,
+          "label": "ADC"
+        },
+        {
+          "pin": null,
+          "label": "EN / CH_PD"
+        },
+        {
+          "pin": 16,
+          "label": "GPIO16"
+        },
+        {
+          "pin": 14,
+          "label": "GPIO14"
+        },
+        {
+          "pin": 12,
+          "label": "GPIO12"
+        },
+        {
+          "pin": 13,
+          "label": "GPIO13"
+        },
+        {
+          "pin": null,
+          "label": "3V3"
+        },
+        {
+          "pin": 1,
+          "label": "TX / GPIO1"
+        },
+        {
+          "pin": 3,
+          "label": "RX / GPIO3"
+        },
+        {
+          "pin": 5,
+          "label": "GPIO5"
+        },
+        {
+          "pin": 4,
+          "label": "GPIO4"
+        },
+        {
+          "pin": 0,
+          "label": "GPIO0"
+        },
+        {
+          "pin": 2,
+          "label": "GPIO2"
+        },
+        {
+          "pin": 15,
+          "label": "GPIO15"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        }
+      ],
+      "reserved": {
+        "0": {
+          "label": "BOOT",
+          "warning": "GPIO0 must be low during reset to enter the ROM bootloader.",
+          "kind": "strap"
+        },
+        "1": {
+          "label": "U0TXD",
+          "warning": "GPIO1 is used by the programming UART.",
+          "kind": "serial"
+        },
+        "2": {
+          "label": "BOOT strap",
+          "warning": "GPIO2 must remain high for normal boot.",
+          "kind": "strap"
+        },
+        "3": {
+          "label": "U0RXD",
+          "warning": "GPIO3 is used by the programming UART.",
+          "kind": "serial"
+        },
+        "15": {
+          "label": "BOOT strap",
+          "warning": "GPIO15 must remain low for normal flash boot.",
+          "kind": "strap"
+        }
+      },
+      "assetAlt": "ESP8266 ESP-12F development board"
+    },
+    {
+      "boardId": "esp8266-wemos-d1-mini",
+      "helpId": "boards.esp8266-wemos-d1-mini",
+      "title": "ESP8266 WEMOS D1 MINI",
+      "chip": "esp8266",
+      "pins": [
+        {
+          "pin": null,
+          "label": "RST"
+        },
+        {
+          "pin": null,
+          "label": "A0"
+        },
+        {
+          "pin": 16,
+          "label": "D0 / GPIO16"
+        },
+        {
+          "pin": 14,
+          "label": "D5 / GPIO14"
+        },
+        {
+          "pin": 12,
+          "label": "D6 / GPIO12"
+        },
+        {
+          "pin": 13,
+          "label": "D7 / GPIO13"
+        },
+        {
+          "pin": 15,
+          "label": "D8 / GPIO15"
+        },
+        {
+          "pin": null,
+          "label": "3V3"
+        },
+        {
+          "pin": 1,
+          "label": "TX / GPIO1"
+        },
+        {
+          "pin": 3,
+          "label": "RX / GPIO3"
+        },
+        {
+          "pin": 5,
+          "label": "D1 / GPIO5"
+        },
+        {
+          "pin": 4,
+          "label": "D2 / GPIO4"
+        },
+        {
+          "pin": 0,
+          "label": "D3 / GPIO0"
+        },
+        {
+          "pin": 2,
+          "label": "D4 / GPIO2"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        },
+        {
+          "pin": null,
+          "label": "5V"
+        }
+      ],
+      "reserved": {
+        "0": {
+          "label": "BOOT",
+          "warning": "GPIO0 must be high for normal boot and low during reset to program.",
+          "kind": "strap"
+        },
+        "1": {
+          "label": "U0TXD",
+          "warning": "GPIO1 is used by the programming UART.",
+          "kind": "serial"
+        },
+        "2": {
+          "label": "BOOT strap",
+          "warning": "GPIO2 must remain high for normal boot.",
+          "kind": "strap"
+        },
+        "3": {
+          "label": "U0RXD",
+          "warning": "GPIO3 is used by the programming UART.",
+          "kind": "serial"
+        },
+        "15": {
+          "label": "BOOT strap",
+          "warning": "GPIO15 must remain low for normal flash boot.",
+          "kind": "strap"
+        }
+      },
+      "assetAlt": "Wemos D1 Mini ESP8266 (4 MB) board"
+    },
+    {
+      "boardId": "esp8266-wemos-d1-mini-lite",
+      "helpId": "boards.esp8266-wemos-d1-mini-lite",
+      "title": "ESP8266 WEMOS D1 MINI LITE",
+      "chip": "esp8266",
+      "pins": [
+        {
+          "pin": null,
+          "label": "RST"
+        },
+        {
+          "pin": null,
+          "label": "A0"
+        },
+        {
+          "pin": 16,
+          "label": "D0 / GPIO16"
+        },
+        {
+          "pin": 14,
+          "label": "D5 / GPIO14"
+        },
+        {
+          "pin": 12,
+          "label": "D6 / GPIO12"
+        },
+        {
+          "pin": 13,
+          "label": "D7 / GPIO13"
+        },
+        {
+          "pin": 15,
+          "label": "D8 / GPIO15"
+        },
+        {
+          "pin": null,
+          "label": "3V3"
+        },
+        {
+          "pin": 1,
+          "label": "TX / GPIO1"
+        },
+        {
+          "pin": 3,
+          "label": "RX / GPIO3"
+        },
+        {
+          "pin": 5,
+          "label": "D1 / GPIO5"
+        },
+        {
+          "pin": 4,
+          "label": "D2 / GPIO4"
+        },
+        {
+          "pin": 0,
+          "label": "D3 / GPIO0"
+        },
+        {
+          "pin": 2,
+          "label": "D4 / GPIO2"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        },
+        {
+          "pin": null,
+          "label": "5V"
+        }
+      ],
+      "reserved": {
+        "0": {
+          "label": "BOOT",
+          "warning": "GPIO0 must be high for normal boot and low during reset to program.",
+          "kind": "strap"
+        },
+        "1": {
+          "label": "U0TXD",
+          "warning": "GPIO1 is used by the programming UART.",
+          "kind": "serial"
+        },
+        "2": {
+          "label": "BOOT strap",
+          "warning": "GPIO2 must remain high for normal boot.",
+          "kind": "strap"
+        },
+        "3": {
+          "label": "U0RXD",
+          "warning": "GPIO3 is used by the programming UART.",
+          "kind": "serial"
+        },
+        "15": {
+          "label": "BOOT strap",
+          "warning": "GPIO15 must remain low for normal flash boot.",
+          "kind": "strap"
+        }
+      },
+      "assetAlt": "Wemos D1 Mini Lite ESP8285 board"
+    },
+    {
+      "boardId": "esp8285-generic",
+      "helpId": "boards.esp8285-generic",
+      "title": "ESP8285 GENERIC",
+      "chip": "esp8285",
+      "pins": [
+        {
+          "pin": 16,
+          "label": "GPIO16"
+        },
+        {
+          "pin": 14,
+          "label": "GPIO14"
+        },
+        {
+          "pin": 12,
+          "label": "GPIO12"
+        },
+        {
+          "pin": 13,
+          "label": "GPIO13"
+        },
+        {
+          "pin": 15,
+          "label": "GPIO15"
+        },
+        {
+          "pin": 2,
+          "label": "GPIO2"
+        },
+        {
+          "pin": null,
+          "label": "GND",
+          "synthesizedRail": true
+        },
+        {
+          "pin": null,
+          "label": "3V3",
+          "synthesizedRail": true
+        },
+        {
+          "pin": 0,
+          "label": "GPIO0"
+        },
+        {
+          "pin": 4,
+          "label": "GPIO4"
+        },
+        {
+          "pin": 5,
+          "label": "GPIO5"
+        },
+        {
+          "pin": 3,
+          "label": "RX / GPIO3"
+        },
+        {
+          "pin": 1,
+          "label": "TX / GPIO1"
+        }
+      ],
+      "reserved": {
+        "0": {
+          "label": "BOOT",
+          "warning": "GPIO0 must be low during reset to enter the ROM bootloader.",
+          "kind": "strap"
+        },
+        "1": {
+          "label": "U0TXD",
+          "warning": "GPIO1 is used by the programming UART.",
+          "kind": "serial"
+        },
+        "2": {
+          "label": "BOOT strap",
+          "warning": "GPIO2 must remain high for normal boot.",
+          "kind": "strap"
+        },
+        "3": {
+          "label": "U0RXD",
+          "warning": "GPIO3 is used by the programming UART.",
+          "kind": "serial"
+        },
+        "15": {
+          "label": "BOOT strap",
+          "warning": "GPIO15 must remain low for normal flash boot.",
+          "kind": "strap"
+        }
+      },
+      "assetAlt": "ESP8285 family module"
+    },
+    {
       "boardId": "viewe-uedx24320028e-wb-a",
       "helpId": "boards.viewe-uedx24320028e-wb-a",
       "title": "VIEWE UEDX24320028E WB A",
@@ -8336,6 +10315,227 @@
         }
       },
       "assetAlt": "VIEWE UEDX24320028E-WB-A V1.1 board"
+    },
+    {
+      "boardId": "wemos-d1-mini-esp32",
+      "helpId": "boards.wemos-d1-mini-esp32",
+      "title": "WEMOS D1 MINI ESP32",
+      "chip": "esp32",
+      "pins": [
+        {
+          "pin": null,
+          "label": "RST"
+        },
+        {
+          "pin": 36,
+          "label": "GPIO36"
+        },
+        {
+          "pin": 26,
+          "label": "GPIO26"
+        },
+        {
+          "pin": 18,
+          "label": "GPIO18"
+        },
+        {
+          "pin": 19,
+          "label": "GPIO19"
+        },
+        {
+          "pin": 23,
+          "label": "GPIO23"
+        },
+        {
+          "pin": 5,
+          "label": "GPIO5"
+        },
+        {
+          "pin": null,
+          "label": "3V3"
+        },
+        {
+          "pin": 13,
+          "label": "GPIO13"
+        },
+        {
+          "pin": 15,
+          "label": "GPIO15"
+        },
+        {
+          "pin": 1,
+          "label": "GPIO1"
+        },
+        {
+          "pin": 3,
+          "label": "GPIO3"
+        },
+        {
+          "pin": 22,
+          "label": "GPIO22"
+        },
+        {
+          "pin": 21,
+          "label": "GPIO21"
+        },
+        {
+          "pin": 17,
+          "label": "GPIO17"
+        },
+        {
+          "pin": 16,
+          "label": "GPIO16"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        },
+        {
+          "pin": null,
+          "label": "5V"
+        },
+        {
+          "pin": 12,
+          "label": "GPIO12"
+        },
+        {
+          "pin": 7,
+          "label": "GPIO7"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        },
+        {
+          "pin": null,
+          "label": "NC"
+        },
+        {
+          "pin": 39,
+          "label": "GPIO39"
+        },
+        {
+          "pin": 35,
+          "label": "GPIO35"
+        },
+        {
+          "pin": 33,
+          "label": "GPIO33"
+        },
+        {
+          "pin": 34,
+          "label": "GPIO34"
+        },
+        {
+          "pin": 14,
+          "label": "GPIO14"
+        },
+        {
+          "pin": null,
+          "label": "NC"
+        },
+        {
+          "pin": 9,
+          "label": "GPIO9"
+        },
+        {
+          "pin": 11,
+          "label": "GPIO11"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        },
+        {
+          "pin": 27,
+          "label": "GPIO27"
+        },
+        {
+          "pin": 25,
+          "label": "GPIO25"
+        },
+        {
+          "pin": 32,
+          "label": "GPIO32"
+        },
+        {
+          "pin": 12,
+          "label": "GPIO12"
+        },
+        {
+          "pin": 4,
+          "label": "GPIO4"
+        },
+        {
+          "pin": 0,
+          "label": "GPIO0"
+        },
+        {
+          "pin": 2,
+          "label": "GPIO2"
+        },
+        {
+          "pin": 8,
+          "label": "GPIO8"
+        },
+        {
+          "pin": 6,
+          "label": "GPIO6"
+        }
+      ],
+      "reserved": {
+        "0": {
+          "label": "BOOT",
+          "warning": "GPIO0 is a boot strap pin.",
+          "kind": "strap"
+        },
+        "1": {
+          "label": "U0TXD",
+          "warning": "GPIO1 is used by the programming UART.",
+          "kind": "serial"
+        },
+        "3": {
+          "label": "U0RXD",
+          "warning": "GPIO3 is used by the programming UART.",
+          "kind": "serial"
+        },
+        "6": {
+          "label": "Flash CLK",
+          "warning": "GPIO6 is connected to the onboard SPI flash and must not be assigned.",
+          "kind": "onboard"
+        },
+        "7": {
+          "label": "Flash SD0",
+          "warning": "GPIO7 is connected to the onboard SPI flash and must not be assigned.",
+          "kind": "onboard"
+        },
+        "8": {
+          "label": "Flash SD1",
+          "warning": "GPIO8 is connected to the onboard SPI flash and must not be assigned.",
+          "kind": "onboard"
+        },
+        "9": {
+          "label": "Flash SD2",
+          "warning": "GPIO9 is connected to the onboard SPI flash and must not be assigned.",
+          "kind": "onboard"
+        },
+        "10": {
+          "label": "Flash SD3",
+          "warning": "GPIO10 is connected to the onboard SPI flash and must not be assigned.",
+          "kind": "onboard"
+        },
+        "11": {
+          "label": "Flash CMD",
+          "warning": "GPIO11 is connected to the onboard SPI flash and must not be assigned.",
+          "kind": "onboard"
+        },
+        "12": {
+          "label": "BOOT strap",
+          "warning": "GPIO12 affects flash voltage during boot; use only when the attached circuit preserves a safe boot level.",
+          "kind": "strap"
+        }
+      },
+      "assetAlt": "Wemos D1 Mini ESP32 board"
     },
     {
       "boardId": "wemos-lolin32-mini",
