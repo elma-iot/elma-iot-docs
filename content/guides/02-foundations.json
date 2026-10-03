@@ -48,7 +48,7 @@
       "<h2>The sentence method</h2><p>Write: <strong>When X happens, check Y, then do Z.</strong> “When” becomes an event, edge, or timer; “check” becomes a Boolean condition; “do” becomes an action with a white Flow input.</p>",
       "<h2>Data is not execution</h2><p>A temperature value connected to Compare updates Result. It does not fire a relay. Use Rising Edge, Falling Edge, IF, Branch, Timer, or another Flow-producing block.</p><pre>Temperature → Compare A (> 30) → Result → Rising Edge Value\nRising Edge Out → Relay ON In</pre>",
       "<h2>Enable and hysteresis</h2><pre>(Temperature > 30) AND SystemEnabled → Rising Edge → Fan ON\nTemperature < 27 → Rising Edge → Fan OFF</pre><p>Between 27 and 30 °C the previous output state remains unchanged.</p>",
-      "<h2>Runtime limits</h2><p>Firmware graphs support at most 64 nodes, 128 connections, and a 32 KiB payload. Timing is greater than zero and at most 86,400 seconds. Repeat count is 1–128. Incompatible types, cycles, missing required ports, and unsupported adapters are rejected.</p>"
+      "<h2>Runtime limits</h2><p>Firmware graphs support at most 64 nodes, 128 connections, and a 32 KiB payload. Timing is greater than zero and at most 86,400 seconds. Repeat count is 1–128. Incompatible types, immediate execution cycles, circular data dependencies, missing required ports, and unsupported adapters are rejected. Feedback loops are allowed when every cycle passes through Delay, Timer, Debounce or Countdown Timer. An event must start the flow.</p>"
     ]
   },
   {
