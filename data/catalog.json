@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "appliesTo": {
     "android": "1.0.21 (parity pending)",
-    "windows": "0.1.75+",
-    "firmware": "0.1.57+"
+    "windows": "0.1.76+",
+    "firmware": "0.1.58+"
   },
   "locales": [
     "en",
