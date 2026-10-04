@@ -11,6 +11,7 @@ This is the public, online-only user documentation for ELMA-IoT. Android, Window
 - [Tutorials](https://elma-iot.github.io/elma-iot-docs/en/tutorials/)
 - [Project cookbook](https://elma-iot.github.io/elma-iot-docs/en/cookbook/)
 - [MQTT guide](https://elma-iot.github.io/elma-iot-docs/en/mqtt/guide/)
+- [VIEWE displays and portrait touchscreen](https://elma-iot.github.io/elma-iot-docs/en/guides/viewe-touchscreen/)
 - [Configuration reference](https://elma-iot.github.io/elma-iot-docs/en/configuration/reference/)
 - [Troubleshooting](https://elma-iot.github.io/elma-iot-docs/en/troubleshooting/)
 
@@ -19,7 +20,7 @@ ELMA-IoT supports ESP32, ESP32-S3, and ESP32-C3 families, visual peripheral conf
 Current applications:
 
 - Android 1.0.21: setup wizard, vertical constructor, full Blueprint canvas, local compilation, USB and OTA flashing.
-- Windows source 0.1.76: detachable native workspace, serial/Wi-Fi Plotter, Logics telemetry, and full offline ESP compiler for Windows 10/11 x64.
+- Windows source 0.1.77: detachable native workspace, serial/Wi-Fi Plotter, Logics telemetry, and full offline ESP compiler for Windows 10/11 x64.
 - Device firmware source 0.1.58: live web configuration, on-demand telemetry, external-storage data logging, Logics monitoring, MQTT, peripherals, and OTA updates.
 
 ## Screenshots
@@ -45,4 +46,4 @@ The planned Custom Hardware Constructor can use the documented [safe documentati
 
 ## Versions
 
-Current documentation applies to ELMA-IoT Android 1.0.15+, Windows source 0.1.76+, and firmware source 0.1.58+, unless an article says otherwise. Source versions do not imply a published app or firmware binary.
+Current documentation applies to ELMA-IoT Android 1.0.15+, Windows source 0.1.77+, and firmware source 0.1.58+, unless an article says otherwise. Source versions do not imply a published app or firmware binary.

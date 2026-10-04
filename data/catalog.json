@@ -2,8 +2,8 @@
   "schemaVersion": 1,
   "appliesTo": {
     "android": "1.0.21 (parity pending)",
-    "windows": "0.1.76+",
-    "firmware": "0.1.58+"
+    "windows": "0.1.75+",
+    "firmware": "0.1.57+"
   },
   "locales": [
     "en",
@@ -5990,7 +5990,7 @@
     {
       "peripheralId": "display:viewe-onboard-lcd",
       "helpId": "peripheral.viewe-onboard-lcd",
-      "title": "Onboard LCD · 240×320 + CHSC6540",
+      "title": "Onboard LCD + CHSC6540",
       "group": "display",
       "signals": [],
       "pins": [],
@@ -10314,7 +10314,226 @@
           "label": "LCD IM1"
         }
       },
-      "assetAlt": "VIEWE UEDX24320028E-WB-A V1.1 board"
+      "assetAlt": "VIEWE 2.8-inch 240x320 · UEDX24320028E-WB-A V1.1 board"
+    },
+    {
+      "boardId": "viewe-uedx32480035e-wb-a",
+      "helpId": "boards.viewe-uedx32480035e-wb-a",
+      "title": "VIEWE UEDX32480035E WB A",
+      "chip": "esp32s3",
+      "pins": [
+        {
+          "pin": 5,
+          "label": "GPIO5"
+        },
+        {
+          "pin": 6,
+          "label": "GPIO6"
+        },
+        {
+          "pin": 7,
+          "label": "GPIO7"
+        },
+        {
+          "pin": 8,
+          "label": "GPIO8"
+        },
+        {
+          "pin": 9,
+          "label": "GPIO9"
+        },
+        {
+          "pin": 10,
+          "label": "GPIO10"
+        },
+        {
+          "pin": 11,
+          "label": "GPIO11"
+        },
+        {
+          "pin": 12,
+          "label": "GPIO12"
+        },
+        {
+          "pin": 2,
+          "label": "GPIO2"
+        },
+        {
+          "pin": 4,
+          "label": "GPIO4"
+        },
+        {
+          "pin": 14,
+          "label": "GPIO14"
+        },
+        {
+          "pin": 15,
+          "label": "GPIO15"
+        },
+        {
+          "pin": 16,
+          "label": "GPIO16"
+        },
+        {
+          "pin": 17,
+          "label": "GPIO17"
+        },
+        {
+          "pin": 18,
+          "label": "GPIO18"
+        },
+        {
+          "pin": 21,
+          "label": "GPIO21"
+        },
+        {
+          "pin": 43,
+          "label": "GPIO43"
+        },
+        {
+          "pin": 44,
+          "label": "GPIO44"
+        },
+        {
+          "pin": null,
+          "label": "3V3"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        },
+        {
+          "pin": 0,
+          "label": "GPIO0 · BOOT / WS2812 (strap)"
+        },
+        {
+          "pin": 1,
+          "label": "GPIO1 · Touch SDA"
+        },
+        {
+          "pin": 3,
+          "label": "GPIO3 · Touch SCL (strap)"
+        },
+        {
+          "pin": 13,
+          "label": "GPIO13 · LCD backlight"
+        },
+        {
+          "pin": 19,
+          "label": "GPIO19 · USB D-"
+        },
+        {
+          "pin": 20,
+          "label": "GPIO20 · USB D+"
+        },
+        {
+          "pin": 38,
+          "label": "GPIO38 · Buzzer"
+        },
+        {
+          "pin": 39,
+          "label": "GPIO39 · LCD physical RST"
+        },
+        {
+          "pin": 40,
+          "label": "GPIO40 · LCD SCK"
+        },
+        {
+          "pin": 41,
+          "label": "GPIO41 · LCD DC"
+        },
+        {
+          "pin": 42,
+          "label": "GPIO42 · LCD CS"
+        },
+        {
+          "pin": 45,
+          "label": "GPIO45 · LCD MOSI (strap)"
+        },
+        {
+          "pin": 47,
+          "label": "GPIO47 · LCD IM0"
+        },
+        {
+          "pin": 48,
+          "label": "GPIO48 · LCD IM1"
+        },
+        {
+          "pin": 46,
+          "label": "GPIO46 · Boot strap"
+        },
+        {
+          "pin": null,
+          "label": "5V"
+        },
+        {
+          "pin": null,
+          "label": "GND"
+        }
+      ],
+      "reserved": {
+        "0": {
+          "kind": "onboard",
+          "label": "BOOT / WS2812 (strap)"
+        },
+        "1": {
+          "kind": "onboard",
+          "label": "Touch SDA"
+        },
+        "3": {
+          "kind": "onboard",
+          "label": "Touch SCL (strap)"
+        },
+        "13": {
+          "kind": "onboard",
+          "label": "LCD backlight"
+        },
+        "19": {
+          "kind": "onboard",
+          "label": "USB D-"
+        },
+        "20": {
+          "kind": "onboard",
+          "label": "USB D+"
+        },
+        "38": {
+          "kind": "onboard",
+          "label": "Buzzer"
+        },
+        "39": {
+          "kind": "onboard",
+          "label": "LCD physical RST"
+        },
+        "40": {
+          "kind": "onboard",
+          "label": "LCD SCK"
+        },
+        "41": {
+          "kind": "onboard",
+          "label": "LCD DC"
+        },
+        "42": {
+          "kind": "onboard",
+          "label": "LCD CS"
+        },
+        "45": {
+          "kind": "onboard",
+          "label": "LCD MOSI (strap)"
+        },
+        "46": {
+          "kind": "onboard",
+          "label": "Boot strap"
+        },
+        "47": {
+          "kind": "onboard",
+          "label": "LCD IM0"
+        },
+        "48": {
+          "kind": "onboard",
+          "label": "LCD IM1"
+        }
+      },
+      "assetAlt": "VIEWE 3.5-inch 320x480 · UEDX32480035E-WB-A board"
     },
     {
       "boardId": "wemos-d1-mini-esp32",
