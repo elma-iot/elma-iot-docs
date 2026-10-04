@@ -2734,5 +2734,14 @@
     "helpId": "guides.compact-led-arrays",
     "capturedAt": "2026-10-03",
     "path": "assets/screenshots/windows/en/ring-preview-0.1.75.png"
+  },
+  {
+    "platform": "Web",
+    "applicationVersion": "0.1.57 development fixture",
+    "locale": "en",
+    "feature": "chained-led-arrays",
+    "helpId": "guides.compact-led-arrays",
+    "capturedAt": "2026-10-04",
+    "path": "assets/screenshots/web/en/compact-array-chain.png"
   }
 ]
