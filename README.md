@@ -12,6 +12,7 @@ This is the public, online-only user documentation for ELMA-IoT. Android, Window
 - [Project cookbook](https://elma-iot.github.io/elma-iot-docs/en/cookbook/)
 - [MQTT guide](https://elma-iot.github.io/elma-iot-docs/en/mqtt/guide/)
 - [VIEWE displays and portrait touchscreen](https://elma-iot.github.io/elma-iot-docs/en/guides/viewe-touchscreen/)
+- [Shared I²C buses and BNO055](https://elma-iot.github.io/elma-iot-docs/en/guides/i2c-sharing/)
 - [Configuration reference](https://elma-iot.github.io/elma-iot-docs/en/configuration/reference/)
 - [Troubleshooting](https://elma-iot.github.io/elma-iot-docs/en/troubleshooting/)
 
