@@ -13,6 +13,7 @@ def main():
     args=parser.parse_args()
     root=args.windows.resolve(); sys.path.insert(0,str(root))
     registry=importlib.import_module("logic_registry")
+    metadata=importlib.import_module("app_metadata")
     helpmod=importlib.import_module("logic_help")
     source=json.loads((root/"native_designer_catalog.json").read_text(encoding="utf-8"))
     nodes=[]
@@ -36,16 +37,21 @@ def main():
         peripherals.append({"peripheralId":profile_id,"helpId":"peripheral."+slug(topic),
           "title":labels.get(profile_id,value.replace("-"," ").title()),"group":group,
           "signals":profile.get("signals",[]),"pins":profile.get("pins",[]),
-          "requirements":profile.get("requirements",{}),"rails":profile.get("rails",{})})
+          "requirements":profile.get("requirements",{}),"rails":profile.get("rails",{}),
+          "onboard":bool(profile.get('onboard')),"boards":profile.get('boards',[])})
     boards=[]
     for board_id,board in sorted(source["boards"].items()):
         pins=[]
         for area in ("layout","extras"):
             for side in ("left","right"): pins.extend(board.get(area,{}).get(side,[]))
+        onboard=board.get('onboard',{})
+        builtins=[onboard.get('builtinLabels',{}).get(group,labels.get(group+':'+profile,profile)) for group,profile in onboard.get('builtinProfiles',{}).items()]
+        if onboard.get('cameraPins'):builtins.append('Onboard camera interface')
+        if onboard.get('displayProfile') and 'display' not in onboard.get('builtinProfiles',{}):builtins.append('Onboard LCD + touch')
         boards.append({"boardId":board_id,"helpId":"boards."+slug(board_id),
           "title":board_id.replace("-"," ").upper(),"chip":board.get("chip"),"pins":pins,
-          "reserved":board.get("reserved",{}),"assetAlt":board.get("asset",{}).get("alt","")})
-    payload={"schemaVersion":1,"appliesTo":{"android":"1.0.21 (parity pending)","windows":"0.1.75+","firmware":"0.1.57+"},
+          "reserved":board.get("reserved",{}),"assetAlt":board.get("asset",{}).get("alt",""),"builtins":builtins})
+    payload={"schemaVersion":1,"appliesTo":{"android":"1.0.21 (parity pending)","windows":metadata.APP_VERSION+"+","firmware":metadata.FIRMWARE_VERSION+"+"},
       "locales":["en","es","zh","hi","ar","pt","bn","ru","ja","de","fr","ko","tr","it","id","pl","uk","vi","th","fa"],
       "nodes":nodes,"peripherals":peripherals,"boards":boards}
     args.output.parent.mkdir(parents=True,exist_ok=True)

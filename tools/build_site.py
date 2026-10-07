@@ -130,6 +130,12 @@ def peripheral_body(p):
     req=[[esc(k),esc(v),esc(p["rails"].get(k,"Signal; board GPIO selected by the project"))] for k,v in p["requirements"].items()]
     pins=[[esc(x),esc(p["rails"].get(x,"Signal or profile-dependent"))] for x in p["pins"]]
     group=p["group"]; pid=p["peripheralId"].split(":",1)[-1]
+    service={
+      'bno055':'The BNO055 runtime provides orientation, accelerometer and gyroscope data through the Orientation tab. Compatible I2C devices can share the same SDA/SCL pair when their bus addresses do not conflict.',
+      'spk-dual-mic':'The ESP32-SPK onboard I2S microphones are controlled through the Microphones tab and use the fixed board wiring.',
+      'viewe-onboard-lcd':'The onboard LCD and touch controller run the compact LVGL dashboard. Its media and device controls use the same services as the web interface.',
+      'ws2812-neopixel-led-strip':'Addressable arrays support effects, per-array settings and synchronization through the WLED tab. Configuration and WLED controls share the array settings; LED array effect nodes can control them through Logics.'
+    }.get(pid,'')
     caps=[]
     if group=="audio": caps=["Play","Stop"] if "buzzer" in pid else ["Play","Stop","Volume"]
     elif group=="display" and pid=="i2c-oled": caps=["Set text","Clear text"]
@@ -141,23 +147,28 @@ def peripheral_body(p):
     elif group=="input" and "potentiometer" in pid: caps=["Analog value"]
     elif group=="input" and any(x in pid for x in ("button","switch","pir","reed")): caps=["State","Rising edge","Falling edge"]
     dedicated=group=="control" and pid=="drv8833-dual-motor-driver"
-    if dedicated:
+    if service:
+        status='<aside class="support supported"><strong>Runtime support:</strong> '+esc(service)+'</aside>'
+    elif dedicated:
         status='<aside class="support supported"><strong>Runtime support:</strong> the dedicated Motor runtime implements two timed direction channels, optional limit-stop inputs, learned open/closed roles, and MQTT commands. A generic DRV8833 Logics action adapter is not currently supported.</aside>'
     elif caps:
         status=f'<aside class="support supported"><strong>Runtime support:</strong> firmware Logics adapters are implemented for {esc(", ".join(caps))}. The profile also participates in GPIO validation and the wiring diagram.</aside>'
     else:
         status='<aside class="support wiring"><strong>Runtime support: not currently supported.</strong> This is a configuration and wiring profile only. GPIO assignment and diagrams are available, but selecting it does not by itself initialize or control the hardware.</aside>'
     typical={"audio":"audio output module, amplifier, DAC, or buzzer named by this profile","audioIn":"microphone or audio input module named by this profile","display":"display module named by this profile","sensor":"sensor module named by this profile","input":"button, switch, or input module named by this profile","power":"power-conversion module named by this profile","control":"actuator driver named by this profile","expansion":"bus expander or converter named by this profile","storage":"storage module named by this profile","communication":"communications interface named by this profile"}.get(group,"module named by this profile")
-    signal_rows=[[esc(k),"GPIO selector","Required",esc(v),esc(p["rails"].get(k,"Board-dependent"))] for k,v in p["requirements"].items()]
+    signal_rows=[[esc(k),"Fixed board connection" if p.get('onboard') else "GPIO selector","Required",esc(v),esc(p["rails"].get(k,"Board-dependent"))] for k,v in p["requirements"].items()]
     advanced=('<li>Use the device Motor page or documented MQTT channel commands; configure a maximum duration and end switch before increasing movement time.</li>' if dedicated else f'<li>Add the generated capability blocks ({esc(", ".join(caps))}) to a grouped automation and verify live values or actions on the target.</li>' if caps else '<li>Do not build an automation around this profile until a firmware adapter exists; use it as a reviewed wiring plan or implement a custom hardware package.</li>')
+    if service:advanced='<li>Open the matching device control tab and verify live state before adding automation.</li>'
+    builtin='<p>This profile is built into the selected board. Its connections are fixed; no external module or rewiring is required.</p>' if p.get('onboard') else ''
+    setup=(f'<li>Select a compatible board: {esc(", ".join(p.get("boards",[])))}.</li><li>The built-in profile is enabled automatically. Keep its fixed connections.</li><li>Compile and test the matching device controls.</li>' if p.get('onboard') else f'<li>Select the exact ESP board.</li><li>Add <strong>{esc(p["title"])}</strong> under {esc(group)}.</li><li>Accept safe automatic GPIO assignments or choose pins that satisfy every capability below.</li><li>Open the wiring diagram and compare every signal, supply rail, and ground with the physical module before applying power.</li>')
     return f'''<p class="lead">The <strong>{esc(p["title"])}</strong> entry is ELMA-IoT’s {esc(group)} profile for a {esc(typical)}.</p>{status}
 <h2>What this profile provides</h2><p>It declares the signals, directions, power labels, and GPIO requirements used by automatic assignment, conflict checking, and the Graphic Designer. Runtime support is stated separately above because a wiring profile is not proof that a firmware driver exists.</p>
 <h2>Typical hardware</h2><p>Use the exact module named by the profile, or a genuinely compatible module with the same interface and voltage requirements. Similar connector names do not guarantee electrical compatibility.</p>
-<h2>Wiring</h2>{table(["Pin or signal","Declared rail / role"],pins)}{table(["Signal","GPIO capability","Declared rail"],req)}
+<h2>Wiring</h2>{builtin}{table(["Pin or signal","Declared rail / role"],pins)}{table(["Signal","GPIO capability","Declared rail"],req)}
 <aside class="safety"><strong>Electrical safety:</strong> ESP GPIO is low-voltage logic and must not directly power motors, pumps, speakers, relay coils, solenoids, heaters, or mains loads. Use the correct driver and external supply, join grounds where the interface requires it, and verify the module datasheet. Never assume an ESP input is 5 V tolerant.</aside>
-<h2>Minimal configuration</h2><ol><li>Select the exact ESP board.</li><li>Add <strong>{esc(p["title"])}</strong> under {esc(group)}.</li><li>Accept safe automatic GPIO assignments or choose pins that satisfy every capability below.</li><li>Open the wiring diagram and compare every signal, supply rail, and ground with the physical module before applying power.</li></ol>
+<h2>Minimal configuration</h2><ol>{setup}</ol>
 <h2>Configuration fields</h2>{table(["Field","Type","Required","Meaning","Default"],signal_rows)}<p>GPIO defaults are board- and project-dependent because ELMA-IoT avoids reserved pins and collisions. The generated value shown in your project is authoritative for that build.</p>
-<h2>Runtime behavior and Logics</h2><p>{esc("The dedicated Motor service owns this profile; use its web/MQTT controls. Generic visual Logics actions for DRV8833 are not compiled." if dedicated else "The compiled runtime binds only the listed capabilities to this configured slot. A wired value overrides its inline default; Flow inputs trigger actions." if caps else "No generic Logics execution adapter is compiled for this profile. Its presence in the palette documents wiring and reserves pins only.")}</p>
+<h2>Runtime behavior and Logics</h2><p>{esc(service or ("The dedicated Motor service owns this profile; use its web/MQTT controls. Generic visual Logics actions for DRV8833 are not compiled." if dedicated else "The compiled runtime binds only the listed capabilities to this configured slot. A wired value overrides its inline default; Flow inputs trigger actions." if caps else "No generic Logics execution adapter is compiled for this profile. Its presence in the palette documents wiring and reserves pins only."))}</p>
 <h2>Examples</h2><h3>Minimal</h3><p>Add one profile, keep automatic GPIO assignment enabled, compile, and confirm there are no pin conflicts.</p><h3>Practical</h3><p>Give the slot a meaningful project role, such as “Tank high switch” or “Cooling relay,” then verify the generated wiring against the module labels before flashing.</p><h3>Advanced</h3><ol>{advanced}</ol>
 <h2>Common mistakes</h2><ul><li>Choosing a similarly named module with a different pinout or voltage.</li><li>Powering a load from GPIO or omitting the required driver and flyback protection.</li><li>Forgetting the common reference ground between logic and an external low-voltage driver.</li><li>Manually overriding a boot, flash, USB, input-only, or already-used GPIO.</li><li>Assuming a configuration-only profile already has a firmware driver.</li></ul>
 <h2>Known limits</h2><p>Exact current, voltage, bus address, timing, and library requirements are not present in the profile metadata unless shown above. Check the hardware manufacturer’s documentation. Configuration support and runtime support are deliberately reported separately.</p>'''
@@ -165,7 +176,9 @@ def peripheral_body(p):
 def board_body(b):
     pins=[[esc(x.get("label","")),esc(x.get("pin") if x.get("pin") is not None else "Power / ground")] for x in b["pins"]]
     reserved=[[esc(k),esc(v)] for k,v in b["reserved"].items()]
-    special='''<h2>VIEWE onboard hardware</h2><p>The VIEWE UEDX24320028E-WB-A V1.1 profile reserves its onboard display, touch, SDMMC card, buzzer, UART, flash, PSRAM, and boot connections before offering free GPIOs to added modules. Its compact LVGL dashboard runs from the same device services as the web interface. Select this exact profile and review the generated contact labels before connecting anything externally.</p>''' if b["boardId"]=="viewe-uedx24320028e-wb-a" else ''
+    special='''<h2>VIEWE onboard hardware</h2><p>The VIEWE UEDX24320028E-WB-A V1.1 profile reserves its onboard display, touch, SD card, buzzer, UART, flash, PSRAM, and boot connections before offering free GPIOs to added modules. Its compact LVGL dashboard runs from the same device services as the web interface. Select this exact profile and review the generated contact labels before connecting anything externally.</p>''' if b["boardId"]=="viewe-uedx24320028e-wb-a" else ''
+    if b.get('builtins'):
+        special += '<h2>Built-in hardware</h2><ul>' + ''.join('<li>'+esc(label)+'</li>' for label in b['builtins']) + '</ul><p>Built-in hardware uses fixed board connections. The application enables supported onboard services without adding external modules. A storage slot remains configured when no card is inserted; card availability is reported separately.</p>'
     return f'''<p class="lead">ELMA-IoT target for the {esc(b["chip"].upper())} family. {esc(b["assetAlt"])}</p>
 <h2>GPIO map</h2>{table(["Board label","GPIO"],pins)}
 <h2>Reserved and boot pins</h2>{table(["GPIO","Reason"],reserved)}<p>Automatic GPIO assignment uses the board metadata. Enable reserved-pin overrides only after verifying boot, USB, flash, PSRAM, and on-board-device restrictions.</p>
