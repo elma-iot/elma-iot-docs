@@ -157,6 +157,7 @@
       "Open Compile and Flash and choose the intended board target.",
       "Start compilation and keep Technical Details available if a failure occurs.",
       "Windows 0.1.79 reports source preparation, compiler archive checking and unpacking before compiler output starts. First-use preparation can take several minutes. Build actions remain disabled while a job is active.",
+      "Windows 0.1.80 selects compiler workers from available RAM and CPU count and reports the choice in the log. Low available memory reduces parallelism to avoid paging. Avoid running multiple firmware builds at the same time.",
       "Cancel stops preparation or compilation. During a flash write it waits for a safe stopping point. Closing the app requests cancellation, then offers the normal unsaved-project choices.",
       "Confirm the resulting manifest identifies the expected board and version."
     ]
@@ -203,6 +204,7 @@
     "steps": [
       "Expand Technical Details and find the first error, not only the final summary.",
       "Verify board, peripheral profiles, and GPIO conflicts.",
+      "Use Windows 0.1.80 or later if an ESP32 build reports errors in ESPAsyncTCP or missing debug.h. The bundled compiler now excludes incompatible ESP8266 libraries from ESP32 builds and corrects ESP32-S3 audio initialization.",
       "Use Windows 0.1.79 or later for legacy empty Logics graphs without a schema marker and board-specific application partition limits. Unknown non-empty or future graph versions remain protected; do not delete the original project.",
       "The LCD board group includes ESP32-2432S028R (resistive), ESP32-2432S028C (capacitive), ESP32-48S035 / ESP32-3248S035C (capacitive), and both VIEWE sizes. Choose the exact model and touch variant.",
       "Retry after correcting the identified field.",
