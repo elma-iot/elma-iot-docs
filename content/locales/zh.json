@@ -2750,5 +2750,10 @@
   "Sharing SDA and SCL": "共享SDA和SCL",
   "The implemented OLED, RTC and BNO055 drivers use one matching external bus pair and serialize transactions. Built-in LCD touch keeps its own controller. Compact ESP8266/ESP8285/C2 firmware retains its existing peripheral restrictions. Catalog wiring support does not mean every expander, ADC or codec has a runtime driver. Bus pull-ups must be compatible with ESP 3.3 V signals; check any additional chips on the breakout board too.": "所实现的 OLED、RTC 和 BNO055 驱动器使用一对匹配的外部总线并对事务进行串行化。内置 LCD 触摸保留其自己的控制器。紧凑型 ESP 8266/ ESP 8285/C2 固件保留其现有的外设限制。目录接线支持并不意味着每个扩展器、 ADC 或编解码器都有运行时驱动程序。总线上拉电阻必须与 ESP 3.3 V 信号兼容；还要检查分线板上的任何其他芯片。",
   "These additions are in the development source. They are not yet a new published Windows EXE, Android APK or hardware-verified sensor release.": "这些添加内容位于开发源代码中。它们还不是新发布的 Windows EXE、 Android APK 或经过硬件验证的传感器版本。",
-  "Shared I²C buses and BNO055 · ELMA-IoT Help": "共享 I²C 总线和 BNO055 · ELMA-IoT 帮助"
+  "Shared I²C buses and BNO055 · ELMA-IoT Help": "共享 I²C 总线和 BNO055 · ELMA-IoT 帮助",
+  "Cancel stops preparation or compilation. During a flash write it waits for a safe stopping point. Closing the app requests cancellation, then offers the normal unsaved-project choices.": "取消将停止准备或编译。在闪存写入期间，它等待安全停止点。关闭应用程序会请求取消，然后提供正常的未保存项目选择。",
+  "Windows 0.1.79 reports source preparation, compiler archive checking and unpacking before compiler output starts. First-use preparation can take several minutes. Build actions remain disabled while a job is active.": "Windows 0.1.79 报告编译器输出开始之前的源代码准备、编译器存档检查和解包。首次使用准备工作可能需要几分钟时间。当作业处于活动状态时，构建操作保持禁用状态。",
+  "6 guided steps →": "6 个指导步骤 →",
+  "Use Windows 0.1.79 or later for legacy empty Logics graphs without a schema marker and board-specific application partition limits. Unknown non-empty or future graph versions remain protected; do not delete the original project.": "使用 Windows 0.1.79 或更高版本来处理没有模式标记和板特定应用程序分区限制的旧式空逻辑图。未知的非空或未来的图版本仍然受到保护；不要删除原来的项目。",
+  "The LCD board group includes ESP32-2432S028R (resistive), ESP32-2432S028C (capacitive), ESP32-48S035 / ESP32-3248S035C (capacitive), and both VIEWE sizes. Choose the exact model and touch variant.": "LCD 板组包括 ESP32 -2432S028R（电阻式）、 ESP32 -2432S028C（电容式）、 ESP32 -48S035 / ESP32 -3248S035C（电容式）以及两种 VIEWE 尺寸。选择确切的型号和触摸版本。"
 }
