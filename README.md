@@ -21,8 +21,8 @@ ELMA-IoT supports ESP32, ESP32-S3, and ESP32-C3 families, visual peripheral conf
 Current applications:
 
 - Android 1.0.21: setup wizard, vertical constructor, full Blueprint canvas, local compilation, USB and OTA flashing.
-- Windows source 0.1.79: detachable native workspace, serial/Wi-Fi Plotter, Logics telemetry, and full offline ESP compiler for Windows 10/11 x64.
-- Device firmware source 0.1.58: live web configuration, on-demand telemetry, external-storage data logging, Logics monitoring, MQTT, peripherals, and OTA updates.
+- Windows testing source 0.1.84: native workspace and offline compiler, with VIEWE Modbus and configured MCP2551 CAN Logics additions.
+- Device testing firmware source 0.1.59-test.2: VIEWE LCD fixes, shared web/LCD controls, external storage, Modbus monitoring and classic CAN runtime support. Physical bus equipment requires separate testing.
 
 ## Screenshots
 

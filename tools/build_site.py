@@ -131,6 +131,8 @@ def peripheral_body(p):
     pins=[[esc(x),esc(p["rails"].get(x,"Signal or profile-dependent"))] for x in p["pins"]]
     group=p["group"]; pid=p["peripheralId"].split(":",1)[-1]
     service={
+      'mcp2551':'The ESP32 TWAI runtime supports classic CAN through Configure, Send, Received and Status Logics nodes. One configured transceiver is supported. MCP2551 requires 5 V power and safe 3.3 V receive-level conversion; CANH/CANL are bus contacts, not GPIOs. Physical equipment testing is still required.',
+      'viewe-ms1285':'The built-in VIEWE MS1285 port supports nonblocking Modbus RTU reads and a live TX/RX monitor, with shared LCD/web state and Read, Received, Last read value and Status Logics nodes. GPIO43/44 are shared with the UART header. Register writes are not implemented.',
       'bno055':'The BNO055 runtime provides orientation, accelerometer and gyroscope data through the Orientation tab. Compatible I2C devices can share the same SDA/SCL pair when their bus addresses do not conflict.',
       'spk-dual-mic':'The ESP32-SPK onboard I2S microphones are controlled through the Microphones tab and use the fixed board wiring.',
       'viewe-onboard-lcd':'The onboard LCD and touch controller run the compact LVGL dashboard. Its media and device controls use the same services as the web interface.',
@@ -159,6 +161,7 @@ def peripheral_body(p):
     signal_rows=[[esc(k),"Fixed board connection" if p.get('onboard') else "GPIO selector","Required",esc(v),esc(p["rails"].get(k,"Board-dependent"))] for k,v in p["requirements"].items()]
     advanced=('<li>Use the device Motor page or documented MQTT channel commands; configure a maximum duration and end switch before increasing movement time.</li>' if dedicated else f'<li>Add the generated capability blocks ({esc(", ".join(caps))}) to a grouped automation and verify live values or actions on the target.</li>' if caps else '<li>Do not build an automation around this profile until a firmware adapter exists; use it as a reviewed wiring plan or implement a custom hardware package.</li>')
     if service:advanced='<li>Open the matching device control tab and verify live state before adding automation.</li>'
+    if pid=='mcp2551':advanced='<li>Use CAN Configure to select the bus bitrate and mode. Inspect Received and Status before adding Send; there is no separate CAN device tab.</li>'
     builtin='<p>This profile is built into the selected board. Its connections are fixed; no external module or rewiring is required.</p>' if p.get('onboard') else ''
     setup=(f'<li>Select a compatible board: {esc(", ".join(p.get("boards",[])))}.</li><li>The built-in profile is enabled automatically. Keep its fixed connections.</li><li>Compile and test the matching device controls.</li>' if p.get('onboard') else f'<li>Select the exact ESP board.</li><li>Add <strong>{esc(p["title"])}</strong> under {esc(group)}.</li><li>Accept safe automatic GPIO assignments or choose pins that satisfy every capability below.</li><li>Open the wiring diagram and compare every signal, supply rail, and ground with the physical module before applying power.</li>')
     return f'''<p class="lead">The <strong>{esc(p["title"])}</strong> entry is ELMA-IoT’s {esc(group)} profile for a {esc(typical)}.</p>{status}

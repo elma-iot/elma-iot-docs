@@ -1,0 +1,15 @@
+{
+  "helpId": "guides.can-mcp2551",
+  "title": "MCP2551 CAN and Logics",
+  "summary": "Wire a classic CAN transceiver and use asynchronous transmit, receive and status nodes.",
+  "section": "Guides",
+  "related": ["configuration.reference"],
+  "body": [
+    "<p>Windows 0.1.84 testing adds MCP2551 under Communication for full-feature ESP32, ESP32-S2, ESP32-S3 and ESP32-C3 firmware. One controller/transceiver is supported. Add the peripheral, assign CTX/CRX and compile the selected board. Compact firmware and ESP8266 do not expose these nodes.</p>",
+    "<h2>Electrical connection</h2><p>MCP2551 requires 5 V power. Connect GND to common ground, CTX to the transmit GPIO, and CRX to the receive GPIO through a 5 V to 3.3 V level shifter. CANH/CANL connect only to the external bus. Verify onboard level shifting and termination: the Fritzing artwork is not a circuit guarantee. Use 120-ohm termination at each end of the bus.</p>",
+    "<h2>Logics nodes</h2><p>Configure selects 125/250/500/1000 kbit/s and listen-only mode. Startup defaults to 500 kbit/s listen-only. Disable Listen only to transmit and acknowledge. Send queues one single-attempt classic CAN frame with a decimal identifier and up to eight space-separated hex bytes. Extended identifiers and remote requests are supported. Remote frames use Length and empty Data. Queued does not mean delivered.</p>",
+    "<p>Received exposes the latest identifier, flags, length and hex data. Identifier filter -1 accepts all frames. Fast bursts can coalesce between Logics ticks. Status reports Ready, Bus off and RX-missed/TX-failed counters. Correct wiring and bitrate before using Configure to restart after bus-off. Reconfiguration clears queues and resets counters.</p>",
+    "<p>Example: On Start → Configure (Listen only false) → Send. Received.Out → MQTT Publish.In; Received.Data → Publish.Text. This supports classic CAN, not CAN-FD or higher-level protocol decoding. Physical testing requires the transceiver and another CAN node.</p>",
+    "<p>References: <a href=\"https://www.microchip.com/content/dam/mchp/documents/APID/ProductDocuments/DataSheets/20001667G.pdf\">Microchip MCP2551 datasheet</a> and <a href=\"https://docs.espressif.com/projects/esp-idf/en/v4.4/esp32s3/api-reference/peripherals/twai.html\">Espressif TWAI driver</a>.</p>"
+  ]
+}
